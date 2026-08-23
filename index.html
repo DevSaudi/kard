@@ -40,6 +40,8 @@
             background-color: var(--bg-main);
             color: var(--text-main);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
@@ -99,6 +101,7 @@
         .main-container {
             max-width: 1100px; margin: 0 auto 4rem; padding: 0 1.5rem;
             display: grid; grid-template-columns: 380px 1fr; gap: 2rem;
+            flex: 1;
         }
         @media (max-width: 850px) { .main-container { grid-template-columns: 1fr; } }
 
@@ -130,7 +133,7 @@
             transform: translateY(-2px); border-color: var(--accent-green); color: var(--accent-green); box-shadow: var(--btn-shadow-hover);
         }
 
-        .btn-remove-bg {
+        .btn-remove-img {
             background: transparent; border: 1px dashed #ef4444; color: #ef4444;
             padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.75rem; cursor: pointer;
             margin-top: 0.4rem; display: none; width: 100%; text-align: center;
@@ -156,7 +159,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Overlay to ensure readability on custom backgrounds */
         .card-frame.has-bg::before {
             content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
             background: rgba(0, 0, 0, 0.45); z-index: 1;
@@ -186,6 +188,57 @@
         .qr-canvas-box canvas { width: 44px !important; height: 44px !important; display: block; }
 
         #posterCanvas { max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+
+        /* FOOTER DESIGN */
+        footer {
+            background: var(--surface-card);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .footer-rights {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        .footer-socials {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
     </style>
 </head>
 <body>
@@ -229,7 +282,7 @@
                 <div class="field-group">
                     <label id="lblCardBg">خلفية البطاقة (اختياري)</label>
                     <input type="file" id="cardBgInput" accept="image/*" onchange="loadCardBackground(event)">
-                    <button class="btn-remove-bg" id="btnRemoveBg" onclick="removeCardBackground()">حذف الخلفية المخصصة</button>
+                    <button class="btn-remove-img" id="btnRemoveBg" onclick="removeCardBackground()">حذف الخلفية المخصصة</button>
                 </div>
 
                 <div class="field-group">
@@ -270,6 +323,7 @@
                 <div class="field-group">
                     <label id="lblImage">صورة المنتج أو الخلفية</label>
                     <input type="file" id="pImgInput" accept="image/*" onchange="loadPosterImage(event)">
+                    <button class="btn-remove-img" id="btnRemovePosterImg" onclick="removePosterImage()">حذف صورة البوستر</button>
                 </div>
                 <div class="field-group">
                     <label id="lblPStore">اسم المتجر</label>
@@ -328,6 +382,22 @@
     </div>
 
     <canvas id="posterQrCanvas" style="display: none;"></canvas>
+
+    <footer>
+        <div class="footer-rights" id="txtRights">
+            جميع الحقوق محفوظة © كارد 2026
+        </div>
+        <div class="footer-socials">
+            <!-- WhatsApp Icon -->
+            <a href="https://wa.me/" target="_blank" class="social-link" title="WhatsApp" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c0-5.445 4.43-9.874 9.877-9.874 2.637 0 5.116 1.028 6.98 2.894a9.81 9.81 0 012.888 6.982c-.001 5.447-4.431 9.875-9.863 9.875m0-18.133c-4.557 0-8.267 3.71-8.267 8.258a8.23 8.23 0 001.371 4.542l.2.318-.588 2.148 2.199-.577.308.183a8.23 8.23 0 004.773 1.503h.004c4.555 0 8.262-3.71 8.264-8.259 0-2.207-.86-4.283-2.423-5.848A8.2 8.2 0 0012.051 3.65"/></svg>
+            </a>
+            <!-- X (Twitter) Icon -->
+            <a href="https://x.com/" target="_blank" class="social-link" title="X" aria-label="X">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+        </div>
+    </footer>
 
     <script>
         let currentLang = 'ar';
@@ -433,8 +503,16 @@
                 uploadedImage = new Image();
                 uploadedImage.onload = function() { drawPoster(); }
                 uploadedImage.src = reader.result;
+                document.getElementById('btnRemovePosterImg').style.display = 'block';
             }
             if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function removePosterImage() {
+            uploadedImage = null;
+            document.getElementById('pImgInput').value = '';
+            document.getElementById('btnRemovePosterImg').style.display = 'none';
+            drawPoster();
         }
 
         function drawPoster() {
@@ -497,7 +575,7 @@
 
             ctx.fillStyle = '#94a3b8';
             ctx.font = '26px Readex Pro';
-            ctx.fillText('امسح الرمز للطلب المباشر', canvas.width / 2, canvas.height - 70);
+            ctx.fillText(currentLang === 'ar' ? 'امسح الرمز للطلب المباشر' : 'Scan QR Code to Order', canvas.width / 2, canvas.height - 70);
         }
 
         function downloadPoster() {
@@ -529,6 +607,7 @@
                 document.getElementById('txtPosterTitle').innerText = 'Poster Customization';
                 document.getElementById('lblPlatform').innerText = 'Platform Aspect Ratio';
                 document.getElementById('lblImage').innerText = 'Product / Background Image';
+                document.getElementById('btnRemovePosterImg').innerText = 'Remove Poster Image';
                 document.getElementById('lblPStore').innerText = 'Store Name';
                 document.getElementById('lblPProduct').innerText = 'Product Name';
                 document.getElementById('lblPPrice').innerText = 'Price';
@@ -537,6 +616,7 @@
                 document.getElementById('txtBtnDownload').innerText = 'Download Poster (HD Image)';
                 document.getElementById('lblFrom').innerText = 'From:';
                 document.getElementById('lblTo').innerText = 'To:';
+                document.getElementById('txtRights').innerText = 'All Rights Reserved © Kard 2026';
             } else {
                 currentLang = 'ar';
                 document.documentElement.setAttribute('dir', 'rtl');
@@ -557,6 +637,7 @@
                 document.getElementById('txtPosterTitle').innerText = 'تخصيص البوستر الإعلاني';
                 document.getElementById('lblPlatform').innerText = 'قياس المنصة';
                 document.getElementById('lblImage').innerText = 'صورة المنتج أو الخلفية';
+                document.getElementById('btnRemovePosterImg').innerText = 'حذف صورة البوستر';
                 document.getElementById('lblPStore').innerText = 'اسم المتجر';
                 document.getElementById('lblPProduct').innerText = 'اسم المنتج / العرض';
                 document.getElementById('lblPPrice').innerText = 'السعر';
@@ -565,6 +646,10 @@
                 document.getElementById('txtBtnDownload').innerText = 'تحميل البوستر (صورة عالية الدقة)';
                 document.getElementById('lblFrom').innerText = 'من:';
                 document.getElementById('lblTo').innerText = 'إلى:';
+                document.getElementById('txtRights').innerText = 'جميع الحقوق محفوظة © كارد 2026';
+            }
+            if(document.getElementById('posterControls').style.display !== 'none') {
+                drawPoster();
             }
         }
     </script>
