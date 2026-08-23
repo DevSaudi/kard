@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kard | كَرْد - منصة كروت الإهداء وبوسترات العروض</title>
+    <title>Kard | كَرْد - منصة بطاقات الإهداء وبوسترات العروض</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Tajawal:wght@300;400;500;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- QRCode Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --bg-main: #0b0712;
-            --surface-card: rgba(23, 15, 38, 0.7);
+            --surface-card: rgba(23, 15, 38, 0.75);
             --border-purple: rgba(157, 78, 221, 0.25);
             --border-glow: #9d4edd;
             --accent-purple: #7b2cbf;
@@ -31,7 +33,7 @@
 
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 8%;
+            padding: 1.2rem 8%;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             background: rgba(11, 7, 18, 0.8);
@@ -53,7 +55,7 @@
         }
         .btn-lang:hover { border-color: var(--border-glow); background: rgba(157, 78, 221, 0.1); }
 
-        .tabs-wrapper { display: flex; justify-content: center; margin: 2.5rem 0 1.5rem; }
+        .tabs-wrapper { display: flex; justify-content: center; margin: 2rem 0 1.5rem; }
         .tabs-box {
             background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-purple);
             padding: 5px; border-radius: 14px; display: flex; gap: 5px; backdrop-filter: blur(10px);
@@ -70,22 +72,22 @@
 
         .main-container {
             max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem;
-            display: grid; grid-template-columns: 420px 1fr; gap: 2rem;
+            display: grid; grid-template-columns: 400px 1fr; gap: 2rem;
         }
         @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
 
         .glass-panel {
             background: var(--surface-card); border: 1px solid var(--border-purple);
-            border-radius: 20px; padding: 2rem; backdrop-filter: blur(16px);
+            border-radius: 20px; padding: 1.8rem; backdrop-filter: blur(16px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
-        .panel-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--accent-light); }
+        .panel-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--accent-light); }
 
-        .field-group { margin-bottom: 1.2rem; }
-        .field-group label { display: block; font-size: 0.85rem; color: var(--text-sub); margin-bottom: 0.5rem; }
+        .field-group { margin-bottom: 1rem; }
+        .field-group label { display: block; font-size: 0.85rem; color: var(--text-sub); margin-bottom: 0.4rem; }
         .field-group input, .field-group textarea, .field-group select {
             width: 100%; background: rgba(11, 7, 18, 0.6); border: 1px solid var(--border-purple);
-            border-radius: 10px; padding: 0.8rem 1rem; color: #fff; font-size: 0.9rem; transition: 0.3s;
+            border-radius: 10px; padding: 0.75rem 0.9rem; color: #fff; font-size: 0.9rem; transition: 0.3s;
         }
         .field-group input:focus, .field-group textarea:focus, .field-group select:focus {
             outline: none; border-color: var(--border-glow); box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
@@ -93,7 +95,7 @@
 
         .btn-primary {
             width: 100%; background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
-            color: #fff; border: none; padding: 1rem; border-radius: 12px;
+            color: #fff; border: none; padding: 0.9rem; border-radius: 12px;
             font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: 0.3s;
             margin-top: 0.5rem; box-shadow: 0 8px 25px rgba(157, 78, 221, 0.3);
         }
@@ -109,9 +111,9 @@
            CARD DESIGN FOR SCREEN
         ---------------------------------------------------- */
         .card-frame {
-            width: 100%; max-width: 480px; aspect-ratio: 1.414 / 1;
-            background: #fcfcfc; color: #1a1523;
-            border-radius: 12px; padding: 2.2rem; position: relative;
+            width: 100%; max-width: 500px; aspect-ratio: 1.414 / 1;
+            background: #ffffff; color: #1a1523;
+            border-radius: 12px; padding: 2rem; position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             display: flex; flex-direction: column; justify-content: space-between;
             border: 1px solid #e2d9f3;
@@ -121,60 +123,56 @@
 
         .card-border-decoration {
             position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid #9d4edd; border-radius: 8px; pointer-events: none; opacity: 0.5;
+            border: 1px solid #9d4edd; border-radius: 8px; pointer-events: none; opacity: 0.4;
         }
 
         .card-header { text-align: center; }
-        .card-store { font-size: 1.1rem; font-weight: 800; letter-spacing: 2px; color: #5a189a; text-transform: uppercase; }
+        .card-store { font-size: 1.15rem; font-weight: 800; letter-spacing: 1.5px; color: #5a189a; text-transform: uppercase; }
         .card-divider { width: 40px; height: 2px; background: #9d4edd; margin: 6px auto 0; border-radius: 2px; }
 
-        .card-body { text-align: center; margin: 1rem 0; }
+        .card-body { text-align: center; margin: 0.8rem 0; }
         .card-text { font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.7; color: #2d233c; font-style: italic; }
 
-        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.8rem; color: #6e647e; }
-        .card-parties strong { color: #5a189a; font-weight: 700; }
-        .card-order-num { font-size: 0.75rem; letter-spacing: 0.5px; opacity: 0.8; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0e6ff; padding-top: 0.8rem; }
+        .card-parties { font-size: 0.82rem; color: #5a189a; }
+        .card-parties strong { color: #240046; font-weight: 700; }
+        
+        .qr-container { display: flex; align-items: center; gap: 8px; }
+        #qrcode img, #qrcode canvas { width: 45px !important; height: 45px !important; border-radius: 4px; }
 
         #posterCanvas { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
 
         /* ----------------------------------------------------
-           STRICT SINGLE-PAGE PDF PRINT ENGINE
+           STRICT SINGLE PAGE PRINT ENGINE (A4 CENTERED)
         ---------------------------------------------------- */
         @media print {
             @page {
-                size: 148mm 105mm; /* Exact A6 Landscape Size */
-                margin: 0 !important;
-            }
-            
-            html, body {
-                width: 148mm !important;
-                height: 105mm !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                background: #ffffff !important;
-                overflow: hidden !important;
+                size: A4 portrait;
+                margin: 0;
             }
 
+            /* Hide everything in the body by default */
             body * {
-                visibility: hidden !important;
+                display: none !important;
             }
 
-            #giftDisplay, #giftDisplay *, #printableCard, #printableCard * {
-                visibility: visible !important;
+            /* Display ONLY the print wrapper and its contents */
+            body, #printArea, #printArea * {
+                display: block !important;
             }
 
-            #giftDisplay {
-                position: absolute !important;
-                left: 0 !important;
+            #printArea {
+                position: fixed !important;
                 top: 0 !important;
-                width: 148mm !important;
-                height: 105mm !important;
+                left: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                background: #ffffff !important;
             }
 
             .card-frame {
@@ -182,13 +180,22 @@
                 height: 105mm !important;
                 max-width: 148mm !important;
                 max-height: 105mm !important;
-                border-radius: 0 !important;
+                border-radius: 8px !important;
                 box-shadow: none !important;
-                border: none !important;
-                padding: 12mm !important;
+                border: 1.5px solid #7b2cbf !important;
+                padding: 10mm !important;
                 box-sizing: border-box !important;
-                page-break-inside: avoid !important;
-                break-after: avoid !important;
+                margin: auto !important;
+            }
+
+            .card-footer {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+            }
+
+            .qr-container {
+                display: flex !important;
             }
         }
     </style>
@@ -213,11 +220,16 @@
     <div class="main-container">
         
         <div class="glass-panel">
+            <!-- Gift Controls -->
             <div id="giftControls">
                 <div class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</div>
                 <div class="field-group">
                     <label id="lblStore">اسم المتجر</label>
                     <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
+                </div>
+                <div class="field-group">
+                    <label id="lblStoreUrl">رابط المتجر (سيلتحق بكود الـ QR)</label>
+                    <input type="text" id="storeUrl" value="https://salla.sa/my-store" oninput="updateCard()">
                 </div>
                 <div class="field-group">
                     <label id="lblSender">اسم المرسل</label>
@@ -231,13 +243,10 @@
                     <label id="lblMsg">عبارة الإهداء</label>
                     <textarea id="cardMsg" rows="3" oninput="updateCard()">كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح.</textarea>
                 </div>
-                <div class="field-group">
-                    <label id="lblOrder">رقم الطلب</label>
-                    <input type="text" id="orderId" value="#ORD-98241" oninput="updateCard()">
-                </div>
                 <button class="btn-primary" onclick="window.print()" id="btnPrint">🖨️ طباعة / تصدير PDF</button>
             </div>
 
+            <!-- Poster Controls -->
             <div id="posterControls" style="display: none;">
                 <div class="panel-title" id="txtPosterTitle">تخصيص البوستر الإعلاني</div>
                 <div class="field-group">
@@ -272,7 +281,8 @@
         </div>
 
         <div class="preview-wrapper">
-            <div id="giftDisplay" style="width: 100%; display: flex; justify-content: center;">
+            <!-- Gift Card Print Isolated Wrapper -->
+            <div id="printArea" style="width: 100%; display: flex; justify-content: center;">
                 <div class="card-frame" id="printableCard">
                     <div class="card-border-decoration"></div>
                     <div class="card-header">
@@ -284,14 +294,17 @@
                     </div>
                     <div class="card-footer">
                         <div class="card-parties">
-                            <span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong> | 
-                            <span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong>
+                            <div><span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong></div>
+                            <div><span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong></div>
                         </div>
-                        <div class="card-order-num" id="prevOrder">#ORD-98241</div>
+                        <div class="qr-container">
+                            <div id="qrcode"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Poster Area -->
             <div id="posterDisplay" style="display: none;">
                 <canvas id="posterCanvas" width="500" height="500"></canvas>
             </div>
@@ -302,6 +315,19 @@
     <script>
         let currentLang = 'ar';
         let uploadedImage = null;
+        let qrcodeObj = null;
+
+        // Initialize QR Code on load
+        window.onload = function() {
+            qrcodeObj = new QRCode(document.getElementById("qrcode"), {
+                text: document.getElementById('storeUrl').value,
+                width: 45,
+                height: 45,
+                colorDark : "#5a189a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        };
 
         function switchTab(tab) {
             if(tab === 'gift') {
@@ -309,7 +335,7 @@
                 document.getElementById('tabPoster').classList.remove('active');
                 document.getElementById('giftControls').style.display = 'block';
                 document.getElementById('posterControls').style.display = 'none';
-                document.getElementById('giftDisplay').style.display = 'flex';
+                document.getElementById('printArea').style.display = 'flex';
                 document.getElementById('posterDisplay').style.display = 'none';
             } else {
                 document.getElementById('tabPoster').classList.add('active');
@@ -317,7 +343,7 @@
                 document.getElementById('posterControls').style.display = 'block';
                 document.getElementById('giftControls').style.display = 'none';
                 document.getElementById('posterDisplay').style.display = 'block';
-                document.getElementById('giftDisplay').style.display = 'none';
+                document.getElementById('printArea').style.display = 'none';
                 drawPoster();
             }
         }
@@ -327,7 +353,12 @@
             document.getElementById('prevSender').innerText = document.getElementById('senderName').value;
             document.getElementById('prevReceiver').innerText = document.getElementById('receiverName').value;
             document.getElementById('prevMsg').innerText = '"' + document.getElementById('cardMsg').value + '"';
-            document.getElementById('prevOrder').innerText = document.getElementById('orderId').value;
+            
+            // Update QR Code
+            if (qrcodeObj) {
+                qrcodeObj.clear();
+                qrcodeObj.makeCode(document.getElementById('storeUrl').value || "https://salla.sa");
+            }
         }
 
         function loadPosterImage(event) {
@@ -412,10 +443,10 @@
                 document.getElementById('tabPoster').innerText = '📣 Promo Posters';
                 document.getElementById('txtGiftTitle').innerText = 'Gift Card Customization';
                 document.getElementById('lblStore').innerText = 'Store Name';
+                document.getElementById('lblStoreUrl').innerText = 'Store URL (Links to QR Code)';
                 document.getElementById('lblSender').innerText = 'Sender Name';
                 document.getElementById('lblReceiver').innerText = 'Receiver Name';
                 document.getElementById('lblMsg').innerText = 'Gift Message';
-                document.getElementById('lblOrder').innerText = 'Order ID';
                 document.getElementById('btnPrint').innerText = '🖨️ Print / Export PDF';
                 
                 document.getElementById('txtPosterTitle').innerText = 'Poster Customization';
@@ -437,10 +468,10 @@
                 document.getElementById('tabPoster').innerText = '📣 بوسترات العروض';
                 document.getElementById('txtGiftTitle').innerText = 'تخصيص بطاقة الإهداء';
                 document.getElementById('lblStore').innerText = 'اسم المتجر';
+                document.getElementById('lblStoreUrl').innerText = 'رابط المتجر (سيلتحق بكود الـ QR)';
                 document.getElementById('lblSender').innerText = 'اسم المرسل';
                 document.getElementById('lblReceiver').innerText = 'اسم المستلم';
                 document.getElementById('lblMsg').innerText = 'عبارة الإهداء';
-                document.getElementById('lblOrder').innerText = 'رقم الطلب';
                 document.getElementById('btnPrint').innerText = '🖨️ طباعة / تصدير PDF';
                 
                 document.getElementById('txtPosterTitle').innerText = 'تخصيص البوستر الإعلاني';
