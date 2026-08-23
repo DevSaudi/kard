@@ -3,10 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كارد | Kard</title>
+
+    <!-- SEO Meta Tags -->
+    <title>كارد | Kard - مصمم بطاقات الإهداء وبوسترات العروض الحصرية</title>
+    <meta name="description" content="منصة كارد (Kard) لإنشاء وتصميم بطاقات الإهداء وتصاميم وبوسترات العروض الترويجية الاحترافية مع رموز QR كود مجاناً وبجودة عالية.">
+    <meta name="keywords" content="كارد, Kard, تصميم بطاقات إهداء, تصاميم متجر, بوسترات عروض, صانع كيو ار, QR code generator, بطاقة اهداء سلة, تصميم اعلان">
+    <meta name="author" content="BADAH_AI">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://kard.sa/">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="كارد | Kard - صانع بطاقات الإهداء وبوسترات العروض">
+    <meta property="og:description" content="صمم بطاقات إهداء مخصصة وبوسترات إعلانية لمتجرك مجاناً وبأعلى جودة مع QR Code تلقائي.">
+    <meta property="og:url" content="https://kard.sa/">
+    <meta property="og:site_name" content="كارد - Kard">
+    <meta property="og:locale" content="ar_SA">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BADAH_AI">
+    <meta name="twitter:creator" content="@BADAH_AI">
+    <meta name="twitter:title" content="كارد | Kard - مصمم بطاقات الإهداء وبوسترات العروض">
+    <meta name="twitter:description" content="أنشئ بطاقات إهداء وبوسترات ترويجية احترافية لمتجرك الإلكتروني بسهولة وسرعة.">
+
+    <!-- Structured Data (JSON-LD) for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "كارد | Kard",
+      "url": "https://kard.sa/",
+      "description": "تطبيق ويب احترافي لتصميم بطاقات الإهداء وبوسترات العروض التجارية مع إمكانية تضمين رمز QR مجاناً.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "SAR"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "BADAH_AI",
+        "url": "https://x.com/BADAH_AI"
+      }
+    }
+    </script>
+
+    <!-- Fonts & External Libraries -->
     <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         :root[data-theme="light"] {
             --bg-main: #f4f6f9;
@@ -52,7 +100,7 @@
             position: sticky; top: 0; z-index: 100;
         }
 
-        .logo-container { display: flex; align-items: center; gap: 0.8rem; }
+        .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
         .logo-icon {
             width: 40px; height: 40px; background: var(--accent-green);
             border-radius: 12px; display: flex; align-items: center; justify-content: center;
@@ -189,34 +237,31 @@
 
         #posterCanvas { max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
 
-        /* FOOTER DESIGN */
+        /* FOOTER DESIGN - CENTERED & STACKED */
         footer {
             background: var(--surface-card);
             border-top: 1px solid var(--border-color);
-            padding: 1.5rem 8%;
+            padding: 2rem 1.5rem;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            justify-content: center;
+            gap: 1.2rem;
             margin-top: auto;
-        }
-
-        .footer-rights {
-            font-size: 0.85rem;
-            color: var(--text-sub);
+            text-align: center;
         }
 
         .footer-socials {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            justify-content: center;
+            gap: 1rem;
         }
 
         .social-link {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             background: var(--input-bg);
             border: 1px solid var(--border-color);
             display: flex;
@@ -230,24 +275,30 @@
         .social-link:hover {
             border-color: var(--accent-green);
             color: var(--accent-green);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.2);
         }
 
         .social-link svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
+        }
+
+        .footer-rights {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 400;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-container">
+        <a href="#" class="logo-container" title="كارد Kard">
             <div class="logo-icon">ك</div>
-            <div class="logo-text">كارد</div>
-        </div>
+            <h1 class="logo-text">كارد</h1>
+        </a>
         <div class="header-actions">
             <!-- Dark/Light Theme Icon Button -->
             <button class="icon-btn-transparent" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme" title="الوضع الداكن/الفاتح">
@@ -261,141 +312,143 @@
         </div>
     </header>
 
-    <div class="tabs-wrapper">
-        <div class="tabs-box">
-            <button class="tab-card active" onclick="switchTab('gift')" id="tabGift">
-                <span id="txtTabGift">بطاقات الإهداء</span>
-            </button>
-            <button class="tab-card" onclick="switchTab('poster')" id="tabPoster">
-                <span id="txtTabPoster">بوسترات العروض</span>
-            </button>
-        </div>
-    </div>
-
-    <div class="main-container">
-        
-        <div class="panel-box">
-            <!-- Gift Controls -->
-            <div id="giftControls">
-                <div class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</div>
-                
-                <div class="field-group">
-                    <label id="lblCardBg">خلفية البطاقة (اختياري)</label>
-                    <input type="file" id="cardBgInput" accept="image/*" onchange="loadCardBackground(event)">
-                    <button class="btn-remove-img" id="btnRemoveBg" onclick="removeCardBackground()">حذف الخلفية المخصصة</button>
-                </div>
-
-                <div class="field-group">
-                    <label id="lblStore">اسم المتجر</label>
-                    <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblStoreUrl">رابط المتجر (تحويل لـ QR Code)</label>
-                    <input type="text" id="storeUrl" value="https://salla.sa/my-store" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblSender">اسم المرسل</label>
-                    <input type="text" id="senderName" value="عبدالله السلمان" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblReceiver">اسم المستلم</label>
-                    <input type="text" id="receiverName" value="فيصل الخالد" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblMsg">عبارة الإهداء</label>
-                    <textarea id="cardMsg" rows="3" oninput="updateCard()">كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح.</textarea>
-                </div>
-                <button class="btn-card-primary" onclick="downloadCardImage()" id="btnPrint">
-                    <span id="txtBtnPrint">تحميل البطاقة (صورة عالية الدقة)</span>
+    <main>
+        <div class="tabs-wrapper">
+            <div class="tabs-box">
+                <button class="tab-card active" onclick="switchTab('gift')" id="tabGift">
+                    <span id="txtTabGift">بطاقات الإهداء</span>
                 </button>
-            </div>
-
-            <!-- Poster Controls -->
-            <div id="posterControls" style="display: none;">
-                <div class="panel-title" id="txtPosterTitle">تخصيص البوستر الإعلاني</div>
-                <div class="field-group">
-                    <label id="lblPlatform">قياس المنصة</label>
-                    <select id="pPlatform" onchange="drawPoster()">
-                        <option value="square">منشور مربع (1:1)</option>
-                        <option value="story">قصة / ستوري (9:16)</option>
-                    </select>
-                </div>
-                <div class="field-group">
-                    <label id="lblImage">صورة المنتج أو الخلفية</label>
-                    <input type="file" id="pImgInput" accept="image/*" onchange="loadPosterImage(event)">
-                    <button class="btn-remove-img" id="btnRemovePosterImg" onclick="removePosterImage()">حذف صورة البوستر</button>
-                </div>
-                <div class="field-group">
-                    <label id="lblPStore">اسم المتجر</label>
-                    <input type="text" id="pStore" value="متجر الفخامة" oninput="drawPoster()">
-                </div>
-                <div class="field-group">
-                    <label id="lblPProduct">اسم المنتج / العرض</label>
-                    <input type="text" id="pProduct" value="عطر السمو الملكي" oninput="drawPoster()">
-                </div>
-                <div class="field-group">
-                    <label id="lblPPrice">السعر</label>
-                    <input type="text" id="pPrice" value="299 ر.س (بدلاً من 450 ر.س)" oninput="drawPoster()">
-                </div>
-                <div class="field-group">
-                    <label id="lblPOffer">عبارة التخفيض</label>
-                    <input type="text" id="pOffer" value="خصم حصري 35% لفترة محدودة" oninput="drawPoster()">
-                </div>
-                <div class="field-group">
-                    <label id="lblPUrl">رابط صفحة العرض (تحويل لـ QR Code)</label>
-                    <input type="text" id="pUrl" value="https://salla.sa/my-store/product-1" oninput="drawPoster()">
-                </div>
-                <button class="btn-card-primary" onclick="downloadPoster()" id="btnDownload">
-                    <span id="txtBtnDownload">تحميل البوستر (صورة عالية الدقة)</span>
+                <button class="tab-card" onclick="switchTab('poster')" id="tabPoster">
+                    <span id="txtTabPoster">بوسترات العروض</span>
                 </button>
             </div>
         </div>
 
-        <div class="preview-wrapper">
-            <!-- Gift Preview Screen -->
-            <div id="giftDisplay" style="width: 100%; display: flex; justify-content: center;">
-                <div class="card-frame" id="cardToCapture">
-                    <div class="card-header">
-                        <div class="card-store" id="prevStore">متجر الفخامة</div>
+        <div class="main-container">
+            
+            <div class="panel-box">
+                <!-- Gift Controls -->
+                <div id="giftControls">
+                    <h2 class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</h2>
+                    
+                    <div class="field-group">
+                        <label id="lblCardBg">خلفية البطاقة (اختياري)</label>
+                        <input type="file" id="cardBgInput" accept="image/*" onchange="loadCardBackground(event)">
+                        <button class="btn-remove-img" id="btnRemoveBg" onclick="removeCardBackground()">حذف الخلفية المخصصة</button>
                     </div>
-                    <div class="card-body">
-                        <div class="card-text" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
+
+                    <div class="field-group">
+                        <label id="lblStore">اسم المتجر</label>
+                        <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
                     </div>
-                    <div class="card-footer">
-                        <div class="card-parties">
-                            <div><span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong></div>
-                            <div><span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong></div>
-                        </div>
-                        <div class="qr-canvas-box">
-                            <canvas id="cardQrCanvas"></canvas>
-                        </div>
+                    <div class="field-group">
+                        <label id="lblStoreUrl">رابط المتجر (تحويل لـ QR Code)</label>
+                        <input type="text" id="storeUrl" value="https://salla.sa/my-store" oninput="updateCard()">
                     </div>
+                    <div class="field-group">
+                        <label id="lblSender">اسم المرسل</label>
+                        <input type="text" id="senderName" value="عبدالله السلمان" oninput="updateCard()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblReceiver">اسم المستلم</label>
+                        <input type="text" id="receiverName" value="فيصل الخالد" oninput="updateCard()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblMsg">عبارة الإهداء</label>
+                        <textarea id="cardMsg" rows="3" oninput="updateCard()">كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح.</textarea>
+                    </div>
+                    <button class="btn-card-primary" onclick="downloadCardImage()" id="btnPrint">
+                        <span id="txtBtnPrint">تحميل البطاقة (صورة عالية الدقة)</span>
+                    </button>
+                </div>
+
+                <!-- Poster Controls -->
+                <div id="posterControls" style="display: none;">
+                    <h2 class="panel-title" id="txtPosterTitle">تخصيص البوستر الإعلاني</h2>
+                    <div class="field-group">
+                        <label id="lblPlatform">قياس المنصة</label>
+                        <select id="pPlatform" onchange="drawPoster()">
+                            <option value="square">منشور مربع (1:1)</option>
+                            <option value="story">قصة / ستوري (9:16)</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label id="lblImage">صورة المنتج أو الخلفية</label>
+                        <input type="file" id="pImgInput" accept="image/*" onchange="loadPosterImage(event)">
+                        <button class="btn-remove-img" id="btnRemovePosterImg" onclick="removePosterImage()">حذف صورة البوستر</button>
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPStore">اسم المتجر</label>
+                        <input type="text" id="pStore" value="متجر الفخامة" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPProduct">اسم المنتج / العرض</label>
+                        <input type="text" id="pProduct" value="عطر السمو الملكي" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPPrice">السعر</label>
+                        <input type="text" id="pPrice" value="299 ر.س (بدلاً من 450 ر.س)" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPOffer">عبارة التخفيض</label>
+                        <input type="text" id="pOffer" value="خصم حصري 35% لفترة محدودة" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPUrl">رابط صفحة العرض (تحويل لـ QR Code)</label>
+                        <input type="text" id="pUrl" value="https://salla.sa/my-store/product-1" oninput="drawPoster()">
+                    </div>
+                    <button class="btn-card-primary" onclick="downloadPoster()" id="btnDownload">
+                        <span id="txtBtnDownload">تحميل البوستر (صورة عالية الدقة)</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- Poster Preview Screen -->
-            <div id="posterDisplay" style="display: none;">
-                <canvas id="posterCanvas" width="500" height="500"></canvas>
-            </div>
-        </div>
+            <div class="preview-wrapper">
+                <!-- Gift Preview Screen -->
+                <div id="giftDisplay" style="width: 100%; display: flex; justify-content: center;">
+                    <div class="card-frame" id="cardToCapture">
+                        <div class="card-header">
+                            <div class="card-store" id="prevStore">متجر الفخامة</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-parties">
+                                <div><span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong></div>
+                                <div><span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong></div>
+                            </div>
+                            <div class="qr-canvas-box">
+                                <canvas id="cardQrCanvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    </div>
+                <!-- Poster Preview Screen -->
+                <div id="posterDisplay" style="display: none;">
+                    <canvas id="posterCanvas" width="500" height="500"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </main>
 
     <canvas id="posterQrCanvas" style="display: none;"></canvas>
 
     <footer>
-        <div class="footer-rights" id="txtRights">
-            جميع الحقوق محفوظة © كارد 2026
-        </div>
         <div class="footer-socials">
-            <!-- WhatsApp Icon -->
-            <a href="https://wa.me/" target="_blank" class="social-link" title="WhatsApp" aria-label="WhatsApp">
+            <!-- WhatsApp Icon with direct number link -->
+            <a href="https://wa.me/966590211191" target="_blank" rel="noopener noreferrer" class="social-link" title="تواصل عبر الواتساب" aria-label="WhatsApp">
                 <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c0-5.445 4.43-9.874 9.877-9.874 2.637 0 5.116 1.028 6.98 2.894a9.81 9.81 0 012.888 6.982c-.001 5.447-4.431 9.875-9.863 9.875m0-18.133c-4.557 0-8.267 3.71-8.267 8.258a8.23 8.23 0 001.371 4.542l.2.318-.588 2.148 2.199-.577.308.183a8.23 8.23 0 004.773 1.503h.004c4.555 0 8.262-3.71 8.264-8.259 0-2.207-.86-4.283-2.423-5.848A8.2 8.2 0 0012.051 3.65"/></svg>
             </a>
-            <!-- X (Twitter) Icon -->
-            <a href="https://x.com/" target="_blank" class="social-link" title="X" aria-label="X">
+            <!-- X (Twitter) Icon with direct account link -->
+            <a href="https://x.com/BADAH_AI" target="_blank" rel="noopener noreferrer" class="social-link" title="متابعة عبر منصة X" aria-label="X Platform">
                 <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
+        </div>
+        <div class="footer-rights" id="txtRights">
+            جميع الحقوق محفوظة © كارد 2026
         </div>
     </footer>
 
