@@ -48,7 +48,8 @@ HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 ​هذا المشروع مفتوح المصدر ومحمي بموجب رخصة MIT (MIT License) التي تتيح لك حرية الاستخدام والتعديل والتطوير.
 
 ​📞 التواصل والدعم الفني
-​تطوير وإشراف: BADAH_AI
+
+​تطوير وإشراف/ BADAHAI#
 ​<p align="center">
 <a href="https://x.com/BADAH_AI" target="_blank">
 <img src="https://img.shields.io/badge/X%20(Twitter)-000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)" />
