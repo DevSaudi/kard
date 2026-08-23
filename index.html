@@ -57,30 +57,26 @@
             font-weight: 700; color: #fff; font-size: 1.2rem;
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
         }
-        .logo-text { font-size: 1.4rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; }
+        .logo-text { font-size: 1.4rem; font-weight: 700; color: var(--text-main); letter-spacing: 0; }
 
-        .header-actions { display: flex; align-items: center; gap: 0.6rem; }
+        .header-actions { display: flex; align-items: center; gap: 0.3rem; }
 
         .icon-btn-transparent {
             background: transparent; border: none;
             color: var(--text-main); width: 40px; height: 40px; border-radius: 12px;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease; position: relative;
         }
         .icon-btn-transparent:hover { background: var(--input-bg); }
         .icon-btn-transparent svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-        .lang-text-btn {
-            background: transparent; border: 1px solid var(--border-color);
-            color: var(--text-main); padding: 0.4rem 0.9rem; border-radius: 12px;
-            cursor: pointer; font-size: 0.85rem; font-weight: 500;
+        .lang-badge {
+            position: absolute; bottom: 2px; right: 2px; font-size: 0.65rem; font-weight: 700;
+            background: var(--accent-green); color: white; padding: 1px 4px; border-radius: 6px;
         }
-        .lang-text-btn:hover { border-color: var(--accent-green); }
 
         .tabs-wrapper { display: flex; justify-content: center; margin: 2rem 0 1.5rem; }
-        .tabs-box {
-            display: flex; gap: 12px;
-        }
+        .tabs-box { display: flex; gap: 12px; }
 
         .tab-card {
             background: var(--surface-card); border: 1px solid var(--border-color);
@@ -134,34 +130,60 @@
             transform: translateY(-2px); border-color: var(--accent-green); color: var(--accent-green); box-shadow: var(--btn-shadow-hover);
         }
 
+        .btn-remove-bg {
+            background: transparent; border: 1px dashed #ef4444; color: #ef4444;
+            padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.75rem; cursor: pointer;
+            margin-top: 0.4rem; display: none; width: 100%; text-align: center;
+        }
+
         .preview-wrapper {
             background: var(--surface-card); border: 1px solid var(--border-color);
             border-radius: 20px; padding: 2rem; box-shadow: var(--card-shadow);
             display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 450px;
         }
 
-        /* GIFT CARD MINIMALIST */
+        /* GIFT CARD DESIGN */
         .card-frame {
             width: 100%; max-width: 400px; min-height: 250px;
-            background: #ffffff; color: #0f172a;
+            background-color: #ffffff;
+            background-size: cover;
+            background-position: center;
             border-radius: 18px; padding: 1.8rem; position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
             display: flex; flex-direction: column; justify-content: space-between;
             border: 1px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .card-header { text-align: center; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.8rem; }
-        .card-store { font-size: 1.05rem; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; }
+        /* Overlay to ensure readability on custom backgrounds */
+        .card-frame.has-bg::before {
+            content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+            background: rgba(0, 0, 0, 0.45); z-index: 1;
+        }
+
+        .card-header, .card-body, .card-footer { position: relative; z-index: 2; }
+
+        .card-header { text-align: center; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 0.8rem; }
+        .card-frame.has-bg .card-header { border-bottom-color: rgba(255,255,255,0.2); }
+
+        .card-store { font-size: 1.2rem; font-weight: 700; color: #0f172a; letter-spacing: 0; }
+        .card-frame.has-bg .card-store { color: #ffffff; }
 
         .card-body { text-align: center; margin: 1.2rem 0; }
-        .card-text { font-size: 0.95rem; line-height: 1.6; color: #374151; font-weight: 400; }
+        .card-text { font-size: 0.95rem; line-height: 1.6; color: #374151; font-weight: 400; letter-spacing: 0; }
+        .card-frame.has-bg .card-text { color: #ffffff; }
 
-        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #f3f4f6; padding-top: 0.8rem; }
-        .card-parties { font-size: 0.8rem; color: #6b7280; line-height: 1.5; text-align: right; }
+        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 0.8rem; }
+        .card-frame.has-bg .card-footer { border-top-color: rgba(255,255,255,0.2); }
+
+        .card-parties { font-size: 0.8rem; color: #6b7280; line-height: 1.5; text-align: right; letter-spacing: 0; }
         .card-parties strong { color: #111827; font-weight: 600; }
-        
-        .qr-canvas-box { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .qr-canvas-box canvas { width: 50px !important; height: 50px !important; border-radius: 6px; display: block; }
+        .card-frame.has-bg .card-parties { color: #e2e8f0; }
+        .card-frame.has-bg .card-parties strong { color: #ffffff; }
+
+        .qr-canvas-box { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: #ffffff; padding: 3px; border-radius: 6px; }
+        .qr-canvas-box canvas { width: 44px !important; height: 44px !important; display: block; }
 
         #posterCanvas { max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
     </style>
@@ -174,11 +196,15 @@
             <div class="logo-text">كارد</div>
         </div>
         <div class="header-actions">
-            <button class="icon-btn-transparent" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme">
-                <!-- Moon SVG Default -->
+            <!-- Dark/Light Theme Icon Button -->
+            <button class="icon-btn-transparent" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme" title="الوضع الداكن/الفاتح">
                 <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
-            <button class="lang-text-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+            <!-- Language Icon Button -->
+            <button class="icon-btn-transparent" onclick="toggleLanguage()" id="langBtn" aria-label="Toggle Language" title="تغيير اللغة">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <span class="lang-badge" id="langBadge">EN</span>
+            </button>
         </div>
     </header>
 
@@ -199,6 +225,13 @@
             <!-- Gift Controls -->
             <div id="giftControls">
                 <div class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</div>
+                
+                <div class="field-group">
+                    <label id="lblCardBg">خلفية البطاقة (اختياري)</label>
+                    <input type="file" id="cardBgInput" accept="image/*" onchange="loadCardBackground(event)">
+                    <button class="btn-remove-bg" id="btnRemoveBg" onclick="removeCardBackground()">حذف الخلفية المخصصة</button>
+                </div>
+
                 <div class="field-group">
                     <label id="lblStore">اسم المتجر</label>
                     <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
@@ -347,6 +380,25 @@
             }
         }
 
+        function loadCardBackground(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const card = document.getElementById('cardToCapture');
+                card.style.backgroundImage = `url('${reader.result}')`;
+                card.classList.add('has-bg');
+                document.getElementById('btnRemoveBg').style.display = 'block';
+            }
+            if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function removeCardBackground() {
+            const card = document.getElementById('cardToCapture');
+            card.style.backgroundImage = 'none';
+            card.classList.remove('has-bg');
+            document.getElementById('cardBgInput').value = '';
+            document.getElementById('btnRemoveBg').style.display = 'none';
+        }
+
         function updateCard() {
             const store = document.getElementById('storeName').value;
             const sender = document.getElementById('senderName').value;
@@ -366,7 +418,6 @@
             const target = document.getElementById('cardToCapture');
             html2canvas(target, {
                 scale: 3,
-                backgroundColor: '#ffffff',
                 useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
@@ -461,11 +512,13 @@
             if (currentLang === 'ar') {
                 currentLang = 'en';
                 document.documentElement.setAttribute('dir', 'ltr');
-                document.getElementById('langBtn').innerText = 'العربية';
+                document.getElementById('langBadge').innerText = 'AR';
                 
                 document.getElementById('txtTabGift').innerText = 'Gift Cards';
                 document.getElementById('txtTabPoster').innerText = 'Promo Posters';
                 document.getElementById('txtGiftTitle').innerText = 'Gift Card Customization';
+                document.getElementById('lblCardBg').innerText = 'Card Background Image (Optional)';
+                document.getElementById('btnRemoveBg').innerText = 'Remove Custom Background';
                 document.getElementById('lblStore').innerText = 'Store Name';
                 document.getElementById('lblStoreUrl').innerText = 'Store URL (Links to QR)';
                 document.getElementById('lblSender').innerText = 'Sender Name';
@@ -487,11 +540,13 @@
             } else {
                 currentLang = 'ar';
                 document.documentElement.setAttribute('dir', 'rtl');
-                document.getElementById('langBtn').innerText = 'English';
+                document.getElementById('langBadge').innerText = 'EN';
                 
                 document.getElementById('txtTabGift').innerText = 'بطاقات الإهداء';
                 document.getElementById('txtTabPoster').innerText = 'بوسترات العروض';
                 document.getElementById('txtGiftTitle').innerText = 'تخصيص بطاقة الإهداء';
+                document.getElementById('lblCardBg').innerText = 'خلفية البطاقة (اختياري)';
+                document.getElementById('btnRemoveBg').innerText = 'حذف الخلفية المخصصة';
                 document.getElementById('lblStore').innerText = 'اسم المتجر';
                 document.getElementById('lblStoreUrl').innerText = 'رابط المتجر (تحويل لـ QR Code)';
                 document.getElementById('lblSender').innerText = 'اسم المرسل';
