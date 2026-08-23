@@ -49,13 +49,13 @@ HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 
 ​📞 التواصل والدعم الفني
 
-​تطوير وإشراف/ BADAHAI#
+​تطوير وإشراف/ #BADAH
 ​<p align="center">
 <a href="https://x.com/BADAH_AI" target="_blank">
 <img src="https://img.shields.io/badge/X%20(Twitter)-000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)" />
 </a>
  
-<a href="https://wa.me/966500000000" target="_blank">
+<a href="https://wa.me/966590211191" target="_blank">
 <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp" />
 </a>
 </p>
