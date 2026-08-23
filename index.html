@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kard | كَرْد - منصة كروت الإهداء وبوسترات العروض</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Amiri:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --primary-hover: #b89528;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; transition: all 0.2s; }
+        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+        header { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+        .lang-btn { background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 0.4rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+        /* Tabs */
+        .tabs-container { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem; }
+        .tab-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.8rem 1.8rem; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+        .tab-btn.active { background: var(--primary); color: var(--bg-dark); border-color: var(--primary); }
+
+        .app-container { max-width: 1100px; margin: 0 auto 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 0 1rem; }
+        @media (max-width: 768px) { .app-container { grid-template-columns: 1fr; } }
+
+        .form-card { background: var(--card-bg); padding: 1.8rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.85rem; }
+        input, textarea, select { width: 100%; padding: 0.75rem; background: #0f172a; border: 1px solid var(--border-color); border-radius: 6px; color: #fff; }
+
+        .btn-action { width: 100%; background: var(--primary); color: var(--bg-dark); border: none; padding: 0.9rem; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 1rem; font-size: 1rem; }
+        .btn-action:hover { background: var(--primary-hover); }
+
+        .preview-area { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* Gift Card Preview */
+        .card-preview { width: 100%; aspect-ratio: 1.414/1; background: #fff; color: #1e293b; padding: 1.2rem; border-radius: 8px; border: 3px double #d4af37; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .preview-header { text-align: center; border-bottom: 1px solid #d4af37; padding-bottom: 0.4rem; font-weight: bold; color: #d4af37; }
+        .preview-body { text-align: center; font-family: 'Amiri', serif; font-size: 1.1rem; margin: 0.8rem 0; }
+        .preview-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 0.4rem; }
+
+        /* Poster Canvas */
+        #posterCanvas { max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); }
+
+        /* Pricing Section */
+        .pricing-section { max-width: 1100px; margin: 4rem auto; padding: 0 1rem; text-align: center; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .price-card { background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .price-card.featured { border-color: var(--primary); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        .price-title { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .price-val { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 1rem; }
+
+        @media print {
+            body * { visibility: hidden; }
+            #printable-card, #printable-card * { visibility: visible; }
+            #printable-card { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Kard | كَرْد</div>
+        <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTab('gift')" id="tabGift">🎁 مولد كروت الإهداء</button>
+        <button class="tab-btn" onclick="switchTab('poster')" id="tabPoster">📣 مولد بوسترات العروض</button>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div class="app-container">
+        
+        <!-- Form Controls -->
+        <div class="form-card">
+            <!-- Gift Card Form -->
+            <div id="giftForm">
+                <h3 id="txtGiftTitle" style="margin-bottom: 1rem;">بيانات كارت الإهداء</h3>
+                <div class="form-group">
+                    <label id="lblStore">اسم المتجر</label>
+                    <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
+                </div>
+                <div class="form-group">
+                    <label id="lblSender">اسم المرسل</label>
+                    <input type="text" id="senderName" value="عبدالله السلمان" oninput="updateCard()">
+                </div>
+                <div class="form-group">
+                    <label id="lblReceiver">اسم المستلم</label>
+                    <input type="text" id="receiverName" value="فيصل الخالد" oninput="updateCard()">
+                </div>
+                <div class="form-group">
+                    <label id="lblMsg">رسالة الإهداء</label>
+                    <textarea id="cardMsg" rows="3" oninput="updateCard()">كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح.</textarea>
+                </div>
+                <div class="form-group">
+                    <label id="lblOrder">رقم الطلب</label>
+                    <input type="text" id="orderId" value="#ORD-98241" oninput="updateCard()">
+                </div>
+                <button class="btn-action" onclick="window.print()" id="btnPrint">🖨️ طباعة / حفظ كـ PDF</button>
+            </div>
+
+            <!-- Poster Form -->
+            <div id="posterForm" style="display: none;">
+                <h3 id="txtPosterTitle" style="margin-bottom: 1rem;">بيانات العرض والإعلان</h3>
+                <div class="form-group">
+                    <label id="lblPStore">اسم المتجر</label>
+                    <input type="text" id="pStore" value="متجر الفخامة" oninput="drawPoster()">
+                </div>
+                <div class="form-group">
+                    <label id="lblPProduct">اسم المنتج / العرض</label>
+                    <input type="text" id="pProduct" value="عطر السمو الملكي" oninput="drawPoster()">
+                </div>
+                <div class="form-group">
+                    <label id="lblPPrice">السعر الأصلي / الجديد</label>
+                    <input type="text" id="pPrice" value="299 ر.س (بدلاً من 450 ر.س)" oninput="drawPoster()">
+                </div>
+                <div class="form-group">
+                    <label id="lblPOffer">عبارة العرض البروموشين</label>
+                    <input type="text" id="pOffer" value="خصم حصري 35% لفترة محدودة" oninput="drawPoster()">
+                </div>
+                <button class="btn-action" onclick="downloadPoster()" id="btnDownload">📥 تحميل البوستر (PNG)</button>
+            </div>
+        </div>
+
+        <!-- Live Preview Area -->
+        <div class="preview-area">
+            <!-- Gift Preview -->
+            <div id="giftPreview" style="width: 100%;">
+                <div class="card-preview" id="printable-card">
+                    <div class="preview-header" id="prevStore">متجر الفخامة</div>
+                    <div class="preview-body" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
+                    <div class="preview-footer">
+                        <div><span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong> | <span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong></div>
+                        <div id="prevOrder">#ORD-98241</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Poster Preview Canvas -->
+            <div id="posterPreview" style="display: none; text-align: center;">
+                <canvas id="posterCanvas" width="400" height="400"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Pricing Section (Business Model) -->
+    <section class="pricing-section">
+        <h2 id="txtPricingHead">باقات الاستخدام المتاحة للمتاجر</h2>
+        <p id="txtPricingSub" style="color: var(--text-muted);">اختر الخطة المناسبة لحجم متجرك الإلكتروني</p>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-title" id="pFreeTitle">الباقة المجانية</div>
+                <div class="price-val">0 <span style="font-size: 1rem;">ر.س</span></div>
+                <p id="pFreeDesc">تجربة حية حتى 10 كروت وبوسترات شهرياً بمارك مائي.</p>
+            </div>
+            <div class="price-card featured">
+                <div class="price-title" id="pProTitle">باقة المتاجر (Pro)</div>
+                <div class="price-val">49 <span style="font-size: 1rem;">ر.س / شهرياً</span></div>
+                <p id="pProDesc">توليد غير محدود لبطاقات PDF والبوسترات بدون علامة مائية + دعم الربط المباشر.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentLang = 'ar';
+        let activeTab = 'gift';
+
+        function switchTab(tab) {
+            activeTab = tab;
+            if(tab === 'gift') {
+                document.getElementById('tabGift').classList.add('active');
+                document.getElementById('tabPoster').classList.remove('active');
+                document.getElementById('giftForm').style.display = 'block';
+                document.getElementById('posterForm').style.display = 'none';
+                document.getElementById('giftPreview').style.display = 'block';
+                document.getElementById('posterPreview').style.display = 'none';
+            } else {
+                document.getElementById('tabPoster').classList.add('active');
+                document.getElementById('tabGift').classList.remove('active');
+                document.getElementById('posterForm').style.display = 'block';
+                document.getElementById('giftForm').style.display = 'none';
+                document.getElementById('posterPreview').style.display = 'block';
+                document.getElementById('giftPreview').style.display = 'none';
+                drawPoster();
+            }
+        }
+
+        function updateCard() {
+            document.getElementById('prevStore').innerText = document.getElementById('storeName').value;
+            document.getElementById('prevSender').innerText = document.getElementById('senderName').value;
+            document.getElementById('prevReceiver').innerText = document.getElementById('receiverName').value;
+            document.getElementById('prevMsg').innerText = '"' + document.getElementById('cardMsg').value + '"';
+            document.getElementById('prevOrder').innerText = document.getElementById('orderId').value;
+        }
+
+        function drawPoster() {
+            const canvas = document.getElementById('posterCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Background gradient
+            let grad = ctx.createLinearGradient(0, 0, 0, 400);
+            grad.addColorStop(0, '#0f172a');
+            grad.addColorStop(1, '#1e293b');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 400, 400);
+
+            // Gold Border
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 6;
+            ctx.strokeRect(15, 15, 370, 370);
+
+            // Store Name
+            ctx.fillStyle = '#d4af37';
+            ctx.font = 'bold 20px Tajawal';
+            ctx.textAlign = 'center';
+            ctx.fillText(document.getElementById('pStore').value, 200, 60);
+
+            // Discount Badge
+            ctx.fillStyle = '#b89528';
+            ctx.fillRect(50, 90, 300, 40);
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 18px Tajawal';
+            ctx.fillText(document.getElementById('pOffer').value, 200, 116);
+
+            // Product Name
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 24px Tajawal';
+            ctx.fillText(document.getElementById('pProduct').value, 200, 210);
+
+            // Price
+            ctx.fillStyle = '#d4af37';
+            ctx.font = 'bold 22px Tajawal';
+            ctx.fillText(document.getElementById('pPrice').value, 200, 280);
+
+            // Footer
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '14px Tajawal';
+            ctx.fillText('اطلب الآن عبر متجرنا الإلكتروني', 200, 350);
+        }
+
+        function downloadPoster() {
+            const canvas = document.getElementById('posterCanvas');
+            const link = document.createElement('a');
+            link.download = 'kard-poster.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function toggleLanguage() {
+            if (currentLang === 'ar') {
+                currentLang = 'en';
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.getElementById('langBtn').innerText = 'العربية';
+                
+                document.getElementById('tabGift').innerText = '🎁 Gift Card Generator';
+                document.getElementById('tabPoster').innerText = '📣 Promo Poster Generator';
+                document.getElementById('txtGiftTitle').innerText = 'Gift Card Details';
+                document.getElementById('lblStore').innerText = 'Store Name';
+                document.getElementById('lblSender').innerText = 'Sender Name';
+                document.getElementById('lblReceiver').innerText = 'Receiver Name';
+                document.getElementById('lblMsg').innerText = 'Gift Message';
+                document.getElementById('lblOrder').innerText = 'Order ID';
+                document.getElementById('btnPrint').innerText = '🖨️ Print / Save as PDF';
+                
+                document.getElementById('txtPosterTitle').innerText = 'Offer & Promo Details';
+                document.getElementById('lblPStore').innerText = 'Store Name';
+                document.getElementById('lblPProduct').innerText = 'Product / Offer Name';
+                document.getElementById('lblPPrice').innerText = 'Original / New Price';
+                document.getElementById('lblPOffer').innerText = 'Promo Tagline';
+                document.getElementById('btnDownload').innerText = '📥 Download Poster (PNG)';
+            } else {
+                currentLang = 'ar';
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.getElementById('langBtn').innerText = 'English';
+                
+                document.getElementById('tabGift').innerText = '🎁 مولد كروت الإهداء';
+                document.getElementById('tabPoster').innerText = '📣 مولد بوسترات العروض';
+                document.getElementById('txtGiftTitle').innerText = 'بيانات كارت الإهداء';
+                document.getElementById('lblStore').innerText = 'اسم المتجر';
+                document.getElementById('lblSender').innerText = 'اسم المرسل';
+                document.getElementById('lblReceiver').innerText = 'اسم المستلم';
+                document.getElementById('lblMsg').innerText = 'رسالة الإهداء';
+                document.getElementById('lblOrder').innerText = 'رقم الطلب';
+                document.getElementById('btnPrint').innerText = '🖨️ طباعة / حفظ كـ PDF';
+                
+                document.getElementById('txtPosterTitle').innerText = 'بيانات العرض والإعلان';
+                document.getElementById('lblPStore').innerText = 'اسم المتجر';
+                document.getElementById('lblPProduct').innerText = 'اسم المنتج / العرض';
+                document.getElementById('lblPPrice').innerText = 'السعر الأصلي / الجديد';
+                document.getElementById('lblPOffer').innerText = 'عبارة العرض البروموشين';
+                document.getElementById('btnDownload').innerText = '📥 تحميل البوستر (PNG)';
+            }
+        }
+    </script>
+</body>
+</html>
