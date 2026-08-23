@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kard | كَرْد - منصة بطاقات الإهداء وبوسترات العروض</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Tajawal:wght@300;400;500;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- QRCode Generator Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- QR Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
     <style>
         :root {
             --bg-main: #0b0712;
@@ -30,6 +30,8 @@
                 radial-gradient(circle at 85% 80%, rgba(157, 78, 221, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
         }
+
+        #app-wrapper { display: block; }
 
         header {
             display: flex; justify-content: space-between; align-items: center;
@@ -108,12 +110,12 @@
         }
 
         /* ----------------------------------------------------
-           CARD DESIGN FOR SCREEN
+           CARD DESIGN DISPLAY (SCREEN)
         ---------------------------------------------------- */
         .card-frame {
-            width: 100%; max-width: 500px; aspect-ratio: 1.414 / 1;
+            width: 100%; max-width: 500px; height: 320px;
             background: #ffffff; color: #1a1523;
-            border-radius: 12px; padding: 2rem; position: relative;
+            border-radius: 12px; padding: 1.8rem; position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             display: flex; flex-direction: column; justify-content: space-between;
             border: 1px solid #e2d9f3;
@@ -130,203 +132,249 @@
         .card-store { font-size: 1.15rem; font-weight: 800; letter-spacing: 1.5px; color: #5a189a; text-transform: uppercase; }
         .card-divider { width: 40px; height: 2px; background: #9d4edd; margin: 6px auto 0; border-radius: 2px; }
 
-        .card-body { text-align: center; margin: 0.8rem 0; }
-        .card-text { font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.7; color: #2d233c; font-style: italic; }
+        .card-body { text-align: center; margin: 0.5rem 0; }
+        .card-text { font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.6; color: #2d233c; font-style: italic; }
 
         .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0e6ff; padding-top: 0.8rem; }
-        .card-parties { font-size: 0.82rem; color: #5a189a; }
+        .card-parties { font-size: 0.85rem; color: #5a189a; line-height: 1.4; }
         .card-parties strong { color: #240046; font-weight: 700; }
         
-        .qr-container { display: flex; align-items: center; gap: 8px; }
-        #qrcode img, #qrcode canvas { width: 45px !important; height: 45px !important; border-radius: 4px; }
+        .qr-canvas-box canvas { width: 50px !important; height: 50px !important; border-radius: 4px; display: block; }
 
         #posterCanvas { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
 
         /* ----------------------------------------------------
-           STRICT SINGLE PAGE PRINT ENGINE (A4 CENTERED)
+           ABSOLUTE DIRECT PRINT ENGINE (PREVENTS BLANK PAGES)
         ---------------------------------------------------- */
+        #print-mount { display: none; }
+
         @media print {
             @page {
                 size: A4 portrait;
                 margin: 0;
             }
 
-            /* Hide everything in the body by default */
-            body * {
+            html, body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                overflow: hidden !important;
+            }
+
+            #app-wrapper {
                 display: none !important;
             }
 
-            /* Display ONLY the print wrapper and its contents */
-            body, #printArea, #printArea * {
-                display: block !important;
-            }
-
-            #printArea {
+            #print-mount {
+                display: flex !important;
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
                 width: 100vw !important;
                 height: 100vh !important;
-                background: #ffffff !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
+                background: #ffffff !important;
+                z-index: 999999 !important;
             }
 
-            .card-frame {
+            .card-frame-print {
                 width: 148mm !important;
                 height: 105mm !important;
-                max-width: 148mm !important;
-                max-height: 105mm !important;
+                background: #ffffff !important;
+                color: #1a1523 !important;
                 border-radius: 8px !important;
-                box-shadow: none !important;
-                border: 1.5px solid #7b2cbf !important;
                 padding: 10mm !important;
-                box-sizing: border-box !important;
-                margin: auto !important;
-            }
-
-            .card-footer {
+                position: relative !important;
                 display: flex !important;
+                flex-direction: column !important;
                 justify-content: space-between !important;
-                align-items: center !important;
+                border: 1.5px solid #7b2cbf !important;
+                box-sizing: border-box !important;
             }
 
-            .qr-container {
-                display: flex !important;
+            .card-frame-print .card-border-decoration {
+                position: absolute !important; top: 5mm !important; left: 5mm !important; right: 5mm !important; bottom: 5mm !important;
+                border: 1px solid #9d4edd !important; border-radius: 6px !important; opacity: 0.4 !important;
             }
+
+            .card-frame-print .card-header { text-align: center !important; }
+            .card-frame-print .card-store { font-size: 1.3rem !important; font-weight: 800 !important; color: #5a189a !important; }
+            .card-frame-print .card-divider { width: 40px !important; height: 2px !important; background: #9d4edd !important; margin: 4px auto 0 !important; }
+
+            .card-frame-print .card-body { text-align: center !important; margin: 4mm 0 !important; }
+            .card-frame-print .card-text { font-family: 'Amiri', serif !important; font-size: 1.3rem !important; line-height: 1.5 !important; color: #2d233c !important; }
+
+            .card-frame-print .card-footer { display: flex !important; justify-content: space-between !important; align-items: center !important; border-top: 1px solid #f0e6ff !important; padding-top: 4mm !important; }
+            .card-frame-print .card-parties { font-size: 0.9rem !important; color: #5a189a !important; }
+            .card-frame-print .card-parties strong { color: #240046 !important; font-weight: 700 !important; }
+            .card-frame-print .qr-canvas-box canvas { width: 55px !important; height: 55px !important; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <div class="logo-icon">K</div>
-            <div class="logo-text">Kard</div>
-        </div>
-        <button class="btn-lang" onclick="toggleLanguage()" id="langBtn">English</button>
-    </header>
+    <div id="app-wrapper">
+        <header>
+            <div class="logo-container">
+                <div class="logo-icon">K</div>
+                <div class="logo-text">Kard</div>
+            </div>
+            <button class="btn-lang" onclick="toggleLanguage()" id="langBtn">English</button>
+        </header>
 
-    <div class="tabs-wrapper">
-        <div class="tabs-box">
-            <button class="tab-btn active" onclick="switchTab('gift')" id="tabGift">🎁 بطاقات الإهداء</button>
-            <button class="tab-btn" onclick="switchTab('poster')" id="tabPoster">📣 بوسترات العروض</button>
+        <div class="tabs-wrapper">
+            <div class="tabs-box">
+                <button class="tab-btn active" onclick="switchTab('gift')" id="tabGift">🎁 بطاقات الإهداء</button>
+                <button class="tab-btn" onclick="switchTab('poster')" id="tabPoster">📣 بوسترات العروض</button>
+            </div>
+        </div>
+
+        <div class="main-container">
+            
+            <div class="glass-panel">
+                <!-- Gift Controls -->
+                <div id="giftControls">
+                    <div class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</div>
+                    <div class="field-group">
+                        <label id="lblStore">اسم المتجر</label>
+                        <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblStoreUrl">رابط المتجر (تحويل لـ QR Code)</label>
+                        <input type="text" id="storeUrl" value="https://salla.sa/my-store" oninput="updateCard()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblSender">اسم المرسل</label>
+                        <input type="text" id="senderName" value="عبدالله السلمان" oninput="updateCard()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblReceiver">اسم المستلم</label>
+                        <input type="text" id="receiverName" value="فيصل الخالد" oninput="updateCard()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblMsg">عبارة الإهداء</label>
+                        <textarea id="cardMsg" rows="3" oninput="updateCard()">كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح.</textarea>
+                    </div>
+                    <button class="btn-primary" onclick="triggerPrint()" id="btnPrint">🖨️ طباعة / تصدير PDF</button>
+                </div>
+
+                <!-- Poster Controls -->
+                <div id="posterControls" style="display: none;">
+                    <div class="panel-title" id="txtPosterTitle">تخصيص البوستر الإعلاني</div>
+                    <div class="field-group">
+                        <label id="lblPlatform">قياس المنصة</label>
+                        <select id="pPlatform" onchange="drawPoster()">
+                            <option value="square">إنستجرام / X (منشور مربع 1:1)</option>
+                            <option value="story">تيك توك / سناب شات (ستوري 9:16)</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label id="lblImage">صورة المنتج أو الخلفية</label>
+                        <input type="file" id="pImgInput" accept="image/*" onchange="loadPosterImage(event)">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPStore">اسم المتجر</label>
+                        <input type="text" id="pStore" value="متجر الفخامة" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPProduct">اسم المنتج / العرض</label>
+                        <input type="text" id="pProduct" value="عطر السمو الملكي" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPPrice">السعر</label>
+                        <input type="text" id="pPrice" value="299 ر.س (بدلاً من 450 ر.س)" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPOffer">عبارة التخفيض</label>
+                        <input type="text" id="pOffer" value="خصم حصري 35% لفترة محدودة" oninput="drawPoster()">
+                    </div>
+                    <div class="field-group">
+                        <label id="lblPUrl">رابط صفحة العرض/المنتج (تحويل لـ QR Code)</label>
+                        <input type="text" id="pUrl" value="https://salla.sa/my-store/product-1" oninput="drawPoster()">
+                    </div>
+                    <button class="btn-primary" onclick="downloadPoster()" id="btnDownload">📥 تحميل البوستر عالية الدقة</button>
+                </div>
+            </div>
+
+            <div class="preview-wrapper">
+                <!-- Gift Preview Screen -->
+                <div id="giftDisplay" style="width: 100%; display: flex; justify-content: center;">
+                    <div class="card-frame">
+                        <div class="card-border-decoration"></div>
+                        <div class="card-header">
+                            <div class="card-store" id="prevStore">متجر الفخامة</div>
+                            <div class="card-divider"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-parties">
+                                <div><span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong></div>
+                                <div><span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong></div>
+                            </div>
+                            <div class="qr-canvas-box">
+                                <canvas id="cardQrCanvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Poster Preview Screen -->
+                <div id="posterDisplay" style="display: none;">
+                    <canvas id="posterCanvas" width="500" height="500"></canvas>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="main-container">
-        
-        <div class="glass-panel">
-            <!-- Gift Controls -->
-            <div id="giftControls">
-                <div class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</div>
-                <div class="field-group">
-                    <label id="lblStore">اسم المتجر</label>
-                    <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblStoreUrl">رابط المتجر (سيلتحق بكود الـ QR)</label>
-                    <input type="text" id="storeUrl" value="https://salla.sa/my-store" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblSender">اسم المرسل</label>
-                    <input type="text" id="senderName" value="عبدالله السلمان" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblReceiver">اسم المستلم</label>
-                    <input type="text" id="receiverName" value="فيصل الخالد" oninput="updateCard()">
-                </div>
-                <div class="field-group">
-                    <label id="lblMsg">عبارة الإهداء</label>
-                    <textarea id="cardMsg" rows="3" oninput="updateCard()">كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح.</textarea>
-                </div>
-                <button class="btn-primary" onclick="window.print()" id="btnPrint">🖨️ طباعة / تصدير PDF</button>
+    <!-- Isolated Dedicated Print Section -->
+    <div id="print-mount">
+        <div class="card-frame-print">
+            <div class="card-border-decoration"></div>
+            <div class="card-header">
+                <div class="card-store" id="printStore">متجر الفخامة</div>
+                <div class="card-divider"></div>
             </div>
-
-            <!-- Poster Controls -->
-            <div id="posterControls" style="display: none;">
-                <div class="panel-title" id="txtPosterTitle">تخصيص البوستر الإعلاني</div>
-                <div class="field-group">
-                    <label id="lblPlatform">قياس المنصة</label>
-                    <select id="pPlatform" onchange="drawPoster()">
-                        <option value="square">إنستجرام / X (منشور مربع 1:1)</option>
-                        <option value="story">تيك توك / سناب شات (ستوري 9:16)</option>
-                    </select>
+            <div class="card-body">
+                <div class="card-text" id="printMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
+            </div>
+            <div class="card-footer">
+                <div class="card-parties">
+                    <div><span id="lblPrintFrom">من:</span> <strong id="printSender">عبدالله السلمان</strong></div>
+                    <div><span id="lblPrintTo">إلى:</span> <strong id="printReceiver">فيصل الخالد</strong></div>
                 </div>
-                <div class="field-group">
-                    <label id="lblImage">صورة المنتج أو الخلفية</label>
-                    <input type="file" id="pImgInput" accept="image/*" onchange="loadPosterImage(event)">
+                <div class="qr-canvas-box">
+                    <canvas id="printQrCanvas"></canvas>
                 </div>
-                <div class="field-group">
-                    <label id="lblPStore">اسم المتجر</label>
-                    <input type="text" id="pStore" value="متجر الفخامة" oninput="drawPoster()">
-                </div>
-                <div class="field-group">
-                    <label id="lblPProduct">اسم المنتج / العرض</label>
-                    <input type="text" id="pProduct" value="عطر السمو الملكي" oninput="drawPoster()">
-                </div>
-                <div class="field-group">
-                    <label id="lblPPrice">السعر</label>
-                    <input type="text" id="pPrice" value="299 ر.س (بدلاً من 450 ر.س)" oninput="drawPoster()">
-                </div>
-                <div class="field-group">
-                    <label id="lblPOffer">عبارة التخفيض</label>
-                    <input type="text" id="pOffer" value="خصم حصري 35% لفترة محدودة" oninput="drawPoster()">
-                </div>
-                <button class="btn-primary" onclick="downloadPoster()" id="btnDownload">📥 تحميل البوستر عالية الدقة</button>
             </div>
         </div>
-
-        <div class="preview-wrapper">
-            <!-- Gift Card Print Isolated Wrapper -->
-            <div id="printArea" style="width: 100%; display: flex; justify-content: center;">
-                <div class="card-frame" id="printableCard">
-                    <div class="card-border-decoration"></div>
-                    <div class="card-header">
-                        <div class="card-store" id="prevStore">متجر الفخامة</div>
-                        <div class="card-divider"></div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-text" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-parties">
-                            <div><span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong></div>
-                            <div><span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong></div>
-                        </div>
-                        <div class="qr-container">
-                            <div id="qrcode"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Poster Area -->
-            <div id="posterDisplay" style="display: none;">
-                <canvas id="posterCanvas" width="500" height="500"></canvas>
-            </div>
-        </div>
-
     </div>
+
+    <!-- Secret Offscreen Canvas for Poster QR Rendering -->
+    <canvas id="posterQrCanvas" style="display: none;"></canvas>
 
     <script>
         let currentLang = 'ar';
         let uploadedImage = null;
-        let qrcodeObj = null;
 
-        // Initialize QR Code on load
+        function renderQR(canvasId, text, size = 150) {
+            try {
+                new QRious({
+                    element: document.getElementById(canvasId),
+                    value: text || 'https://salla.sa',
+                    size: size,
+                    level: 'H'
+                });
+            } catch(e) { console.error("QR Error", e); }
+        }
+
         window.onload = function() {
-            qrcodeObj = new QRCode(document.getElementById("qrcode"), {
-                text: document.getElementById('storeUrl').value,
-                width: 45,
-                height: 45,
-                colorDark : "#5a189a",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
+            updateCard();
         };
 
         function switchTab(tab) {
@@ -335,7 +383,7 @@
                 document.getElementById('tabPoster').classList.remove('active');
                 document.getElementById('giftControls').style.display = 'block';
                 document.getElementById('posterControls').style.display = 'none';
-                document.getElementById('printArea').style.display = 'flex';
+                document.getElementById('giftDisplay').style.display = 'flex';
                 document.getElementById('posterDisplay').style.display = 'none';
             } else {
                 document.getElementById('tabPoster').classList.add('active');
@@ -343,22 +391,36 @@
                 document.getElementById('posterControls').style.display = 'block';
                 document.getElementById('giftControls').style.display = 'none';
                 document.getElementById('posterDisplay').style.display = 'block';
-                document.getElementById('printArea').style.display = 'none';
+                document.getElementById('giftDisplay').style.display = 'none';
                 drawPoster();
             }
         }
 
         function updateCard() {
-            document.getElementById('prevStore').innerText = document.getElementById('storeName').value;
-            document.getElementById('prevSender').innerText = document.getElementById('senderName').value;
-            document.getElementById('prevReceiver').innerText = document.getElementById('receiverName').value;
-            document.getElementById('prevMsg').innerText = '"' + document.getElementById('cardMsg').value + '"';
-            
-            // Update QR Code
-            if (qrcodeObj) {
-                qrcodeObj.clear();
-                qrcodeObj.makeCode(document.getElementById('storeUrl').value || "https://salla.sa");
-            }
+            const store = document.getElementById('storeName').value;
+            const sender = document.getElementById('senderName').value;
+            const receiver = document.getElementById('receiverName').value;
+            const msg = '"' + document.getElementById('cardMsg').value + '"';
+            const url = document.getElementById('storeUrl').value;
+
+            // Update UI Screen Preview
+            document.getElementById('prevStore').innerText = store;
+            document.getElementById('prevSender').innerText = sender;
+            document.getElementById('prevReceiver').innerText = receiver;
+            document.getElementById('prevMsg').innerText = msg;
+            renderQR('cardQrCanvas', url);
+
+            // Sync Print Mount Elements
+            document.getElementById('printStore').innerText = store;
+            document.getElementById('printSender').innerText = sender;
+            document.getElementById('printReceiver').innerText = receiver;
+            document.getElementById('printMsg').innerText = msg;
+            renderQR('printQrCanvas', url);
+        }
+
+        function triggerPrint() {
+            updateCard();
+            window.print();
         }
 
         function loadPosterImage(event) {
@@ -375,6 +437,7 @@
             const canvas = document.getElementById('posterCanvas');
             const ctx = canvas.getContext('2d');
             const platform = document.getElementById('pPlatform').value;
+            const pUrl = document.getElementById('pUrl').value;
 
             if (platform === 'story') {
                 canvas.width = 1080;
@@ -386,7 +449,7 @@
 
             if (uploadedImage) {
                 ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(11, 7, 18, 0.75)';
+                ctx.fillStyle = 'rgba(11, 7, 18, 0.78)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             } else {
                 let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
@@ -403,26 +466,40 @@
             ctx.fillStyle = '#e0aaff';
             ctx.font = 'bold 44px Tajawal';
             ctx.textAlign = 'center';
-            ctx.fillText(document.getElementById('pStore').value, canvas.width / 2, 130);
+            ctx.fillText(document.getElementById('pStore').value, canvas.width / 2, 120);
 
             ctx.fillStyle = '#7b2cbf';
-            ctx.fillRect(100, 180, canvas.width - 200, 90);
+            ctx.fillRect(100, 160, canvas.width - 200, 85);
             ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 38px Tajawal';
-            ctx.fillText(document.getElementById('pOffer').value, canvas.width / 2, 238);
+            ctx.font = 'bold 36px Tajawal';
+            ctx.fillText(document.getElementById('pOffer').value, canvas.width / 2, 215);
 
-            let midY = canvas.height / 2;
+            let midY = canvas.height / 2 - 40;
             ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 54px Tajawal';
+            ctx.font = 'bold 52px Tajawal';
             ctx.fillText(document.getElementById('pProduct').value, canvas.width / 2, midY);
 
             ctx.fillStyle = '#e0aaff';
-            ctx.font = 'bold 44px Tajawal';
-            ctx.fillText(document.getElementById('pPrice').value, canvas.width / 2, midY + 100);
+            ctx.font = 'bold 42px Tajawal';
+            ctx.fillText(document.getElementById('pPrice').value, canvas.width / 2, midY + 90);
+
+            // Generate Poster QR Code on Hidden Canvas
+            renderQR('posterQrCanvas', pUrl, 200);
+            const posterQrCanvas = document.getElementById('posterQrCanvas');
+
+            // Draw QR Code on Bottom Center of Main Canvas
+            const qrSize = 150;
+            const qrX = (canvas.width - qrSize) / 2;
+            const qrY = canvas.height - 260;
+
+            // White Background Card for QR Code
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qrX - 10, qrY - 10, qrSize + 20, qrSize + 20);
+            ctx.drawImage(posterQrCanvas, qrX, qrY, qrSize, qrSize);
 
             ctx.fillStyle = '#a0a0b8';
-            ctx.font = '32px Tajawal';
-            ctx.fillText('اطلب الآن عبر متجرنا الإلكتروني', canvas.width / 2, canvas.height - 100);
+            ctx.font = '28px Tajawal';
+            ctx.fillText('امسح الرمز للطلب المباشر', canvas.width / 2, canvas.height - 70);
         }
 
         function downloadPoster() {
@@ -456,9 +533,12 @@
                 document.getElementById('lblPProduct').innerText = 'Product Name';
                 document.getElementById('lblPPrice').innerText = 'Price';
                 document.getElementById('lblPOffer').innerText = 'Discount Tagline';
+                document.getElementById('lblPUrl').innerText = 'Offer/Product Link (Converts to QR)';
                 document.getElementById('btnDownload').innerText = '📥 Download HD Poster';
                 document.getElementById('lblFrom').innerText = 'From:';
                 document.getElementById('lblTo').innerText = 'To:';
+                document.getElementById('lblPrintFrom').innerText = 'From:';
+                document.getElementById('lblPrintTo').innerText = 'To:';
             } else {
                 currentLang = 'ar';
                 document.documentElement.setAttribute('dir', 'rtl');
@@ -468,7 +548,7 @@
                 document.getElementById('tabPoster').innerText = '📣 بوسترات العروض';
                 document.getElementById('txtGiftTitle').innerText = 'تخصيص بطاقة الإهداء';
                 document.getElementById('lblStore').innerText = 'اسم المتجر';
-                document.getElementById('lblStoreUrl').innerText = 'رابط المتجر (سيلتحق بكود الـ QR)';
+                document.getElementById('lblStoreUrl').innerText = 'رابط المتجر (تحويل لـ QR Code)';
                 document.getElementById('lblSender').innerText = 'اسم المرسل';
                 document.getElementById('lblReceiver').innerText = 'اسم المستلم';
                 document.getElementById('lblMsg').innerText = 'عبارة الإهداء';
@@ -481,9 +561,12 @@
                 document.getElementById('lblPProduct').innerText = 'اسم المنتج / العرض';
                 document.getElementById('lblPPrice').innerText = 'السعر';
                 document.getElementById('lblPOffer').innerText = 'عبارة التخفيض';
+                document.getElementById('lblPUrl').innerText = 'رابط صفحة العرض/المنتج (تحويل لـ QR Code)';
                 document.getElementById('btnDownload').innerText = '📥 تحميل البوستر عالية الدقة';
                 document.getElementById('lblFrom').innerText = 'من:';
                 document.getElementById('lblTo').innerText = 'إلى:';
+                document.getElementById('lblPrintFrom').innerText = 'من:';
+                document.getElementById('lblPrintTo').innerText = 'إلى:';
             }
         }
     </script>
