@@ -1,44 +1,46 @@
 <div align="center">
 
-# كارد | Kard
+# 💳 كارد | Kard
 
-### منصة إنشاء بطاقات الإهداء وبوسترات العروض الحصرية
+### 🇸🇦 منصة إهداء وتصميم إعلانات المتاجر — سعودية الصنع والمصدر
 
-أداة خفيفة ومجانية عبر الويب تمكّن أصحاب المتاجر الإلكترونية والأفراد من تصميم بطاقات الإهداء وبوسترات العروض الترويجية الاحترافية مع توليد رمز الاستجابة السريعة بشكل تلقائي وتصدير الصور بدقة عالية.
+أداة مبتكرة وذكية صُممت بأيدٍ سعودية لتمكين التجار، المتاجر الإلكترونية، والمبدعين من إنشاء بطاقات الإهداء وبوسترات العروض الترويجية الاحترافية خلال ثوانٍ معدودة. نهدف لتوفير حلول تصميم سريعة، عالية الجودة، ومجانية لتعزيز مبيعات المتاجر الرقمية وتسهيل التواصل مع العملاء.
 
-**[رابط معاينة التطبيق المباشر](https://devsaudi.github.io/kard/)**
+**[🔗 رابط معاينة المنصة المباشر](https://devsaudi.github.io/kard/)**
 
----
-
-### المميزات الرئيسية
-
-✦ تصميم بطاقات الإهداء وتخصيص اسم المتجر والمرسل والمستلم والعبارات  
-✦ صانع بوسترات العروض وتخصيص الأسعار ونسب الخصم بمقاسات مختلفة  
-✦ توليد رمز استجابة سريعة ديناميكي لروابط المتاجر والمنتجات  
-✦ تصدير التصاميم بصيغ عالية الدقة للتنزيل المباشر  
-✦ دعم كامل للوضع الداكن والوضع الفاتح  
-✦ واجهة استخدام متعددة اللغات تدعم العربية والإنجليزية  
-✦ عمليات معالجة فورية داخل المتصفح دون الحاجة لتخزين البيانات  
+> **🎁 ملاحظة:** المنصة متاحة للاستخدام مجاناً بالكامل للفترة الحالية دعماً للتجار والمتاجر الناشئة.
 
 ---
 
-### التقنيات المستخدمة
+### ✨ المميزات الرئيسية
+
+🎁 **بطاقات إهداء مخصصة:** إمكانية تخصيص اسم المتجر، المرسل، المستلم، وكتابة العبارات  
+📢 **بوسترات عروض ترويجية:** صانع بوسترات مع التحكم بالأسعار ونسب الخصم بمقاسات متعددة  
+📱 **رمز استجابة سريع (QR):** توليد تلقائي وديناميكي لروابط المتاجر والمنتجات  
+🖼️ **تصدير عالي الدقة (HD):** تنزيل مباشر للتصاميم بصيغ صور فائقة الوضوح  
+🌓 **دعم المظهر:** توافق كامل مع الوضع الداكن والوضع الفاتح  
+🌐 **واجهة متعددة اللغات:** تبديل فوري وسلس بين اللغة العربية والإنجليزية  
+⚡ **معالجة فورية:** تعمل بالكامل داخل المتصفح بأمان وبدون الحاجة لتخزين البيانات  
+
+---
+
+### 🛠️ التقنيات المستخدمة
 
 <p align="center">
-  <img src="https://cdn.simpleicons.org/html5/E34F26" width="36" height="36" alt="HTML5" title="HTML5" />
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" width="38" height="38" alt="HTML5" title="HTML5" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.simpleicons.org/css3/1572B6" width="36" height="36" alt="CSS3" title="CSS3" />
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" width="38" height="38" alt="CSS3" title="CSS3" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.simpleicons.org/javascript/F7DF1E" width="36" height="36" alt="JavaScript" title="JavaScript" />
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" width="38" height="38" alt="JavaScript" title="JavaScript" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.simpleicons.org/githubpages/222222" width="36" height="36" alt="GitHub Pages" title="GitHub Pages" />
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" width="38" height="38" alt="Git" title="Git" />
 </p>
 
 HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 
 ---
 
-### التشغيل المحلي
+### 🚀 التشغيل المحلي
 
 ```bash
 git clone [https://github.com/devsaudi/kard.git](https://github.com/devsaudi/kard.git)
