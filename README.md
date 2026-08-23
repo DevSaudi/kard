@@ -45,3 +45,20 @@ HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 ```bash
 git clone [https://github.com/devsaudi/kard.git](https://github.com/devsaudi/kard.git)
 cd kard
+افتح ملف index.html مباشرة في المتصفح.
+​🤝 المساهمة في المشروع
+​المشروع مفتوح المصدر ونرحب بمساهمات المطورين وتطوير الميزات المقترحة عبر فتح طلب سحب (Pull Request).
+​📄 التراخيص وحقوق الاستخدام
+​هذا المشروع مفتوح المصدر ومحمي بموجب رخصة MIT (MIT License) التي تتيح لك حرية الاستخدام والتعديل والتطوير.
+​📞 التواصل والدعم الفني
+​تطوير وإشراف: BADAH_AI
+​<p align="center">
+<a href="https://x.com/BADAH_AI" target="_blank">
+<img src="https://img.shields.io/badge/X%20(Twitter)-000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)" />
+</a>
+ 
+<a href="https://wa.me/966500000000" target="_blank">
+<img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp" />
+</a>
+</p>
+​</div>
