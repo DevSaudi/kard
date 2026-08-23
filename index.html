@@ -4,234 +4,295 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kard | كَرْد - منصة كروت الإهداء وبوسترات العروض</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Amiri:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Tajawal:wght@300;400;500;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #9d4edd;
-            --primary-light: #c77dff;
-            --primary-accent: #e0aaff;
-            --bg-dark: #10002b;
-            --card-bg: rgba(36, 0, 70, 0.75);
-            --border-color: #5a189a;
-            --text-light: #ffffff;
-            --text-muted: #e0aaff;
+            --bg-main: #0b0712;
+            --surface-card: rgba(23, 15, 38, 0.7);
+            --border-purple: rgba(157, 78, 221, 0.25);
+            --border-glow: #9d4edd;
+            --accent-purple: #7b2cbf;
+            --accent-light: #e0aaff;
+            --text-main: #ffffff;
+            --text-sub: #a0a0b8;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; transition: all 0.2s ease; }
-        
-        body { 
-            background-color: var(--bg-dark); 
-            color: var(--text-light); 
-            line-height: 1.6; 
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(123, 44, 191, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(157, 78, 221, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
-        /* Animated Falling Background */
-        .bg-animation {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 8%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            background: rgba(11, 7, 18, 0.8);
+            position: sticky; top: 0; z-index: 100;
         }
 
-        .icon-particle {
-            position: absolute;
-            top: -50px;
-            font-size: 1.8rem;
-            opacity: 0.25;
-            animation: fall linear infinite;
+        .logo-container { display: flex; align-items: center; gap: 0.8rem; }
+        .logo-icon {
+            width: 38px; height: 38px; background: linear-gradient(135deg, #9d4edd, #3c096c);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: #fff; box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+        }
+        .logo-text { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; }
+
+        .btn-lang {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-purple);
+            color: var(--text-main); padding: 0.5rem 1.2rem; border-radius: 20px;
+            cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: 0.3s;
+        }
+        .btn-lang:hover { border-color: var(--border-glow); background: rgba(157, 78, 221, 0.1); }
+
+        .tabs-wrapper { display: flex; justify-content: center; margin: 2.5rem 0 1.5rem; }
+        .tabs-box {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-purple);
+            padding: 5px; border-radius: 14px; display: flex; gap: 5px; backdrop-filter: blur(10px);
+        }
+        .tab-btn {
+            background: transparent; border: none; color: var(--text-sub);
+            padding: 0.7rem 1.8rem; border-radius: 10px; cursor: pointer;
+            font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #7b2cbf 0%, #5a189a 100%);
+            color: #fff; box-shadow: 0 4px 20px rgba(123, 44, 191, 0.4);
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.35; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        .main-container {
+            max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem;
+            display: grid; grid-template-columns: 420px 1fr; gap: 2rem;
+        }
+        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
+
+        .glass-panel {
+            background: var(--surface-card); border: 1px solid var(--border-purple);
+            border-radius: 20px; padding: 2rem; backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .panel-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--accent-light); }
+
+        .field-group { margin-bottom: 1.2rem; }
+        .field-group label { display: block; font-size: 0.85rem; color: var(--text-sub); margin-bottom: 0.5rem; }
+        .field-group input, .field-group textarea, .field-group select {
+            width: 100%; background: rgba(11, 7, 18, 0.6); border: 1px solid var(--border-purple);
+            border-radius: 10px; padding: 0.8rem 1rem; color: #fff; font-size: 0.9rem; transition: 0.3s;
+        }
+        .field-group input:focus, .field-group textarea:focus, .field-group select:focus {
+            outline: none; border-color: var(--border-glow); box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
         }
 
-        /* Layout Elements */
-        header { 
-            position: relative; z-index: 2;
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 1.2rem 5%; 
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(16, 0, 43, 0.85);
-            backdrop-filter: blur(10px);
+        .btn-primary {
+            width: 100%; background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
+            color: #fff; border: none; padding: 1rem; border-radius: 12px;
+            font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: 0.3s;
+            margin-top: 0.5rem; box-shadow: 0 8px 25px rgba(157, 78, 221, 0.3);
+        }
+        .btn-primary:hover { opacity: 0.95; transform: translateY(-2px); }
+
+        .preview-wrapper {
+            background: var(--surface-card); border: 1px solid var(--border-purple);
+            border-radius: 20px; padding: 2rem; backdrop-filter: blur(16px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 480px;
         }
 
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-accent); text-shadow: 0 0 10px var(--primary); }
-        .lang-btn { 
-            background: transparent; border: 1px solid var(--primary-accent); 
-            color: var(--primary-accent); padding: 0.4rem 1.2rem; 
-            border-radius: 8px; cursor: pointer; font-weight: bold; 
-        }
-        .lang-btn:hover { background: var(--primary-accent); color: var(--bg-dark); }
-
-        .tabs-container { position: relative; z-index: 2; display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem; }
-        .tab-btn { 
-            background: var(--card-bg); border: 1px solid var(--border-color); 
-            color: var(--text-muted); padding: 0.8rem 1.8rem; border-radius: 10px; 
-            cursor: pointer; font-size: 1rem; font-weight: bold; 
-            backdrop-filter: blur(5px);
-        }
-        .tab-btn.active { 
-            background: var(--primary); color: #fff; 
-            border-color: var(--primary-light); 
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5); 
+        /* ----------------------------------------------------
+           CARD DESIGN FOR SCREEN
+        ---------------------------------------------------- */
+        .card-frame {
+            width: 100%; max-width: 480px; aspect-ratio: 1.414 / 1;
+            background: #fcfcfc; color: #1a1523;
+            border-radius: 12px; padding: 2.2rem; position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            display: flex; flex-direction: column; justify-content: space-between;
+            border: 1px solid #e2d9f3;
+            background-image: radial-gradient(#efebf7 1px, transparent 1px);
+            background-size: 16px 16px;
         }
 
-        .app-container { 
-            position: relative; z-index: 2;
-            max-width: 1100px; margin: 0 auto 3rem; 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 0 1rem; 
-        }
-        @media (max-width: 768px) { .app-container { grid-template-columns: 1fr; } }
-
-        .form-card { 
-            background: var(--card-bg); padding: 1.8rem; border-radius: 16px; 
-            border: 1px solid var(--border-color); backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-        }
-        .form-group { margin-bottom: 1rem; }
-        label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.9rem; }
-        input, textarea, select { 
-            width: 100%; padding: 0.75rem; background: rgba(16, 0, 43, 0.6); 
-            border: 1px solid var(--border-color); border-radius: 8px; color: #fff; 
-        }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-light); }
-
-        .btn-action { 
-            width: 100%; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); 
-            color: #fff; border: none; padding: 0.9rem; border-radius: 8px; 
-            font-weight: bold; cursor: pointer; margin-top: 1rem; font-size: 1rem; 
-            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
-        }
-        .btn-action:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        .preview-area { 
-            background: var(--card-bg); padding: 1.5rem; border-radius: 16px; 
-            border: 1px solid var(--border-color); backdrop-filter: blur(10px);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+        .card-border-decoration {
+            position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid #9d4edd; border-radius: 8px; pointer-events: none; opacity: 0.5;
         }
 
-        /* Gift Card Standard A6 Layout */
-        .card-preview { 
-            width: 100%; aspect-ratio: 1.414/1; background: #fff; color: #10002b; 
-            padding: 1.2rem; border-radius: 8px; border: 3px double #7b2cbf; 
-            display: flex; flex-direction: column; justify-content: space-between; position: relative; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
-        .preview-header { text-align: center; border-bottom: 1px solid #7b2cbf; padding-bottom: 0.4rem; font-weight: bold; color: #5a189a; }
-        .preview-body { text-align: center; font-family: 'Amiri', serif; font-size: 1.1rem; margin: 0.8rem 0; color: #240046; }
-        .preview-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #5a189a; border-top: 1px solid #e0aaff; padding-top: 0.4rem; }
+        .card-header { text-align: center; }
+        .card-store { font-size: 1.1rem; font-weight: 800; letter-spacing: 2px; color: #5a189a; text-transform: uppercase; }
+        .card-divider { width: 40px; height: 2px; background: #9d4edd; margin: 6px auto 0; border-radius: 2px; }
 
-        /* Poster Canvas Styling */
-        #posterCanvas { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .card-body { text-align: center; margin: 1rem 0; }
+        .card-text { font-family: 'Amiri', serif; font-size: 1.2rem; line-height: 1.7; color: #2d233c; font-style: italic; }
 
+        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.8rem; color: #6e647e; }
+        .card-parties strong { color: #5a189a; font-weight: 700; }
+        .card-order-num { font-size: 0.75rem; letter-spacing: 0.5px; opacity: 0.8; }
+
+        #posterCanvas { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+
+        /* ----------------------------------------------------
+           STRICT SINGLE-PAGE PDF PRINT ENGINE
+        ---------------------------------------------------- */
         @media print {
-            body * { visibility: hidden; }
-            #printable-card, #printable-card * { visibility: visible; }
-            #printable-card { position: absolute; left: 0; top: 0; width: 148mm; height: 105mm; }
-            @page { size: 148mm 105mm; margin: 0; }
+            @page {
+                size: 148mm 105mm; /* Exact A6 Landscape Size */
+                margin: 0 !important;
+            }
+            
+            html, body {
+                width: 148mm !important;
+                height: 105mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                overflow: hidden !important;
+            }
+
+            body * {
+                visibility: hidden !important;
+            }
+
+            #giftDisplay, #giftDisplay *, #printableCard, #printableCard * {
+                visibility: visible !important;
+            }
+
+            #giftDisplay {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 148mm !important;
+                height: 105mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background: #ffffff !important;
+            }
+
+            .card-frame {
+                width: 148mm !important;
+                height: 105mm !important;
+                max-width: 148mm !important;
+                max-height: 105mm !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 12mm !important;
+                box-sizing: border-box !important;
+                page-break-inside: avoid !important;
+                break-after: avoid !important;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Falling Icons Animated Background -->
-    <div class="bg-animation" id="bgAnimation"></div>
-
     <header>
-        <div class="logo">Kard | كَرْد</div>
-        <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+        <div class="logo-container">
+            <div class="logo-icon">K</div>
+            <div class="logo-text">Kard</div>
+        </div>
+        <button class="btn-lang" onclick="toggleLanguage()" id="langBtn">English</button>
     </header>
 
-    <div class="tabs-container">
-        <button class="tab-btn active" onclick="switchTab('gift')" id="tabGift">🎁 مولد كروت الإهداء (A6)</button>
-        <button class="tab-btn" onclick="switchTab('poster')" id="tabPoster">📣 مولد بوسترات العروض</button>
+    <div class="tabs-wrapper">
+        <div class="tabs-box">
+            <button class="tab-btn active" onclick="switchTab('gift')" id="tabGift">🎁 بطاقات الإهداء</button>
+            <button class="tab-btn" onclick="switchTab('poster')" id="tabPoster">📣 بوسترات العروض</button>
+        </div>
     </div>
 
-    <div class="app-container">
+    <div class="main-container">
         
-        <!-- Controls Panel -->
-        <div class="form-card">
-            
-            <!-- Gift Card Form -->
-            <div id="giftForm">
-                <h3 id="txtGiftTitle" style="margin-bottom: 1rem; color: var(--primary-accent);">بيانات كارت الإهداء</h3>
-                <div class="form-group">
+        <div class="glass-panel">
+            <div id="giftControls">
+                <div class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</div>
+                <div class="field-group">
                     <label id="lblStore">اسم المتجر</label>
                     <input type="text" id="storeName" value="متجر الفخامة" oninput="updateCard()">
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblSender">اسم المرسل</label>
                     <input type="text" id="senderName" value="عبدالله السلمان" oninput="updateCard()">
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblReceiver">اسم المستلم</label>
                     <input type="text" id="receiverName" value="فيصل الخالد" oninput="updateCard()">
                 </div>
-                <div class="form-group">
-                    <label id="lblMsg">رسالة الإهداء</label>
+                <div class="field-group">
+                    <label id="lblMsg">عبارة الإهداء</label>
                     <textarea id="cardMsg" rows="3" oninput="updateCard()">كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح.</textarea>
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblOrder">رقم الطلب</label>
                     <input type="text" id="orderId" value="#ORD-98241" oninput="updateCard()">
                 </div>
-                <button class="btn-action" onclick="window.print()" id="btnPrint">🖨️ طباعة / حفظ كـ PDF (A6)</button>
+                <button class="btn-primary" onclick="window.print()" id="btnPrint">🖨️ طباعة / تصدير PDF</button>
             </div>
 
-            <!-- Poster Form -->
-            <div id="posterForm" style="display: none;">
-                <h3 id="txtPosterTitle" style="margin-bottom: 1rem; color: var(--primary-accent);">إعدادات بوستر العروض</h3>
-                <div class="form-group">
-                    <label id="lblPlatform">مقاس المنصة</label>
+            <div id="posterControls" style="display: none;">
+                <div class="panel-title" id="txtPosterTitle">تخصيص البوستر الإعلاني</div>
+                <div class="field-group">
+                    <label id="lblPlatform">قياس المنصة</label>
                     <select id="pPlatform" onchange="drawPoster()">
                         <option value="square">إنستجرام / X (منشور مربع 1:1)</option>
-                        <option value="story">تيك توك / سناب شات / ستوري (9:16)</option>
+                        <option value="story">تيك توك / سناب شات (ستوري 9:16)</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblImage">صورة المنتج أو الخلفية</label>
                     <input type="file" id="pImgInput" accept="image/*" onchange="loadPosterImage(event)">
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblPStore">اسم المتجر</label>
                     <input type="text" id="pStore" value="متجر الفخامة" oninput="drawPoster()">
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblPProduct">اسم المنتج / العرض</label>
                     <input type="text" id="pProduct" value="عطر السمو الملكي" oninput="drawPoster()">
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblPPrice">السعر</label>
                     <input type="text" id="pPrice" value="299 ر.س (بدلاً من 450 ر.س)" oninput="drawPoster()">
                 </div>
-                <div class="form-group">
+                <div class="field-group">
                     <label id="lblPOffer">عبارة التخفيض</label>
                     <input type="text" id="pOffer" value="خصم حصري 35% لفترة محدودة" oninput="drawPoster()">
                 </div>
-                <button class="btn-action" onclick="downloadPoster()" id="btnDownload">📥 تحميل البوستر (PNG)</button>
+                <button class="btn-primary" onclick="downloadPoster()" id="btnDownload">📥 تحميل البوستر عالية الدقة</button>
             </div>
         </div>
 
-        <!-- Live Preview Area -->
-        <div class="preview-area">
-            <div id="giftPreview" style="width: 100%;">
-                <div class="card-preview" id="printable-card">
-                    <div class="preview-header" id="prevStore">متجر الفخامة</div>
-                    <div class="preview-body" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
-                    <div class="preview-footer">
-                        <div><span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong> | <span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong></div>
-                        <div id="prevOrder">#ORD-98241</div>
+        <div class="preview-wrapper">
+            <div id="giftDisplay" style="width: 100%; display: flex; justify-content: center;">
+                <div class="card-frame" id="printableCard">
+                    <div class="card-border-decoration"></div>
+                    <div class="card-header">
+                        <div class="card-store" id="prevStore">متجر الفخامة</div>
+                        <div class="card-divider"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-parties">
+                            <span id="lblFrom">من:</span> <strong id="prevSender">عبدالله السلمان</strong> | 
+                            <span id="lblTo">إلى:</span> <strong id="prevReceiver">فيصل الخالد</strong>
+                        </div>
+                        <div class="card-order-num" id="prevOrder">#ORD-98241</div>
                     </div>
                 </div>
             </div>
 
-            <div id="posterPreview" style="display: none; text-align: center;">
+            <div id="posterDisplay" style="display: none;">
                 <canvas id="posterCanvas" width="500" height="500"></canvas>
             </div>
         </div>
@@ -242,37 +303,21 @@
         let currentLang = 'ar';
         let uploadedImage = null;
 
-        // Create Animated Background Icons
-        function createParticles() {
-            const container = document.getElementById('bgAnimation');
-            const icons = ['🎁', '🏷️', '✨', '🛍️', '🎉', '💜'];
-            for (let i = 0; i < 25; i++) {
-                let particle = document.createElement('div');
-                particle.className = 'icon-particle';
-                particle.innerText = icons[Math.floor(Math.random() * icons.length)];
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
-                particle.style.animationDelay = (Math.random() * 5) + 's';
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
-
         function switchTab(tab) {
             if(tab === 'gift') {
                 document.getElementById('tabGift').classList.add('active');
                 document.getElementById('tabPoster').classList.remove('active');
-                document.getElementById('giftForm').style.display = 'block';
-                document.getElementById('posterForm').style.display = 'none';
-                document.getElementById('giftPreview').style.display = 'block';
-                document.getElementById('posterPreview').style.display = 'none';
+                document.getElementById('giftControls').style.display = 'block';
+                document.getElementById('posterControls').style.display = 'none';
+                document.getElementById('giftDisplay').style.display = 'flex';
+                document.getElementById('posterDisplay').style.display = 'none';
             } else {
                 document.getElementById('tabPoster').classList.add('active');
                 document.getElementById('tabGift').classList.remove('active');
-                document.getElementById('posterForm').style.display = 'block';
-                document.getElementById('giftForm').style.display = 'none';
-                document.getElementById('posterPreview').style.display = 'block';
-                document.getElementById('giftPreview').style.display = 'none';
+                document.getElementById('posterControls').style.display = 'block';
+                document.getElementById('giftControls').style.display = 'none';
+                document.getElementById('posterDisplay').style.display = 'block';
+                document.getElementById('giftDisplay').style.display = 'none';
                 drawPoster();
             }
         }
@@ -301,65 +346,59 @@
             const platform = document.getElementById('pPlatform').value;
 
             if (platform === 'story') {
-                canvas.width = 450;
-                canvas.height = 800; // 9:16 Aspect
+                canvas.width = 1080;
+                canvas.height = 1920;
             } else {
-                canvas.width = 500;
-                canvas.height = 500; // 1:1 Aspect
+                canvas.width = 1080;
+                canvas.height = 1080;
             }
 
-            // Draw Background Image or Purple Gradient
             if (uploadedImage) {
                 ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(16, 0, 43, 0.65)'; // Purple Overlay
+                ctx.fillStyle = 'rgba(11, 7, 18, 0.75)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             } else {
                 let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-                grad.addColorStop(0, '#240046');
-                grad.addColorStop(1, '#10002b');
+                grad.addColorStop(0, '#1a0b2e');
+                grad.addColorStop(1, '#0b0712');
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
 
-            // Glowing Border
-            ctx.strokeStyle = '#c77dff';
-            ctx.lineWidth = 6;
-            ctx.strokeRect(15, 15, canvas.width - 30, canvas.height - 30);
+            ctx.strokeStyle = '#9d4edd';
+            ctx.lineWidth = 10;
+            ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
 
-            // Store Title
             ctx.fillStyle = '#e0aaff';
-            ctx.font = 'bold 22px Tajawal';
+            ctx.font = 'bold 44px Tajawal';
             ctx.textAlign = 'center';
-            ctx.fillText(document.getElementById('pStore').value, canvas.width / 2, 60);
+            ctx.fillText(document.getElementById('pStore').value, canvas.width / 2, 130);
 
-            // Discount Badge
-            ctx.fillStyle = '#9d4edd';
-            ctx.fillRect(40, 90, canvas.width - 80, 45);
+            ctx.fillStyle = '#7b2cbf';
+            ctx.fillRect(100, 180, canvas.width - 200, 90);
             ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 18px Tajawal';
-            ctx.fillText(document.getElementById('pOffer').value, canvas.width / 2, 118);
+            ctx.font = 'bold 38px Tajawal';
+            ctx.fillText(document.getElementById('pOffer').value, canvas.width / 2, 238);
 
-            // Product Name & Price Positioning based on height
             let midY = canvas.height / 2;
             ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 26px Tajawal';
+            ctx.font = 'bold 54px Tajawal';
             ctx.fillText(document.getElementById('pProduct').value, canvas.width / 2, midY);
 
             ctx.fillStyle = '#e0aaff';
-            ctx.font = 'bold 22px Tajawal';
-            ctx.fillText(document.getElementById('pPrice').value, canvas.width / 2, midY + 50);
+            ctx.font = 'bold 44px Tajawal';
+            ctx.fillText(document.getElementById('pPrice').value, canvas.width / 2, midY + 100);
 
-            // Call to Action
-            ctx.fillStyle = '#c77dff';
-            ctx.font = '16px Tajawal';
-            ctx.fillText('اطلب الآن عبر متجرنا الإلكتروني 🛍️', canvas.width / 2, canvas.height - 50);
+            ctx.fillStyle = '#a0a0b8';
+            ctx.font = '32px Tajawal';
+            ctx.fillText('اطلب الآن عبر متجرنا الإلكتروني', canvas.width / 2, canvas.height - 100);
         }
 
         function downloadPoster() {
             const canvas = document.getElementById('posterCanvas');
             const link = document.createElement('a');
-            link.download = 'kard-promo-poster.png';
-            link.href = canvas.toDataURL();
+            link.download = 'kard-poster.png';
+            link.href = canvas.toDataURL('image/png');
             link.click();
         }
 
@@ -369,50 +408,53 @@
                 document.documentElement.setAttribute('dir', 'ltr');
                 document.getElementById('langBtn').innerText = 'العربية';
                 
-                document.getElementById('tabGift').innerText = '🎁 Gift Card Generator (A6)';
-                document.getElementById('tabPoster').innerText = '📣 Promo Poster Generator';
-                document.getElementById('txtGiftTitle').innerText = 'Gift Card Details';
+                document.getElementById('tabGift').innerText = '🎁 Gift Cards';
+                document.getElementById('tabPoster').innerText = '📣 Promo Posters';
+                document.getElementById('txtGiftTitle').innerText = 'Gift Card Customization';
                 document.getElementById('lblStore').innerText = 'Store Name';
                 document.getElementById('lblSender').innerText = 'Sender Name';
                 document.getElementById('lblReceiver').innerText = 'Receiver Name';
                 document.getElementById('lblMsg').innerText = 'Gift Message';
                 document.getElementById('lblOrder').innerText = 'Order ID';
-                document.getElementById('btnPrint').innerText = '🖨️ Print / Save as PDF (A6)';
+                document.getElementById('btnPrint').innerText = '🖨️ Print / Export PDF';
                 
-                document.getElementById('txtPosterTitle').innerText = 'Poster Settings';
-                document.getElementById('lblPlatform').innerText = 'Platform Size';
-                document.getElementById('lblImage').innerText = 'Product / BG Image';
+                document.getElementById('txtPosterTitle').innerText = 'Poster Customization';
+                document.getElementById('lblPlatform').innerText = 'Platform Aspect Ratio';
+                document.getElementById('lblImage').innerText = 'Product / Background Image';
                 document.getElementById('lblPStore').innerText = 'Store Name';
                 document.getElementById('lblPProduct').innerText = 'Product Name';
                 document.getElementById('lblPPrice').innerText = 'Price';
                 document.getElementById('lblPOffer').innerText = 'Discount Tagline';
-                document.getElementById('btnDownload').innerText = '📥 Download Poster (PNG)';
+                document.getElementById('btnDownload').innerText = '📥 Download HD Poster';
+                document.getElementById('lblFrom').innerText = 'From:';
+                document.getElementById('lblTo').innerText = 'To:';
             } else {
                 currentLang = 'ar';
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.getElementById('langBtn').innerText = 'English';
                 
-                document.getElementById('tabGift').innerText = '🎁 مولد كروت الإهداء (A6)';
-                document.getElementById('tabPoster').innerText = '📣 مولد بوسترات العروض';
-                document.getElementById('txtGiftTitle').innerText = 'بيانات كارت الإهداء';
+                document.getElementById('tabGift').innerText = '🎁 بطاقات الإهداء';
+                document.getElementById('tabPoster').innerText = '📣 بوسترات العروض';
+                document.getElementById('txtGiftTitle').innerText = 'تخصيص بطاقة الإهداء';
                 document.getElementById('lblStore').innerText = 'اسم المتجر';
                 document.getElementById('lblSender').innerText = 'اسم المرسل';
                 document.getElementById('lblReceiver').innerText = 'اسم المستلم';
-                document.getElementById('lblMsg').innerText = 'رسالة الإهداء';
+                document.getElementById('lblMsg').innerText = 'عبارة الإهداء';
                 document.getElementById('lblOrder').innerText = 'رقم الطلب';
-                document.getElementById('btnPrint').innerText = '🖨️ طباعة / حفظ كـ PDF (A6)';
+                document.getElementById('btnPrint').innerText = '🖨️ طباعة / تصدير PDF';
                 
-                document.getElementById('txtPosterTitle').innerText = 'إعدادات بوستر العروض';
-                document.getElementById('lblPlatform').innerText = 'مقاس المنصة';
+                document.getElementById('txtPosterTitle').innerText = 'تخصيص البوستر الإعلاني';
+                document.getElementById('lblPlatform').innerText = 'قياس المنصة';
                 document.getElementById('lblImage').innerText = 'صورة المنتج أو الخلفية';
                 document.getElementById('lblPStore').innerText = 'اسم المتجر';
                 document.getElementById('lblPProduct').innerText = 'اسم المنتج / العرض';
                 document.getElementById('lblPPrice').innerText = 'السعر';
                 document.getElementById('lblPOffer').innerText = 'عبارة التخفيض';
-                document.getElementById('btnDownload').innerText = '📥 تحميل البوستر (PNG)';
+                document.getElementById('btnDownload').innerText = '📥 تحميل البوستر عالية الدقة';
+                document.getElementById('lblFrom').innerText = 'من:';
+                document.getElementById('lblTo').innerText = 'إلى:';
             }
         }
     </script>
 </body>
 </html>
- 
