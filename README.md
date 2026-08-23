@@ -49,7 +49,7 @@ HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 
 ​📞 التواصل والدعم الفني
 
-​تطوير وإشراف/ #BADAH
+​تطوير وإشراف/ BADAH ALGHANMI 
 ​<p align="center">
 <a href="https://x.com/BADAH_AI" target="_blank">
 <img src="https://img.shields.io/badge/X%20(Twitter)-000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)" />
