@@ -46,6 +46,7 @@ HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 ​📄 التراخيص وحقوق الاستخدام
 
 ​هذا المشروع مفتوح المصدر ومحمي بموجب رخصة MIT (MIT License) التي تتيح لك حرية الاستخدام والتعديل والتطوير.
+
 ​📞 التواصل والدعم الفني
 ​تطوير وإشراف: BADAH_AI
 ​<p align="center">
