@@ -40,8 +40,11 @@ HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 
 ---
 🤝 المساهمة في المشروع
+
 ​المشروع مفتوح المصدر ونرحب بمساهمات المطورين وتطوير الميزات المقترحة عبر فتح طلب سحب (Pull Request).
+
 ​📄 التراخيص وحقوق الاستخدام
+
 ​هذا المشروع مفتوح المصدر ومحمي بموجب رخصة MIT (MIT License) التي تتيح لك حرية الاستخدام والتعديل والتطوير.
 ​📞 التواصل والدعم الفني
 ​تطوير وإشراف: BADAH_AI
@@ -64,5 +67,4 @@ HTML5 &bull; CSS3 &bull; JavaScript &bull; QRious &bull; html2canvas
 ```bash
 git clone [https://github.com/devsaudi/kard.git](https://github.com/devsaudi/kard.git)
 cd kard
-افتح ملف index.html مباشرة في المتصفح.
 ​
