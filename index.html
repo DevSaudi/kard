@@ -1,156 +1,165 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kard | كَرْد - منصة بطاقات الإهداء وبوسترات العروض</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Tajawal:wght@300;400;500;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>كارد | Kard - منصة بطاقات الإهداء وبوسترات العروض</title>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- QR & HTML2Canvas Engines -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        :root {
-            --bg-main: #0b0712;
-            --surface-card: rgba(23, 15, 38, 0.75);
-            --border-purple: rgba(157, 78, 221, 0.25);
-            --border-glow: #9d4edd;
-            --accent-purple: #7b2cbf;
-            --accent-light: #e0aaff;
-            --text-main: #ffffff;
-            --text-sub: #a0a0b8;
+        :root[data-theme="light"] {
+            --bg-main: #f8fafc;
+            --surface-card: #ffffff;
+            --border-color: #e2e8f0;
+            --accent-primary: #0f172a;
+            --accent-green: #10b981;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --input-bg: #f1f5f9;
+            --card-inner-bg: #ffffff;
+            --card-text-color: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.05);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif; }
+        :root[data-theme="dark"] {
+            --bg-main: #0f172a;
+            --surface-card: #1e293b;
+            --border-color: #334155;
+            --accent-primary: #f8fafc;
+            --accent-green: #10b981;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --input-bg: #0f172a;
+            --card-inner-bg: #ffffff;
+            --card-text-color: #0f172a;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.3);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Readex Pro', sans-serif; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 15% 20%, rgba(123, 44, 191, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(157, 78, 221, 0.1) 0%, transparent 40%);
-            background-attachment: fixed;
         }
 
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 8%;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            background: rgba(11, 7, 18, 0.8);
+            padding: 1rem 8%;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--surface-card);
             position: sticky; top: 0; z-index: 100;
         }
 
-        .logo-container { display: flex; align-items: center; gap: 0.8rem; }
+        .logo-container { display: flex; align-items: center; gap: 0.6rem; }
         .logo-icon {
-            width: 38px; height: 38px; background: linear-gradient(135deg, #9d4edd, #3c096c);
-            border-radius: 10px; display: flex; align-items: center; justify-content: center;
-            font-weight: 800; color: #fff; box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+            width: 36px; height: 36px; background: var(--accent-green);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: #fff; font-size: 1.1rem;
         }
-        .logo-text { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; }
+        .logo-text { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
 
-        .btn-lang {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-purple);
-            color: var(--text-main); padding: 0.5rem 1.2rem; border-radius: 20px;
-            cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: 0.3s;
+        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
+
+        .btn-toggle {
+            background: var(--input-bg); border: 1px solid var(--border-color);
+            color: var(--text-main); padding: 0.45rem 0.9rem; border-radius: 8px;
+            cursor: pointer; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 6px;
         }
-        .btn-lang:hover { border-color: var(--border-glow); background: rgba(157, 78, 221, 0.1); }
+        .btn-toggle:hover { border-color: var(--accent-green); }
 
         .tabs-wrapper { display: flex; justify-content: center; margin: 2rem 0 1.5rem; }
         .tabs-box {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-purple);
-            padding: 5px; border-radius: 14px; display: flex; gap: 5px; backdrop-filter: blur(10px);
+            background: var(--surface-card); border: 1px solid var(--border-color);
+            padding: 4px; border-radius: 10px; display: flex; gap: 4px; box-shadow: var(--shadow-sm);
         }
         .tab-btn {
             background: transparent; border: none; color: var(--text-sub);
-            padding: 0.7rem 1.8rem; border-radius: 10px; cursor: pointer;
-            font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease;
+            padding: 0.6rem 1.4rem; border-radius: 7px; cursor: pointer;
+            font-weight: 500; font-size: 0.9rem;
         }
         .tab-btn.active {
-            background: linear-gradient(135deg, #7b2cbf 0%, #5a189a 100%);
-            color: #fff; box-shadow: 0 4px 20px rgba(123, 44, 191, 0.4);
+            background: var(--accent-green);
+            color: #ffffff; font-weight: 600;
         }
 
         .main-container {
-            max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem;
-            display: grid; grid-template-columns: 400px 1fr; gap: 2rem;
+            max-width: 1100px; margin: 0 auto 4rem; padding: 0 1.5rem;
+            display: grid; grid-template-columns: 380px 1fr; gap: 2rem;
         }
-        @media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
+        @media (max-width: 850px) { .main-container { grid-template-columns: 1fr; } }
 
-        .glass-panel {
-            background: var(--surface-card); border: 1px solid var(--border-purple);
-            border-radius: 20px; padding: 1.8rem; backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        .panel-box {
+            background: var(--surface-card); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 1.5rem; box-shadow: var(--shadow-lg);
         }
-        .panel-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--accent-light); }
+        .panel-title { font-size: 1rem; font-weight: 600; margin-bottom: 1.2rem; color: var(--text-main); }
 
-        .field-group { margin-bottom: 1rem; }
-        .field-group label { display: block; font-size: 0.85rem; color: var(--text-sub); margin-bottom: 0.4rem; }
+        .field-group { margin-bottom: 0.9rem; }
+        .field-group label { display: block; font-size: 0.8rem; color: var(--text-sub); margin-bottom: 0.35rem; font-weight: 500; }
         .field-group input, .field-group textarea, .field-group select {
-            width: 100%; background: rgba(11, 7, 18, 0.6); border: 1px solid var(--border-purple);
-            border-radius: 10px; padding: 0.75rem 0.9rem; color: #fff; font-size: 0.9rem; transition: 0.3s;
+            width: 100%; background: var(--input-bg); border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 0.65rem 0.8rem; color: var(--text-main); font-size: 0.85rem;
         }
         .field-group input:focus, .field-group textarea:focus, .field-group select:focus {
-            outline: none; border-color: var(--border-glow); box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
+            outline: none; border-color: var(--accent-green);
         }
 
         .btn-primary {
-            width: 100%; background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
-            color: #fff; border: none; padding: 0.9rem; border-radius: 12px;
-            font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: 0.3s;
-            margin-top: 0.5rem; box-shadow: 0 8px 25px rgba(157, 78, 221, 0.3);
-            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; background: var(--accent-green);
+            color: #fff; border: none; padding: 0.75rem; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer;
+            margin-top: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .btn-primary:hover { opacity: 0.95; transform: translateY(-2px); }
+        .btn-primary:hover { opacity: 0.92; }
 
         .preview-wrapper {
-            background: var(--surface-card); border: 1px solid var(--border-purple);
-            border-radius: 20px; padding: 2rem; backdrop-filter: blur(16px);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 480px;
+            background: var(--surface-card); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 2rem; box-shadow: var(--shadow-lg);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 450px;
         }
 
-        /* CARD DESIGN DISPLAY */
+        /* GIFT CARD MINIMALIST DESIGN */
         .card-frame {
-            width: 100%; max-width: 420px; min-height: 280px;
-            background: #ffffff; color: #1a1523;
+            width: 100%; max-width: 400px; min-height: 250px;
+            background: #ffffff; color: #0f172a;
             border-radius: 12px; padding: 1.8rem; position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             display: flex; flex-direction: column; justify-content: space-between;
-            border: 1px solid #e2d9f3;
-            background-image: radial-gradient(#efebf7 1px, transparent 1px);
-            background-size: 16px 16px;
+            border: 1px solid #e2e8f0;
         }
 
-        .card-border-decoration {
-            position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid #9d4edd; border-radius: 8px; pointer-events: none; opacity: 0.4;
-        }
+        .card-header { text-align: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.8rem; }
+        .card-store { font-size: 1.05rem; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .card-header { text-align: center; }
-        .card-store { font-size: 1.15rem; font-weight: 800; letter-spacing: 1.5px; color: #5a189a; text-transform: uppercase; }
-        .card-divider { width: 40px; height: 2px; background: #9d4edd; margin: 6px auto 0; border-radius: 2px; }
+        .card-body { text-align: center; margin: 1.2rem 0; }
+        .card-text { font-size: 0.95rem; line-height: 1.6; color: #334155; font-weight: 400; }
 
-        .card-body { text-align: center; margin: 1rem 0; }
-        .card-text { font-family: 'Amiri', serif; font-size: 1.25rem; line-height: 1.6; color: #2d233c; font-style: italic; }
-
-        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0e6ff; padding-top: 0.8rem; }
-        .card-parties { font-size: 0.85rem; color: #5a189a; line-height: 1.4; text-align: right; }
-        .card-parties strong { color: #240046; font-weight: 700; }
+        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #f1f5f9; padding-top: 0.8rem; }
+        .card-parties { font-size: 0.8rem; color: #64748b; line-height: 1.5; text-align: right; }
+        .card-parties strong { color: #0f172a; font-weight: 600; }
         
-        .qr-canvas-box { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; }
-        .qr-canvas-box canvas { width: 55px !important; height: 55px !important; border-radius: 4px; display: block; }
+        .qr-canvas-box { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .qr-canvas-box canvas { width: 50px !important; height: 50px !important; border-radius: 4px; display: block; }
 
-        #posterCanvas { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        #posterCanvas { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-container">
-            <div class="logo-icon">K</div>
-            <div class="logo-text">Kard</div>
+            <div class="logo-icon">ك</div>
+            <div class="logo-text">كارد</div>
         </div>
-        <button class="btn-lang" onclick="toggleLanguage()" id="langBtn">English</button>
+        <div class="header-actions">
+            <button class="btn-toggle" onclick="toggleTheme()" id="themeBtn">🌙 الوضع الداكن</button>
+            <button class="btn-toggle" onclick="toggleLanguage()" id="langBtn">English</button>
+        </div>
     </header>
 
     <div class="tabs-wrapper">
@@ -162,7 +171,7 @@
 
     <div class="main-container">
         
-        <div class="glass-panel">
+        <div class="panel-box">
             <!-- Gift Controls -->
             <div id="giftControls">
                 <div class="panel-title" id="txtGiftTitle">تخصيص بطاقة الإهداء</div>
@@ -220,7 +229,7 @@
                     <input type="text" id="pOffer" value="خصم حصري 35% لفترة محدودة" oninput="drawPoster()">
                 </div>
                 <div class="field-group">
-                    <label id="lblPUrl">رابط صفحة العرض/المنتج (تحويل لـ QR Code)</label>
+                    <label id="lblPUrl">رابط صفحة العرض (تحويل لـ QR Code)</label>
                     <input type="text" id="pUrl" value="https://salla.sa/my-store/product-1" oninput="drawPoster()">
                 </div>
                 <button class="btn-primary" onclick="downloadPoster()" id="btnDownload">📥 تحميل البوستر عالية الدقة</button>
@@ -231,10 +240,8 @@
             <!-- Gift Preview Screen -->
             <div id="giftDisplay" style="width: 100%; display: flex; justify-content: center;">
                 <div class="card-frame" id="cardToCapture">
-                    <div class="card-border-decoration"></div>
                     <div class="card-header">
                         <div class="card-store" id="prevStore">متجر الفخامة</div>
-                        <div class="card-divider"></div>
                     </div>
                     <div class="card-body">
                         <div class="card-text" id="prevMsg">"كل عام وأنت بألف خير، أتمنى لك أياماً مليئة بالسعادة والنجاح."</div>
@@ -264,6 +271,13 @@
     <script>
         let currentLang = 'ar';
         let uploadedImage = null;
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            document.getElementById('themeBtn').innerText = newTheme === 'light' ? (currentLang === 'ar' ? '🌙 الوضع الداكن' : '🌙 Dark Mode') : (currentLang === 'ar' ? '☀️ الوضع الفاتح' : '☀️ Light Mode');
+        }
 
         function renderQR(canvasId, text, size) {
             try {
@@ -321,11 +335,11 @@
             const target = document.getElementById('cardToCapture');
             html2canvas(target, {
                 scale: 3,
-                backgroundColor: null,
+                backgroundColor: '#ffffff',
                 useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'gift-card.png';
+                link.download = 'kard-gift.png';
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
@@ -357,53 +371,50 @@
 
             if (uploadedImage) {
                 ctx.drawImage(uploadedImage, 0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(11, 7, 18, 0.78)';
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             } else {
-                let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-                grad.addColorStop(0, '#1a0b2e');
-                grad.addColorStop(1, '#0b0712');
-                ctx.fillStyle = grad;
+                ctx.fillStyle = '#0f172a';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
 
-            ctx.strokeStyle = '#9d4edd';
-            ctx.lineWidth = 10;
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 8;
             ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
 
-            ctx.fillStyle = '#e0aaff';
-            ctx.font = 'bold 44px Tajawal';
+            ctx.fillStyle = '#10b981';
+            ctx.font = 'bold 40px Readex Pro';
             ctx.textAlign = 'center';
             ctx.fillText(document.getElementById('pStore').value, canvas.width / 2, 120);
 
-            ctx.fillStyle = '#7b2cbf';
-            ctx.fillRect(100, 160, canvas.width - 200, 85);
             ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 36px Tajawal';
-            ctx.fillText(document.getElementById('pOffer').value, canvas.width / 2, 215);
+            ctx.fillRect(120, 160, canvas.width - 240, 75);
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 32px Readex Pro';
+            ctx.fillText(document.getElementById('pOffer').value, canvas.width / 2, 210);
 
-            let midY = canvas.height / 2 - 40;
+            let midY = canvas.height / 2 - 20;
             ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 52px Tajawal';
+            ctx.font = 'bold 48px Readex Pro';
             ctx.fillText(document.getElementById('pProduct').value, canvas.width / 2, midY);
 
-            ctx.fillStyle = '#e0aaff';
-            ctx.font = 'bold 42px Tajawal';
-            ctx.fillText(document.getElementById('pPrice').value, canvas.width / 2, midY + 90);
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '38px Readex Pro';
+            ctx.fillText(document.getElementById('pPrice').value, canvas.width / 2, midY + 80);
 
             renderQR('posterQrCanvas', pUrl, 200);
             const posterQrCanvas = document.getElementById('posterQrCanvas');
 
-            const qrSize = 150;
+            const qrSize = 140;
             const qrX = (canvas.width - qrSize) / 2;
-            const qrY = canvas.height - 260;
+            const qrY = canvas.height - 250;
 
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(qrX - 10, qrY - 10, qrSize + 20, qrSize + 20);
             ctx.drawImage(posterQrCanvas, qrX, qrY, qrSize, qrSize);
 
-            ctx.fillStyle = '#a0a0b8';
-            ctx.font = '28px Tajawal';
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '26px Readex Pro';
             ctx.fillText('امسح الرمز للطلب المباشر', canvas.width / 2, canvas.height - 70);
         }
 
@@ -416,10 +427,12 @@
         }
 
         function toggleLanguage() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             if (currentLang === 'ar') {
                 currentLang = 'en';
                 document.documentElement.setAttribute('dir', 'ltr');
                 document.getElementById('langBtn').innerText = 'العربية';
+                document.getElementById('themeBtn').innerText = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
                 
                 document.getElementById('tabGift').innerText = '🎁 Gift Cards';
                 document.getElementById('tabPoster').innerText = '📣 Promo Posters';
@@ -446,6 +459,7 @@
                 currentLang = 'ar';
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.getElementById('langBtn').innerText = 'English';
+                document.getElementById('themeBtn').innerText = isDark ? '☀️ الوضع الفاتح' : '🌙 الوضع الداكن';
                 
                 document.getElementById('tabGift').innerText = '🎁 بطاقات الإهداء';
                 document.getElementById('tabPoster').innerText = '📣 بوسترات العروض';
@@ -464,7 +478,7 @@
                 document.getElementById('lblPProduct').innerText = 'اسم المنتج / العرض';
                 document.getElementById('lblPPrice').innerText = 'السعر';
                 document.getElementById('lblPOffer').innerText = 'عبارة التخفيض';
-                document.getElementById('lblPUrl').innerText = 'رابط صفحة العرض/المنتج (تحويل لـ QR Code)';
+                document.getElementById('lblPUrl').innerText = 'رابط صفحة العرض (تحويل لـ QR Code)';
                 document.getElementById('btnDownload').innerText = '📥 تحميل البوستر عالية الدقة';
                 document.getElementById('lblFrom').innerText = 'من:';
                 document.getElementById('lblTo').innerText = 'إلى:';
