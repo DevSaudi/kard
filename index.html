@@ -48,6 +48,22 @@ html[data-theme="dark"] header,html[data-theme="dark"] .ui,html[data-theme="dark
 .poster-ad-card .p-bottom{font-size:8px;margin:2px 0 0;color:rgba(255,255,255,.88)}
 @media(max-width:600px){.poster-ad-card{width:min(90%,250px);padding:14px 12px 11px}.poster-ad-card .p-store{font-size:18px}.poster-ad-card .offer{font-size:19px;padding:5px 14px}.poster-ad-card .qrbox canvas{width:56px!important;height:56px!important}.poster-ad-card .qrbox{min-height:62px}}
 
+
+/* Final polish: header controls, Arabic shaping and export-safe typography */
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;direction:rtl}
+header .brand{justify-self:start}
+header .nav{justify-self:center}
+header .actions{justify-self:end;display:flex;align-items:center;gap:8px;direction:ltr}
+.icon-btn{width:40px!important;min-width:40px;padding:0!important;display:grid;place-items:center}
+.icon-btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lang-btn{font-size:0}
+.poster,.poster *{font-family:Tahoma,Arial,"Noto Sans Arabic",sans-serif!important;letter-spacing:0!important}
+.poster{direction:rtl;unicode-bidi:isolate}
+.p-title,.p-store,.p-desc,.p-day,.p-bottom,.code,.offer{font-synthesis:none}
+.p-title{font-weight:700!important}
+.poster-ad-card{overflow:hidden}
+@media(max-width:760px){header{grid-template-columns:1fr auto;height:58px;gap:8px}header .brand{justify-self:start}.nav{display:none!important}header .actions{justify-self:end}.actions .start{display:none}.icon-btn{width:38px!important;min-width:38px;height:38px!important}}
+@media(max-width:420px){.actions{gap:4px!important}.icon-btn{width:36px!important;min-width:36px;height:36px!important}}
 </style><style>
 /* ===== KARD VISUAL SYSTEM — matched to approved reference ===== */
 body{background:#f6f9f8;color:#0b3937;font-family:Arial,"Tahoma",sans-serif}
@@ -76,8 +92,12 @@ header{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:min(
 <body>
 <header>
   <div class="brand"><div class="brand-mark">ك</div><div>كارد<small>KARD</small></div></div>
-  <nav class="nav"><a class="active" href="#top">الرئيسية</a><a href="#templates">القوالب</a><a href="#faq">الأسئلة الشائعة</a><a href="#faq">عن كارد</a></nav>
-  <div class="actions"><button class="start" id="start">ابدأ الآن →</button><button class="ui" id="lang" aria-label="Language">English</button><button class="ui theme-toggle" id="theme" aria-label="Theme">☾</button></div>
+  <nav class="nav"><a class="active" href="#top" data-i18n="home">الرئيسية</a><a href="#templates" data-i18n="templates">القوالب</a><a href="#faq" data-i18n="faq">الأسئلة الشائعة</a><a href="#faq" data-i18n="about">عن كارد</a></nav>
+  <div class="actions">
+    <button class="ui icon-btn lang-btn" id="lang" aria-label="تبديل اللغة" title="تبديل اللغة"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.2 2.4 3.4 5.4 3.4 9s-1.2 6.6-3.4 9c-2.2-2.4-3.4-5.4-3.4-9S9.8 5.4 12 3Z"></path></svg></button>
+    <button class="ui icon-btn theme-toggle" id="theme" aria-label="تبديل الوضع" title="تبديل الوضع">☾</button>
+    <button class="start" id="start" data-i18n="start">ابدأ الآن →</button>
+  </div>
 </header>
 <main id="top">
 <section class="hero"><div class="hero-banner" id="heroBanner"><div class="hero-inner">
@@ -137,8 +157,10 @@ bgChoices.forEach(x=>x.classList.toggle('active',x.dataset.bg===bg));
 $('qr').innerHTML='';const draw=()=>{try{if(!window.QRious)return false;const c=document.createElement('canvas');new QRious({element:c,value:u,size:82,level:'H'});$('qr').appendChild(c);return true}catch(e){return false}};if(!draw()&&!window._qriousLoading){window._qriousLoading=true;const q=document.createElement('script');q.src='https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js';q.onload=()=>{window._qriousLoading=false;draw()};q.onerror=()=>window._qriousLoading=false;document.head.appendChild(q)}}
 templates.forEach(b=>b.addEventListener('click',()=>{templates.forEach(x=>x.classList.remove('active'));b.classList.add('active');type=b.dataset.type;render()}));bgChoices.forEach(b=>b.addEventListener('click',()=>{bg=b.dataset.bg;render()}));
 ['store','code','discount','url','giftStore','giftFrom','giftTo','giftMessage','giftUrl','offerStore','offerTitle','offerDetails','offerValue','offerUrl'].forEach(id=>$(id)?.addEventListener('input',render));$('update').addEventListener('click',render);$('heroStart').addEventListener('click',()=>$('templates').scrollIntoView({behavior:'smooth'}));$('start').addEventListener('click',()=>$('templates').scrollIntoView({behavior:'smooth'}));
-$('lang').addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$('lang').textContent=lang==='ar'?'English':'العربية';render()});$('theme').addEventListener('click',()=>{const dark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',dark?'light':'dark');$('theme').textContent=dark?'☾':'☀';localStorage.setItem('kard-theme',dark?'light':'dark')});if(localStorage.getItem('kard-theme')==='dark')$('theme').click();
+const I18N={ar:{home:'الرئيسية',templates:'القوالب',faq:'الأسئلة الشائعة',about:'عن كارد',start:'ابدأ الآن →'},en:{home:'Home',templates:'Templates',faq:'FAQ',about:'About Kard',start:'Start now →'}};
+function applyLanguage(){const t=I18N[lang];document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=t[e.dataset.i18n]||e.textContent);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$('lang').title=lang==='ar'?'Switch language':'تبديل اللغة';$('lang').setAttribute('aria-label',$('lang').title)}
+$('lang').addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';applyLanguage();render()});$('theme').addEventListener('click',()=>{const dark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',dark?'light':'dark');$('theme').textContent=dark?'☾':'☀';localStorage.setItem('kard-theme',dark?'light':'dark')});if(localStorage.getItem('kard-theme')==='dark')$('theme').click();
 $('share').addEventListener('click',async()=>{try{if(navigator.share)await navigator.share({title:'Kard',text:'Kard — Saudi digital cards',url:location.href});else await navigator.clipboard.writeText(location.href)}catch(e){}});
 $('upload').addEventListener('click',()=>{const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=()=>{if(i.files[0]){const r=new FileReader();r.onload=e=>{document.querySelector('.uploaded-logo')?.remove();const im=document.createElement('img');im.src=e.target.result;im.className='uploaded-logo';im.style.cssText='position:absolute;z-index:5;top:55px;left:50%;transform:translateX(-50%);width:55px;height:55px;object-fit:contain;';$('poster').appendChild(im)};r.readAsDataURL(i.files[0])}};i.click()});
-$('download').addEventListener('click',async()=>{try{const canvas=await html2canvas($('poster'),{scale:4,backgroundColor:'#003b36',useCORS:true,logging:false});const a=document.createElement('a');a.download='kard-design.png';a.href=canvas.toDataURL('image/png');a.click()}catch(e){console.error(e)}});$('up').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));$('edit').addEventListener('click',()=>document.querySelector('.form-fields:not(.hidden) input')?.focus());render();applyThemeImages();
+$('download').addEventListener('click',async()=>{const poster=$('poster');const original={font:poster.style.fontFamily,weight:poster.style.fontWeight,letter:poster.style.letterSpacing};try{if(document.fonts?.ready)await document.fonts.ready;poster.style.fontFamily='Tahoma, Arial, "Noto Sans Arabic", sans-serif';poster.style.letterSpacing='0';poster.style.fontWeight='700';await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));const canvas=await html2canvas(poster,{scale:4,backgroundColor:null,useCORS:true,allowTaint:false,logging:false,foreignObjectRendering:true});const a=document.createElement('a');a.download='kard-design.png';a.href=canvas.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove()}catch(e){console.error(e);try{const canvas=await html2canvas(poster,{scale:4,backgroundColor:null,useCORS:true,logging:false});const a=document.createElement('a');a.download='kard-design.png';a.href=canvas.toDataURL('image/png');a.click()}catch(err){console.error(err)}}finally{poster.style.fontFamily=original.font;poster.style.fontWeight=original.weight;poster.style.letterSpacing=original.letter}});$('up').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));$('edit').addEventListener('click',()=>document.querySelector('.form-fields:not(.hidden) input')?.focus());render();applyThemeImages();applyLanguage();
 </script></body></html>
