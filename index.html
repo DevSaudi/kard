@@ -87,26 +87,264 @@ header{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:min(
 @media(max-width:1050px){header{width:96%;padding:0 13px}.nav{gap:17px}.main-grid{grid-template-columns:1.3fr 1fr}.side{grid-column:1/-1;min-height:auto}.side .body{display:grid;grid-template-columns:1fr 1fr;gap:8px}.side .head{grid-column:1/-1}.specs,.why{margin-top:8px}}
 @media(max-width:760px){header{top:8px;width:calc(100% - 16px);height:58px;border-radius:15px}.nav{display:none}.actions{margin-left:auto}.brand{font-size:18px}.brand-mark{width:36px;height:36px}.hero-banner,.hero-inner{min-height:500px}.hero-inner{padding:132px 18px 40px}.hero-copy h1{font-size:52px}.hero-copy .sub{font-size:15px}.hero-copy p{font-size:12px}.main-grid{grid-template-columns:1fr}.side{grid-column:auto}.side .body{display:block}.theme-grid{grid-template-columns:1fr}.theme-card img{height:auto;max-height:500px}.wrap{padding:0 12px}.poster{width:min(100%,285px)}}
 @media(max-width:420px){.actions .ui:first-child{display:none}.start{padding:0 13px;font-size:11px}.hero-copy h1{font-size:44px}.templates{padding:8px 10px}.template{min-height:88px}}
+
+/* ===== Final header refinement ===== */
+header#siteHeader{position:relative!important;top:auto!important;left:auto!important;transform:none!important;margin:16px auto -82px!important;width:min(97%,1380px)!important;height:66px!important;display:grid!important;grid-template-columns:auto 1fr auto!important;align-items:center!important;gap:16px!important;background:rgba(255,255,255,.62)!important;border:1px solid rgba(255,255,255,.72)!important;box-shadow:0 10px 35px rgba(0,35,31,.12)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;z-index:20!important}
+header#siteHeader .brand{justify-self:start}
+header#siteHeader .nav{justify-self:center}
+header#siteHeader .actions{justify-self:end}
+header#siteHeader .icon-btn{width:34px!important;min-width:34px!important;height:34px!important;padding:0!important}
+header#siteHeader .icon-btn svg{width:16px!important;height:16px!important;display:block!important;stroke:currentColor!important;fill:none!important}
+header#siteHeader .theme-toggle{font-size:17px!important;line-height:1}
+/* The header must scroll with the page, never stick/fix to the viewport. */
+header#siteHeader{position:relative!important}
+@media(max-width:1050px){header#siteHeader{grid-template-columns:auto 1fr auto!important}.nav{display:none!important}}
+@media(max-width:760px){header#siteHeader{width:calc(100% - 16px)!important;height:58px!important;margin:8px auto -66px!important;padding:0 10px!important;grid-template-columns:auto 1fr auto!important;gap:6px!important}.actions{gap:3px!important}.actions .start{display:none!important}header#siteHeader .icon-btn{display:grid!important;width:32px!important;min-width:32px!important;height:32px!important}.actions .lang-btn{display:grid!important}.brand{font-size:18px!important}.brand-mark{width:34px!important;height:34px!important}}
+@media(max-width:420px){header#siteHeader{width:calc(100% - 10px)!important;padding:0 7px!important}.actions .ui:first-child{display:grid!important}.actions{gap:2px!important}header#siteHeader .icon-btn{width:30px!important;min-width:30px!important;height:30px!important}header#siteHeader .icon-btn svg{width:15px!important;height:15px!important}.theme-toggle{font-size:15px!important}}
+
+/* ===== KARD FINAL CENTERED VISUAL PASS ===== */
+header#siteHeader{
+  position:relative!important;
+  top:auto!important;
+  left:auto!important;
+  transform:none!important;
+  margin:16px auto -82px!important;
+  width:min(96%,1380px)!important;
+  height:66px!important;
+  grid-template-columns:auto 1fr auto!important;
+  background:rgba(255,255,255,.16)!important;
+  border:1px solid rgba(255,255,255,.42)!important;
+  box-shadow:0 10px 32px rgba(0,25,20,.10)!important;
+  backdrop-filter:blur(9px) saturate(120%)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(120%)!important;
+}
+header#siteHeader .brand{justify-self:start;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.35)}
+header#siteHeader .brand small{color:rgba(255,255,255,.78)}
+header#siteHeader .brand-mark{background:rgba(0,91,69,.82);color:#fff}
+header#siteHeader .nav{justify-self:center;display:flex;align-items:center;gap:34px}
+header#siteHeader .nav a{color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.35)}
+header#siteHeader .nav a.active{color:#d7ffbd;border-bottom-color:#d7ffbd}
+header#siteHeader .actions{justify-self:end;display:flex;align-items:center;gap:7px;direction:ltr}
+header#siteHeader .ui,
+header#siteHeader .start{border-color:rgba(255,255,255,.42)!important}
+header#siteHeader .ui{background:rgba(255,255,255,.13)!important;color:#fff!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+header#siteHeader .start{background:rgba(0,111,85,.82)!important;color:#fff!important;box-shadow:0 6px 16px rgba(0,40,30,.15)}
+header#siteHeader .icon-btn svg{stroke:#fff!important}
+header#siteHeader .theme-toggle{color:#fff!important}
+
+.hero-banner{min-height:570px!important;background-position:center top!important}
+.hero-banner:after{background:linear-gradient(180deg,rgba(0,24,20,.08),rgba(0,42,34,.10) 48%,rgba(0,35,28,.46))!important}
+.hero-inner{min-height:570px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:125px 22px 55px!important;text-align:center!important}
+.hero-copy{width:min(100%,760px)!important;margin:0 auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}
+.hero-copy .eyebrow{margin:0 auto 12px!important;border:1px solid rgba(255,255,255,.55)!important;background:rgba(0,65,50,.30)!important;color:#fff!important;box-shadow:0 5px 18px rgba(0,0,0,.08)}
+.hero-copy h1{margin:8px 0 12px!important;font-size:clamp(48px,7vw,82px)!important;line-height:1.05!important;color:#fff!important;text-shadow:0 4px 18px rgba(0,0,0,.34)!important}
+.hero-copy h1 span{color:#d7ff9e!important}
+.hero-copy .sub{max-width:700px!important;font-size:clamp(17px,2vw,22px)!important;line-height:1.7!important;color:#fff!important;text-shadow:0 2px 8px rgba(0,0,0,.28)!important}
+.hero-copy p.hero-description{max-width:610px!important;margin:8px auto 0!important;font-size:14px!important;line-height:2!important;color:rgba(255,255,255,.90)!important;text-shadow:0 2px 7px rgba(0,0,0,.28)!important}
+.hero-primary{margin:20px auto 0!important;padding:13px 28px!important;border:1px solid rgba(255,255,255,.28)!important;background:rgba(8,174,127,.88)!important;border-radius:999px!important;font-size:14px!important;box-shadow:0 10px 24px rgba(0,0,0,.18)!important}
+
+.wrap{padding:0 22px!important}
+.main-grid{align-items:stretch!important}
+.card{display:flex!important;flex-direction:column!important;text-align:center!important}
+.card .head{text-align:center!important}
+.templates{justify-items:stretch!important}
+.template{text-align:center!important;align-items:center!important;justify-content:center!important}
+.template small{color:var(--muted)!important}
+.form{text-align:center!important}
+.form h3,.note,.bg-title{ text-align:center!important }
+.grid{justify-items:stretch!important}
+.field{text-align:center!important}
+.field label{text-align:center!important}
+.field input{text-align:center!important}
+.bg-picker{justify-items:stretch!important}
+.bg-choice{text-align:center!important}
+.bg-choice span,.bg-choice small{text-align:center!important}
+.update,.download{margin-left:auto!important;margin-right:auto!important;display:block!important}
+.preview-title{text-align:center!important}
+.preview-body{justify-content:center!important;align-items:center!important}
+.poster{margin:0 auto!important;text-align:center!important}
+.poster-ad-card{margin-left:auto!important;margin-right:auto!important;text-align:center!important}
+.side .head,.side .body{text-align:center!important}
+.share{margin-left:auto!important;margin-right:auto!important;display:block!important}
+.specs{text-align:center!important}
+.spec{justify-content:center!important;gap:28px!important}
+.footer,.footer-inner,.footer-copy{text-align:center!important;align-items:center!important;justify-content:center!important}
+
+/* Keep the selected background dominant and the ad card visually tied to it. */
+.poster{background:#003f38!important;isolation:isolate!important}
+.poster-bg{filter:saturate(.98) contrast(.98)!important}
+.poster:before{display:none!important}
+.poster-ad-card{width:min(86%,250px)!important;padding:17px 14px 13px!important;border:1px solid rgba(255,255,255,.42)!important;border-radius:22px!important;background:rgba(8,48,42,.28)!important;box-shadow:0 18px 45px rgba(0,25,20,.22),inset 0 1px 0 rgba(255,255,255,.16)!important;backdrop-filter:blur(5px)!important;-webkit-backdrop-filter:blur(5px)!important}
+.poster-ad-card .p-store{font-size:21px!important;line-height:1.35!important;margin-bottom:6px!important;color:#fff!important}
+.poster-ad-card .p-desc{font-size:9px!important;line-height:1.8!important;color:rgba(255,255,255,.90)!important}
+.poster-ad-card .offer{font-size:21px!important;line-height:1.2!important;padding:6px 17px!important;margin:15px auto 9px!important;border:1.5px solid rgba(255,255,255,.95)!important;border-radius:999px!important;background:transparent!important;color:#fff!important;min-width:0!important}
+.poster-ad-card .qrbox{min-height:70px!important;margin:4px 0!important}
+.poster-ad-card .qrbox canvas{width:62px!important;height:62px!important;padding:4px!important;border-radius:6px!important}
+.poster-ad-card .code{width:72%!important;margin:0 auto 5px!important;padding:5px 9px!important;border:1px solid rgba(255,255,255,.38)!important;border-radius:999px!important;background:rgba(0,52,42,.52)!important;font-size:9px!important}
+.poster-ad-card .p-bottom{font-size:8px!important;line-height:1.6!important;color:rgba(255,255,255,.90)!important}
+
+@media(max-width:1050px){
+  header#siteHeader{width:96%!important}
+  header#siteHeader .nav{display:none!important}
+  .hero-banner,.hero-inner{min-height:540px!important}
+  .hero-inner{padding:120px 20px 45px!important}
+}
+@media(max-width:760px){
+  header#siteHeader{width:calc(100% - 16px)!important;height:58px!important;margin:8px auto -66px!important;padding:0 9px!important;background:rgba(255,255,255,.13)!important}
+  header#siteHeader .brand{font-size:18px!important}
+  header#siteHeader .brand-mark{width:34px!important;height:34px!important}
+  header#siteHeader .actions{gap:3px!important}
+  header#siteHeader .icon-btn{width:32px!important;min-width:32px!important;height:32px!important}
+  header#siteHeader .start{display:none!important}
+  .hero-banner,.hero-inner{min-height:540px!important}
+  .hero-inner{padding:120px 16px 38px!important}
+  .hero-copy h1{font-size:clamp(42px,13vw,58px)!important}
+  .hero-copy .sub{font-size:15px!important;max-width:350px!important}
+  .hero-copy p.hero-description{font-size:11px!important;line-height:1.9!important;max-width:340px!important}
+  .hero-primary{font-size:12px!important;padding:11px 23px!important}
+  .main-grid{margin-top:14px!important}
+  .card{border-radius:16px!important}
+  .templates{grid-template-columns:1fr!important}
+  .poster{width:min(100%,300px)!important}
+  .poster-ad-card{width:min(88%,248px)!important}
+  .field input{font-size:12px!important}
+}
+@media(max-width:420px){
+  header#siteHeader{width:calc(100% - 10px)!important}
+  header#siteHeader .icon-btn{width:30px!important;min-width:30px!important;height:30px!important}
+  header#siteHeader .icon-btn svg{width:15px!important;height:15px!important}
+  .hero-inner{padding-left:12px!important;padding-right:12px!important}
+  .hero-copy h1{font-size:44px!important}
+  .poster-ad-card{width:min(90%,244px)!important}
+}
+
 </style>
+
+<style id="final-layout-fix-v2">
+/* ===== Final visual/layout refinement ===== */
+header#siteHeader{
+  position:relative!important; top:auto!important; left:auto!important; transform:none!important;
+  margin:16px auto -82px!important; width:min(97%,1380px)!important; height:66px!important;
+  display:grid!important; grid-template-columns:auto 1fr auto!important; align-items:center!important;
+  direction:rtl!important; background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  box-shadow:0 8px 30px rgba(0,35,30,.10)!important;
+  backdrop-filter:blur(8px)!important; -webkit-backdrop-filter:blur(8px)!important;
+}
+header#siteHeader .brand{justify-self:start!important}
+header#siteHeader .nav{justify-self:center!important}
+header#siteHeader .actions{
+  justify-self:end!important; display:flex!important; align-items:center!important;
+  gap:7px!important; direction:ltr!important;
+}
+header#siteHeader .icon-btn{
+  width:38px!important; min-width:38px!important; height:38px!important;
+  padding:0!important; display:grid!important; place-items:center!important;
+  border-radius:12px!important; background:rgba(255,255,255,.12)!important;
+  border:1px solid rgba(255,255,255,.30)!important; color:#fff!important;
+}
+header#siteHeader .icon-btn svg{
+  width:18px!important; height:18px!important; display:block!important;
+  fill:none!important; stroke:currentColor!important; stroke-width:1.8!important;
+  stroke-linecap:round!important; stroke-linejoin:round!important;
+}
+header#siteHeader .theme-moon{display:block!important}
+header#siteHeader .theme-sun{display:none!important}
+html[data-theme="dark"] header#siteHeader .theme-moon{display:none!important}
+html[data-theme="dark"] header#siteHeader .theme-sun{display:block!important}
+header#siteHeader .lang-btn{font-size:0!important}
+header#siteHeader .brand-mark{
+  background:rgba(0,91,69,.78)!important; border:1px solid rgba(255,255,255,.22)!important;
+}
+
+/* Do not shrink the page's main sections to the hero. */
+.wrap{
+  width:100%!important; max-width:1440px!important; margin-left:auto!important;
+  margin-right:auto!important; padding-left:22px!important; padding-right:22px!important;
+}
+.main-grid{width:100%!important; max-width:none!important; margin-left:auto!important; margin-right:auto!important}
+.main-grid>.card,.main-grid>.side{width:100%!important}
+
+/* Hero marketing copy only */
+.hero-copy{
+  width:min(100%,820px)!important; margin:0 auto!important;
+  text-align:center!important; align-items:center!important;
+}
+.hero-copy h1{
+  margin:10px 0 12px!important; font-size:clamp(48px,7vw,82px)!important;
+  line-height:1.05!important; text-align:center!important;
+}
+.hero-copy .sub,.hero-copy .hero-description{
+  margin-left:auto!important; margin-right:auto!important; text-align:center!important;
+}
+.hero-copy .sub{max-width:760px!important}
+.hero-copy .hero-description{max-width:650px!important}
+
+/* Center the advertisement content — not the surrounding page columns. */
+.poster-ad-card{
+  width:min(82%,250px)!important; margin-left:auto!important; margin-right:auto!important;
+  display:flex!important; flex-direction:column!important; align-items:center!important;
+  justify-content:center!important; text-align:center!important;
+}
+.poster-ad-card .p-store,.poster-ad-card .p-desc,.poster-ad-card .offer,
+.poster-ad-card .qrbox,.poster-ad-card .code,.poster-ad-card .p-bottom{
+  text-align:center!important; margin-left:auto!important; margin-right:auto!important;
+}
+.poster-ad-card .p-store,.poster-ad-card .p-desc,.poster-ad-card .p-bottom{width:100%!important}
+.poster-ad-card .offer{
+  display:block!important; width:max-content!important; max-width:90%!important;
+}
+.poster-ad-card .qrbox{
+  width:100%!important; display:flex!important; align-items:center!important; justify-content:center!important;
+}
+.poster-ad-card .code{width:72%!important}
+
+/* Keep the three working areas as normal cards. */
+.main-grid>.card,.main-grid>.side{
+  border-radius:16px!important; overflow:hidden!important;
+}
+.card .head h2,.card .head p,.form h3,.form .note,.bg-title{text-align:center!important}
+
+@media(max-width:760px){
+  header#siteHeader{
+    width:calc(100% - 16px)!important; height:58px!important; margin:8px auto -66px!important;
+    padding:0 9px!important; grid-template-columns:auto 1fr auto!important;
+  }
+  header#siteHeader .icon-btn{width:32px!important; min-width:32px!important; height:32px!important}
+  header#siteHeader .icon-btn svg{width:16px!important; height:16px!important}
+  .wrap{width:100%!important; padding-left:14px!important; padding-right:14px!important}
+  .poster-ad-card{width:min(82%,248px)!important}
+}
+@media(max-width:420px){
+  header#siteHeader{width:calc(100% - 10px)!important}
+  header#siteHeader .icon-btn{width:30px!important; min-width:30px!important; height:30px!important}
+  header#siteHeader .icon-btn svg{width:15px!important; height:15px!important}
+  .poster-ad-card{width:min(84%,244px)!important}
+}
+</style>
+
 </head>
 <body>
-<header>
+<header id="siteHeader">
   <div class="brand"><div class="brand-mark">ك</div><div>كارد<small>KARD</small></div></div>
   <nav class="nav"><a class="active" href="#top" data-i18n="home">الرئيسية</a><a href="#templates" data-i18n="templates">القوالب</a><a href="#top" data-i18n="about">عن كارد</a></nav>
   <div class="actions">
-    <button class="ui icon-btn lang-btn" id="lang" aria-label="تبديل اللغة" title="تبديل اللغة"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.2 2.4 3.4 5.4 3.4 9s-1.2 6.6-3.4 9c-2.2-2.4-3.4-5.4-3.4-9S9.8 5.4 12 3Z"></path></svg></button>
-    <button class="ui icon-btn theme-toggle" id="theme" aria-label="تبديل الوضع" title="تبديل الوضع">☾</button>
+    <button class="ui icon-btn lang-btn" id="lang" aria-label="تبديل اللغة" title="تبديل اللغة"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.2 2.4 3.4 5.4 3.4 9s-1.2 6.6-3.4 9c-2.2-2.4-3.4-6.6-3.4-9S9.8 5.4 12 3Z"></path></svg></button>
+    <button class="ui icon-btn theme-toggle" id="theme" aria-label="تبديل الوضع" title="تبديل الوضع">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.7A8.8 8.8 0 0 1 9.3 3.5 8.9 8.9 0 1 0 20.5 14.7Z"></path></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+    </button>
     <button class="start" id="start" data-i18n="start">ابدأ الآن →</button>
   </div>
 </header>
 <main id="top">
 <section class="hero"><div class="hero-banner" id="heroBanner"><div class="hero-inner">
   <div class="hero-copy">
-    <div class="eyebrow">اليوم الوطني السعودي 96</div>
-    <h1>عزنا <span>بطبعنا</span></h1>
-    <div class="sub">اليوم الوطني السعودي 96</div>
-    <p class="hero-description">تصميم سعودي سريع، مناسب للمتاجر، ويدعم المشاركة والتحميل بجودة عالية.</p>
-    <button class="hero-primary" id="heroStart">صمّم الآن →</button>
+    <div class="eyebrow">صمّمها بطابعك السعودي</div>
+    <h1>صمّمها <span>بطابعك السعودي</span></h1>
+    <div class="sub">حوّل عروضك ومناسباتك إلى تصاميم أنيقة تليق بهويتك</div>
+    <p class="hero-description">اختر القالب والثيم، أضف بياناتك، واصنع بطاقة جاهزة للمشاركة خلال دقائق.</p>
+    <button class="hero-primary" id="heroStart">ابدأ تصميمك الآن ←</button>
   </div>
 </div></div></section>
 <div class="wrap"><div class="main-grid">
@@ -123,7 +361,7 @@ header{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:min(
 </div>
 <button class="update" id="update">تحديث التصميم</button><button class="download" id="download">تحميل PNG HD</button></div></section>
 <section class="card preview"><div class="preview-title">المعاينة</div><div class="preview-body"><div class="poster" id="poster"><div class="poster-bg" id="posterBg"></div><div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div><div class="p-top"><div class="p-title" id="pTitle">عزنا بطبعنا</div><div class="p-day" id="pDay">اليوم الوطني السعودي 96</div></div><div class="p-main"><div class="poster-ad-card"><div class="p-store" id="pStore">متجرنا</div><div class="p-desc" id="pDesc">صمّم عروضك وشارك فرحتك</div><div class="offer" id="pOffer">خصم 30%</div><div class="qrbox" id="qr"></div><div class="code" id="pCode">KARD96</div><div class="p-bottom" id="pBottom">زورونا وشاركوا فرحتنا</div></div></div></div></div></section>
-<aside class="card side"><div class="head"><h2>أدوات سريعة</h2><p>كل ما تحتاجه للمشاركة</p></div><div class="body"><button class="share" id="share">مشاركة الرابط</button><button class="share" id="upload">رفع الشعار</button><div class="specs"><div class="spec"><span>المقاس</span><b>1080 × 1920</b></div><div class="spec"><span>الجودة</span><b>HD</b></div><div class="spec"><span>الصيغة</span><b>PNG</b></div></div><div class="why"><h3>لماذا كارد؟</h3><p>تصميم سعودي سريع، مناسب للمتاجر، ويدعم المشاركة والتحميل بجودة عالية.</p></div></div></aside>
+<aside class="card side"><div class="head"><h2>أدوات سريعة</h2><p>كل ما تحتاجه للمشاركة</p></div><div class="body"><button class="share" id="share">مشاركة الرابط</button><button class="share" id="upload">رفع الشعار</button><div class="specs"><div class="spec"><span>المقاس</span><b>1080 × 1920</b></div><div class="spec"><span>الجودة</span><b>HD</b></div><div class="spec"><span>الصيغة</span><b>PNG</b></div></div></div></aside>
 </div></div></main>
 
 <footer class="footer"><div class="footer-inner"><div class="footer-social"><a class="social-link" href="https://x.com/BADAH_AI" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.957 6.817H1.69l7.73-8.835L1.262 2.25H8.09l4.713 6.231 5.44-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg></a><a class="social-link whatsapp" href="https://wa.me/966590211191" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.1a9.85 9.85 0 0 0-8.5 14.8L2.1 21.9l5.15-1.35A9.85 9.85 0 1 0 12 2.1Zm0 17.9a8 8 0 0 1-4.08-1.12l-.29-.17-3.05.8.81-2.97-.19-.3A8 8 0 1 1 12 20Zm4.4-5.92c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.01.4 1.35.51.57.18 1.09.15 1.5.09.46-.07 1.4-.57 1.6-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg></a></div><div class="footer-copy"><strong>كارد</strong><span>© 2026 كارد — جميع الحقوق محفوظة</span></div></div></footer>
@@ -157,7 +395,21 @@ templates.forEach(b=>b.addEventListener('click',()=>{templates.forEach(x=>x.clas
 ['store','code','discount','url','giftStore','giftFrom','giftTo','giftMessage','giftUrl','offerStore','offerTitle','offerDetails','offerValue','offerUrl'].forEach(id=>$(id)?.addEventListener('input',render));$('update').addEventListener('click',render);$('heroStart').addEventListener('click',()=>$('templates').scrollIntoView({behavior:'smooth'}));$('start').addEventListener('click',()=>$('templates').scrollIntoView({behavior:'smooth'}));
 const I18N={ar:{home:'الرئيسية',templates:'القوالب',about:'عن كارد',start:'ابدأ الآن →'},en:{home:'Home',templates:'Templates',about:'About Kard',start:'Start now →'}};
 function applyLanguage(){const t=I18N[lang];document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=t[e.dataset.i18n]||e.textContent);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$('lang').title=lang==='ar'?'Switch language':'تبديل اللغة';$('lang').setAttribute('aria-label',$('lang').title)}
-$('lang').addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';applyLanguage();render()});$('theme').addEventListener('click',()=>{const dark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',dark?'light':'dark');$('theme').textContent=dark?'☾':'☀';localStorage.setItem('kard-theme',dark?'light':'dark')});if(localStorage.getItem('kard-theme')==='dark')$('theme').click();
+$('lang').addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';applyLanguage();render()});
+function setThemeIcon(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  $('theme').setAttribute('aria-pressed',dark?'true':'false');
+  $('theme').title=dark?'تفعيل الوضع الفاتح':'تفعيل الوضع الداكن';
+  $('theme').setAttribute('aria-label',$('theme').title);
+}
+$('theme').addEventListener('click',()=>{
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+  localStorage.setItem('kard-theme',dark?'light':'dark');
+  setThemeIcon();
+});
+if(localStorage.getItem('kard-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');
+setThemeIcon();
 $('share').addEventListener('click',async()=>{try{if(navigator.share)await navigator.share({title:'Kard',text:'Kard — Saudi digital cards',url:location.href});else await navigator.clipboard.writeText(location.href)}catch(e){}});
 $('upload').addEventListener('click',()=>{const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=()=>{if(i.files[0]){const r=new FileReader();r.onload=e=>{document.querySelector('.uploaded-logo')?.remove();const im=document.createElement('img');im.src=e.target.result;im.className='uploaded-logo';im.style.cssText='position:absolute;z-index:5;top:55px;left:50%;transform:translateX(-50%);width:55px;height:55px;object-fit:contain;';$('poster').appendChild(im)};r.readAsDataURL(i.files[0])}};i.click()});
 $('download').addEventListener('click',async()=>{
