@@ -1,0 +1,62 @@
+name: Kard one-time UI patch
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  patch:
+    if: "!contains(github.event.head_commit.message, '[kard-patch]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch offer form behavior
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '</script></body></html>'
+          patch = '''
+<script>
+(function(){
+  function syncForm(){
+    var isNational=type==='national', isGift=type==='gift', isOffer=type==='offer';
+    var codeField=document.getElementById('codeLabel')?.closest('.field');
+    var discountField=document.getElementById('discountField');
+    var toField=document.getElementById('toLabel')?.closest('.field');
+    var fromField=document.getElementById('fromLabel')?.closest('.field');
+    if(codeField) codeField.classList.toggle('hidden',!isNational);
+    if(discountField) discountField.classList.toggle('hidden',isGift);
+    if(toField) toField.classList.toggle('hidden',isOffer);
+    if(fromField) fromField.classList.toggle('hidden',isOffer);
+    var pCode=document.getElementById('pCode');
+    if(pCode) pCode.classList.toggle('hidden',!isNational);
+    var title=document.getElementById('formTitle');
+    if(title){
+      if(isNational) title.textContent=lang==='ar'?'تخصيص بطاقة اليوم الوطني 96':'Customize National Day 96 card';
+      else if(isGift) title.textContent=lang==='ar'?'تخصيص بطاقة الهدايا':'Customize gift card';
+      else title.textContent=lang==='ar'?'تخصيص بوسترات العروض':'Customize offer posters';
+    }
+  }
+  document.querySelectorAll('.template').forEach(function(b){b.addEventListener('click',function(){setTimeout(syncForm,0);});});
+  document.getElementById('lang')?.addEventListener('click',function(){setTimeout(syncForm,0);});
+  document.getElementById('update')?.addEventListener('click',function(){setTimeout(syncForm,0);});
+  syncForm();
+})();
+</script>
+'''
+          if patch.strip() not in s:
+              if marker not in s:
+                  raise SystemExit('marker not found')
+              s=s.replace(marker, patch+marker, 1)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Fix template-specific form fields [kard-patch]'
+          git push
