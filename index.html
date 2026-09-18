@@ -25,9 +25,13 @@ html[data-theme="dark"]{
   --muted:#9bb5b0
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box
+}
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth
+}
 
 body{
   margin:0;
@@ -38,8 +42,13 @@ body{
   transition:background .2s,color .2s
 }
 
-button,input{font:inherit}
-button{cursor:pointer}
+button,input{
+  font:inherit
+}
+
+button{
+  cursor:pointer
+}
 
 header{
   height:72px;
@@ -59,7 +68,8 @@ html[data-theme="dark"] header,
 html[data-theme="dark"] .ui,
 html[data-theme="dark"] .card,
 html[data-theme="dark"] .share,
-html[data-theme="dark"] .template{
+html[data-theme="dark"] .template,
+html[data-theme="dark"] .theme-picker{
   background:#0d2a27;
   color:var(--ink)
 }
@@ -355,7 +365,8 @@ html[data-theme="dark"] .template{
 .template:focus-visible,
 .ui:focus-visible,
 .start:focus-visible,
-.hero-primary:focus-visible{
+.hero-primary:focus-visible,
+.theme-option:focus-visible{
   outline:3px solid #8fe3c5;
   outline-offset:2px
 }
@@ -420,6 +431,217 @@ html[data-theme="dark"] .field input{
   font-weight:900
 }
 
+/* =========================================
+   ثيمات الخلفية
+========================================= */
+
+.theme-picker{
+  margin:18px 0 4px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#f8fbfa;
+  transition:background .2s
+}
+
+.theme-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px
+}
+
+.theme-title strong{
+  font-size:13px
+}
+
+.theme-title span{
+  font-size:9px;
+  color:var(--muted)
+}
+
+.theme-options{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px
+}
+
+.theme-option{
+  position:relative;
+  border:2px solid transparent;
+  border-radius:9px;
+  padding:0;
+  overflow:hidden;
+  background:#fff;
+  min-width:0;
+  transition:.2s;
+  cursor:pointer
+}
+
+.theme-option:hover{
+  transform:translateY(-2px)
+}
+
+.theme-option.active{
+  border-color:#0aa979;
+  box-shadow:0 0 0 2px #0aa97922
+}
+
+.theme-thumb{
+  height:78px;
+  position:relative;
+  overflow:hidden
+}
+
+.theme-name{
+  display:block;
+  padding:7px 4px;
+  font-size:9px;
+  font-weight:900;
+  color:var(--ink);
+  background:#fff
+}
+
+/* مصغّر ثيم الرياض */
+
+.theme-riyadh{
+  background:
+    linear-gradient(
+      to top,
+      #073f39 0 18%,
+      transparent 18%
+    ),
+    linear-gradient(
+      160deg,
+      #8fd0bd 0%,
+      #0b7761 46%,
+      #003b36 100%
+    );
+}
+
+.theme-riyadh:before{
+  content:"";
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:13px;
+  height:47px;
+  background:
+    linear-gradient(to top,#d7a968 0 7%,transparent 7%),
+    linear-gradient(
+      90deg,
+      #caa16b 0 9%,
+      transparent 9% 14%,
+      #5f877e 14% 23%,
+      transparent 23% 28%,
+      #b5d2c7 28% 37%,
+      transparent 37% 43%,
+      #d5ad72 43% 52%,
+      transparent 52% 58%,
+      #4e7e76 58% 69%,
+      transparent 69% 75%,
+      #c6dcd3 75% 84%,
+      transparent 84%
+    );
+  clip-path:polygon(
+    0 100%,0 58%,8% 58%,10% 27%,17% 27%,
+    19% 50%,29% 50%,31% 13%,38% 13%,40% 53%,
+    50% 53%,53% 0,60% 0,63% 52%,72% 52%,
+    74% 23%,81% 23%,84% 57%,93% 57%,95% 35%,
+    100% 35%,100% 100%
+  )
+}
+
+.theme-riyadh:after{
+  content:"عزنا بطبعنا";
+  position:absolute;
+  top:8px;
+  right:7px;
+  left:7px;
+  text-align:center;
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+  background:#00604fdd;
+  padding:4px
+}
+
+/* مصغّر ثيم النخيل والتراث */
+
+.theme-heritage{
+  background:
+    radial-gradient(
+      ellipse at 75% 20%,
+      #f0d39c 0 9%,
+      transparent 10%
+    ),
+    linear-gradient(
+      180deg,
+      #d7e9d7 0%,
+      #a6c6a9 43%,
+      #0b6652 100%
+    )
+}
+
+.theme-heritage:before{
+  content:"";
+  position:absolute;
+  left:-8px;
+  bottom:8px;
+  width:70px;
+  height:70px;
+  background:#063f36;
+  border-radius:50% 50% 10% 10%;
+  box-shadow:
+    30px 15px 0 -12px #075246,
+    55px 3px 0 -15px #0b6652
+}
+
+.theme-heritage:after{
+  content:"🌴";
+  position:absolute;
+  left:19px;
+  bottom:22px;
+  font-size:34px;
+  filter:saturate(.8)
+}
+
+/* مصغّر الثيم الهندسي */
+
+.theme-geometric{
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 13px,
+      rgba(18,173,130,.2) 14px 16px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 18px,
+      rgba(217,170,67,.08) 19px 21px
+    ),
+    linear-gradient(
+      145deg,
+      #00745a,
+      #003b36 70%
+    )
+}
+
+.theme-geometric:after{
+  content:"كارد";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-size:18px;
+  font-weight:900
+}
+
+/* =========================================
+   PREVIEW
+========================================= */
+
 .preview{
   min-height:590px;
   display:flex;
@@ -441,9 +663,9 @@ html[data-theme="dark"] .field input{
   padding:0 20px 25px
 }
 
-/* =========================
+/* =========================================
    POSTER
-========================= */
+========================================= */
 
 .poster{
   width:min(100%,300px);
@@ -455,10 +677,86 @@ html[data-theme="dark"] .field input{
   padding:28px 24px;
   box-shadow:0 25px 55px #003b3640;
   display:flex;
-  flex-direction:column
+  flex-direction:column;
+  transition:background .25s ease
 }
 
-.poster::before{
+/* =========================================
+   THIMES داخل المعاينة
+========================================= */
+
+/* الثيم 1 - عزنا بطبعنا */
+
+.poster.theme-riyadh-bg{
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,47,42,.94) 0%,
+      rgba(0,47,42,.35) 25%,
+      rgba(0,59,54,.08) 55%,
+      rgba(0,49,44,.42) 100%
+    ),
+    linear-gradient(
+      180deg,
+      #8ebfaf 0%,
+      #277c69 43%,
+      #064f43 65%,
+      #003b36 100%
+    )
+}
+
+.poster.theme-riyadh-bg .cityscape{
+  display:block
+}
+
+/* الثيم 2 - عروضنا */
+
+.poster.theme-heritage-bg{
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,52,46,.95) 0%,
+      rgba(0,52,46,.35) 34%,
+      rgba(18,87,70,.08) 65%,
+      rgba(225,220,184,.18) 100%
+    ),
+    linear-gradient(
+      180deg,
+      #d7e6d8 0%,
+      #a8c5a8 38%,
+      #477e63 63%,
+      #064c40 100%
+    )
+}
+
+.poster.theme-heritage-bg .heritage-scene{
+  display:block
+}
+
+/* الثيم 3 - هندسي */
+
+.poster.theme-geometric-bg{
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 19px,
+      rgba(20,172,128,.13) 20px 22px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 27px,
+      rgba(20,172,128,.08) 28px 30px
+    ),
+    linear-gradient(
+      145deg,
+      #00745a,
+      #003b36 72%
+    )
+}
+
+/* زخرفة الثيم الهندسي */
+
+.poster.theme-geometric-bg:before{
   content:"";
   position:absolute;
   inset:0;
@@ -476,13 +774,244 @@ html[data-theme="dark"] .field input{
   z-index:0
 }
 
+/* سماء الثيم */
+
+.poster.theme-riyadh-bg:before,
+.poster.theme-heritage-bg:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at 18% 24%,
+      rgba(255,255,255,.17) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 78% 31%,
+      rgba(255,255,255,.13) 0 2px,
+      transparent 3px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.09),
+      transparent 50%
+    );
+  z-index:0
+}
+
+/* مدينة الرياض داخل البطاقة */
+
+.cityscape{
+  display:none;
+  position:absolute;
+  left:-3%;
+  right:-3%;
+  bottom:-1%;
+  height:31%;
+  z-index:1;
+  pointer-events:none
+}
+
+.cityscape .building{
+  position:absolute;
+  bottom:0;
+  background:linear-gradient(
+    90deg,
+    #163f3b,
+    #7f9e8e,
+    #183f3a
+  );
+  box-shadow:inset 4px 0 rgba(255,255,255,.12)
+}
+
+.cityscape .b1{
+  left:3%;
+  width:12%;
+  height:38%
+}
+
+.cityscape .b2{
+  left:17%;
+  width:11%;
+  height:61%
+}
+
+.cityscape .b3{
+  left:30%;
+  width:12%;
+  height:44%
+}
+
+.cityscape .b4{
+  left:44%;
+  width:15%;
+  height:83%;
+  clip-path:polygon(
+    42% 0,
+    58% 0,
+    70% 13%,
+    70% 100%,
+    30% 100%,
+    30% 13%
+  )
+}
+
+.cityscape .b5{
+  left:62%;
+  width:10%;
+  height:53%
+}
+
+.cityscape .b6{
+  left:75%;
+  width:13%;
+  height:70%
+}
+
+.cityscape .b7{
+  left:90%;
+  width:9%;
+  height:45%
+}
+
+.cityscape:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:42%;
+  background:
+    radial-gradient(
+      ellipse at 50% 100%,
+      #c9995b 0 18%,
+      transparent 19%
+    ),
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(218,167,93,.65)
+    );
+  opacity:.8
+}
+
+/* مشهد النخيل والتراث */
+
+.heritage-scene{
+  display:none;
+  position:absolute;
+  left:-4%;
+  right:-4%;
+  bottom:-1%;
+  height:34%;
+  z-index:1;
+  pointer-events:none
+}
+
+.heritage-scene .sand{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:58%;
+  background:
+    linear-gradient(
+      180deg,
+      #c99d63,
+      #775b39
+    );
+  clip-path:ellipse(75% 65% at 50% 100%)
+}
+
+.heritage-scene .fort{
+  position:absolute;
+  right:10%;
+  bottom:10%;
+  width:42%;
+  height:54%;
+  background:
+    linear-gradient(
+      90deg,
+      #b9844e,
+      #e0b77b,
+      #98683f
+    );
+  clip-path:polygon(
+    0 100%,
+    0 34%,
+    10% 34%,
+    10% 0,
+    23% 0,
+    23% 34%,
+    34% 34%,
+    34% 13%,
+    47% 13%,
+    47% 34%,
+    62% 34%,
+    62% 5%,
+    76% 5%,
+    76% 34%,
+    90% 34%,
+    90% 19%,
+    100% 19%,
+    100% 100%
+  )
+}
+
+.heritage-scene .palm{
+  position:absolute;
+  bottom:13%;
+  width:9px;
+  height:43%;
+  background:#503923;
+  border-radius:10px
+}
+
+.heritage-scene .palm:before{
+  content:"";
+  position:absolute;
+  width:65px;
+  height:65px;
+  left:50%;
+  top:-34px;
+  transform:translateX(-50%);
+  background:
+    radial-gradient(
+      ellipse at center,
+      #215b42 0 24%,
+      transparent 25%
+    );
+  box-shadow:
+    -22px 7px 0 -4px #215b42,
+    22px 7px 0 -4px #215b42,
+    -14px -13px 0 -5px #276649,
+    14px -13px 0 -5px #276649
+}
+
+.heritage-scene .p1{
+  left:8%
+}
+
+.heritage-scene .p2{
+  left:30%;
+  height:36%
+}
+
+.heritage-scene .p3{
+  right:3%;
+  height:48%
+}
+
+/* العلم والزخارف */
+
 .poster::after{
   content:"";
   position:absolute;
   inset:12px;
   border:2px solid var(--gold);
   box-shadow:inset 0 0 0 1px #f4d57c55;
-  z-index:1;
+  z-index:6;
   pointer-events:none
 }
 
@@ -491,7 +1020,7 @@ html[data-theme="dark"] .field input{
   width:38px;
   height:38px;
   border:3px solid var(--gold);
-  z-index:3
+  z-index:7
 }
 
 .c1{
@@ -524,7 +1053,12 @@ html[data-theme="dark"] .field input{
 
 .poster>*{
   position:relative;
-  z-index:2
+  z-index:4
+}
+
+.poster .cityscape,
+.poster .heritage-scene{
+  z-index:1
 }
 
 .p-top{
@@ -535,7 +1069,9 @@ html[data-theme="dark"] .field input{
   font-size:29px;
   font-weight:900;
   border:1px solid #14a77d;
-  padding:8px 5px
+  padding:8px 5px;
+  background:rgba(0,59,54,.28);
+  backdrop-filter:blur(2px)
 }
 
 .p-day{
@@ -557,12 +1093,14 @@ html[data-theme="dark"] .field input{
 .p-store{
   font-size:22px;
   font-weight:900;
-  margin-bottom:7px
+  margin-bottom:7px;
+  text-shadow:0 2px 6px #00251f88
 }
 
 .p-desc{
   font-size:9px;
-  color:#c8dfd9
+  color:#c8dfd9;
+  text-shadow:0 1px 4px #00251f88
 }
 
 .offer{
@@ -574,12 +1112,14 @@ html[data-theme="dark"] .field input{
   padding:9px 22px;
   font-size:30px;
   font-weight:900;
-  min-width:190px
+  min-width:190px;
+  background:rgba(0,47,42,.36);
+  backdrop-filter:blur(2px)
 }
 
-/* =========================
+/* =========================================
    QR
-========================= */
+========================================= */
 
 .qrbox{
   width:100%;
@@ -600,10 +1140,9 @@ html[data-theme="dark"] .field input{
   border-radius:3px
 }
 
-/* =========================
-   DISCOUNT CODE
-   في أسفل البطاقة داخل الإطار
-========================= */
+/* =========================================
+   كود الخصم
+========================================= */
 
 .code{
   border:1px solid #10a97b;
@@ -914,6 +1453,22 @@ html[data-theme="dark"] .social-link:hover{
     grid-template-columns:1fr
   }
 
+  .theme-picker{
+    margin-top:15px
+  }
+
+  .theme-options{
+    gap:6px
+  }
+
+  .theme-thumb{
+    height:65px
+  }
+
+  .theme-name{
+    font-size:8px
+  }
+
   .preview{
     min-height:560px
   }
@@ -973,26 +1528,78 @@ html[data-theme="dark"] .social-link:hover{
 <body>
 
 <header>
+
   <div class="brand">
-    <div class="brand-mark">ك</div>
+
+    <div class="brand-mark">
+      ك
+    </div>
+
     <div>
       كارد
       <small>KARD</small>
     </div>
+
   </div>
 
   <nav class="nav">
-    <a class="active" href="#top" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
-    <a href="#templates" data-ar="القوالب" data-en="Templates">القوالب</a>
-    <a href="#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
-    <a href="#about" data-ar="عن كارد" data-en="About Kard">عن كارد</a>
+
+    <a
+      class="active"
+      href="#top"
+      data-ar="الرئيسية"
+      data-en="Home">
+      الرئيسية
+    </a>
+
+    <a
+      href="#templates"
+      data-ar="القوالب"
+      data-en="Templates">
+      القوالب
+    </a>
+
+    <a
+      href="#faq"
+      data-ar="الأسئلة الشائعة"
+      data-en="FAQ">
+      الأسئلة الشائعة
+    </a>
+
+    <a
+      href="#about"
+      data-ar="عن كارد"
+      data-en="About Kard">
+      عن كارد
+    </a>
+
   </nav>
 
   <div class="actions">
-    <button class="ui" id="lang">English</button>
-    <button class="ui" id="theme" aria-label="Theme">☾</button>
-    <button class="start" id="start" data-ar="ابدأ الآن →" data-en="Start now →">ابدأ الآن →</button>
+
+    <button
+      class="ui"
+      id="lang">
+      English
+    </button>
+
+    <button
+      class="ui"
+      id="theme"
+      aria-label="Theme">
+      ☾
+    </button>
+
+    <button
+      class="start"
+      id="start"
+      data-ar="ابدأ الآن →"
+      data-en="Start now →">
+      ابدأ الآن →
+    </button>
+
   </div>
+
 </header>
 
 <main id="top">
@@ -1048,12 +1655,16 @@ html[data-theme="dark"] .social-link:hover{
       </div>
 
       <div class="hero-visual">
+
         <div class="flag-pole"></div>
         <div class="flag"></div>
         <div class="heritage"></div>
+
         <div class="hero-slogan">
-          عزنا<br>بطبعنا
+          عزنا<br>
+          بطبعنا
         </div>
+
       </div>
 
     </div>
@@ -1069,7 +1680,10 @@ html[data-theme="dark"] .social-link:hover{
 <section class="card">
 
 <div class="head">
-  <h2 data-ar="اختر القالب" data-en="Choose a template">
+
+  <h2
+    data-ar="اختر القالب"
+    data-en="Choose a template">
     اختر القالب
   </h2>
 
@@ -1078,36 +1692,67 @@ html[data-theme="dark"] .social-link:hover{
     data-en="Choose an occasion and the matching design will appear">
     اختر المناسبة وسيظهر لك النموذج المناسب
   </p>
+
 </div>
 
 <div class="templates" id="templates">
 
-<button class="template active" data-type="national">
-  <span class="icon">🇸🇦</span>
-  <span data-ar="اليوم الوطني 96" data-en="National Day 96">
+<button
+  class="template active"
+  data-type="national">
+
+  <span class="icon">
+    🇸🇦
+  </span>
+
+  <span
+    data-ar="اليوم الوطني 96"
+    data-en="National Day 96">
     اليوم الوطني 96
   </span>
-  <small data-ar="قالب رسمي" data-en="Official template">
+
+  <small
+    data-ar="قالب رسمي"
+    data-en="Official template">
     قالب رسمي
   </small>
+
 </button>
 
-<button class="template" data-type="gift">
-  <span data-ar="بطاقة إهداء" data-en="Gift card">
+<button
+  class="template"
+  data-type="gift">
+
+  <span
+    data-ar="بطاقة إهداء"
+    data-en="Gift card">
     بطاقة إهداء
   </span>
-  <small data-ar="إهداء أنيق" data-en="Elegant gift">
+
+  <small
+    data-ar="إهداء أنيق"
+    data-en="Elegant gift">
     إهداء أنيق
   </small>
+
 </button>
 
-<button class="template" data-type="offer">
-  <span data-ar="بوستر عروض" data-en="Offer poster">
+<button
+  class="template"
+  data-type="offer">
+
+  <span
+    data-ar="بوستر عروض"
+    data-en="Offer poster">
     بوستر عروض
   </span>
-  <small data-ar="خصومات المتجر" data-en="Store discounts">
+
+  <small
+    data-ar="خصومات المتجر"
+    data-en="Store discounts">
     خصومات المتجر
   </small>
+
 </button>
 
 </div>
@@ -1124,87 +1769,256 @@ html[data-theme="dark"] .social-link:hover{
   أدخل بيانات متجرك، وستظهر مباشرة في المعاينة.
 </div>
 
-<div class="grid form-fields" id="nationalFields">
+<div
+  class="grid form-fields"
+  id="nationalFields">
 
 <div class="field">
-<label>اسم المتجر</label>
-<input id="store" value="متجرنا">
-</div>
 
-<div class="field">
-<label>نسبة الخصم</label>
-<input id="discount" value="30%">
-</div>
+<label>
+  اسم المتجر
+</label>
 
-<div class="field">
-<label>كود الخصم</label>
-<input id="code" value="KARD96">
-</div>
+<input
+  id="store"
+  value="متجرنا">
 
-<div class="field">
-<label>رابط المتجر</label>
-<input id="url" value="https://example.com">
-</div>
-
-</div>
-
-<div class="grid form-fields hidden" id="giftFields">
-
-<div class="field">
-<label>اسم المتجر</label>
-<input id="giftStore" value="متجرنا">
 </div>
 
 <div class="field">
-<label>المرسل</label>
-<input id="giftFrom" value="فريق المتجر">
+
+<label>
+  نسبة الخصم
+</label>
+
+<input
+  id="discount"
+  value="30%">
+
 </div>
 
 <div class="field">
-<label>المستلم</label>
-<input id="giftTo" value="عملاؤنا الأعزاء">
+
+<label>
+  كود الخصم
+</label>
+
+<input
+  id="code"
+  value="KARD96">
+
 </div>
 
 <div class="field">
-<label>رسالة الإهداء</label>
-<input id="giftMessage" value="هدية من القلب">
+
+<label>
+  رابط المتجر
+</label>
+
+<input
+  id="url"
+  value="https://example.com">
+
+</div>
+
+</div>
+
+<div
+  class="grid form-fields hidden"
+  id="giftFields">
+
+<div class="field">
+
+<label>
+  اسم المتجر
+</label>
+
+<input
+  id="giftStore"
+  value="متجرنا">
+
 </div>
 
 <div class="field">
-<label>رابط المتجر</label>
-<input id="giftUrl" value="https://example.com">
-</div>
 
-</div>
+<label>
+  المرسل
+</label>
 
-<div class="grid form-fields hidden" id="offerFields">
+<input
+  id="giftFrom"
+  value="فريق المتجر">
 
-<div class="field">
-<label>اسم المتجر</label>
-<input id="offerStore" value="متجرنا">
 </div>
 
 <div class="field">
-<label>عنوان العرض</label>
-<input id="offerTitle" value="عرض خاص">
+
+<label>
+  المستلم
+</label>
+
+<input
+  id="giftTo"
+  value="عملاؤنا الأعزاء">
+
 </div>
 
 <div class="field">
-<label>تفاصيل العرض</label>
-<input id="offerDetails" value="خصم لفترة محدودة">
+
+<label>
+  رسالة الإهداء
+</label>
+
+<input
+  id="giftMessage"
+  value="هدية من القلب">
+
 </div>
 
 <div class="field">
-<label>قيمة العرض</label>
-<input id="offerValue" value="30%">
+
+<label>
+  رابط المتجر
+</label>
+
+<input
+  id="giftUrl"
+  value="https://example.com">
+
+</div>
+
+</div>
+
+<div
+  class="grid form-fields hidden"
+  id="offerFields">
+
+<div class="field">
+
+<label>
+  اسم المتجر
+</label>
+
+<input
+  id="offerStore"
+  value="متجرنا">
+
 </div>
 
 <div class="field">
-<label>رابط المتجر</label>
-<input id="offerUrl" value="https://example.com">
+
+<label>
+  عنوان العرض
+</label>
+
+<input
+  id="offerTitle"
+  value="عرض خاص">
+
+</div>
+
+<div class="field">
+
+<label>
+  تفاصيل العرض
+</label>
+
+<input
+  id="offerDetails"
+  value="خصم لفترة محدودة">
+
+</div>
+
+<div class="field">
+
+<label>
+  قيمة العرض
+</label>
+
+<input
+  id="offerValue"
+  value="30%">
+
+</div>
+
+<div class="field">
+
+<label>
+  رابط المتجر
+</label>
+
+<input
+  id="offerUrl"
+  value="https://example.com">
+
 </div>
 
 </div>
+
+
+<!-- =====================================
+     اختيار ثيم الخلفية
+===================================== -->
+
+<div class="theme-picker">
+
+  <div class="theme-title">
+
+    <strong>
+      خلفية التصميم
+    </strong>
+
+    <span>
+      اختر الثيم
+    </span>
+
+  </div>
+
+  <div class="theme-options">
+
+    <button
+      class="theme-option active"
+      data-bg="riyadh"
+      aria-label="خلفية عزنا بطبعنا">
+
+      <div class="theme-thumb theme-riyadh"></div>
+
+      <span class="theme-name">
+        عزنا بطبعنا
+      </span>
+
+    </button>
+
+    <button
+      class="theme-option"
+      data-bg="heritage"
+      aria-label="خلفية عروضنا">
+
+      <div class="theme-thumb theme-heritage"></div>
+
+      <span class="theme-name">
+        عروضنا
+      </span>
+
+    </button>
+
+    <button
+      class="theme-option"
+      data-bg="geometric"
+      aria-label="الخلفية الهندسية">
+
+      <div class="theme-thumb theme-geometric"></div>
+
+      <span class="theme-name">
+        الأخضر الهندسي
+      </span>
+
+    </button>
+
+  </div>
+
+</div>
+
 
 <button
   class="update"
@@ -1226,6 +2040,7 @@ html[data-theme="dark"] .social-link:hover{
 
 </section>
 
+
 <section class="card preview">
 
 <div
@@ -1237,49 +2052,103 @@ html[data-theme="dark"] .social-link:hover{
 
 <div class="preview-body">
 
-<div class="poster" id="poster">
+<div
+  class="poster theme-riyadh-bg"
+  id="poster">
+
+
+<!-- عناصر المشهد -->
+
+<div class="cityscape">
+
+  <div class="building b1"></div>
+  <div class="building b2"></div>
+  <div class="building b3"></div>
+  <div class="building b4"></div>
+  <div class="building b5"></div>
+  <div class="building b6"></div>
+  <div class="building b7"></div>
+
+</div>
+
+<div class="heritage-scene">
+
+  <div class="sand"></div>
+
+  <div class="fort"></div>
+
+  <div class="palm p1"></div>
+  <div class="palm p2"></div>
+  <div class="palm p3"></div>
+
+</div>
+
 
 <div class="corner c1"></div>
 <div class="corner c2"></div>
 <div class="corner c3"></div>
 <div class="corner c4"></div>
 
+
 <div class="p-top">
 
-<div class="p-title" id="pTitle">
-عزنا بطبعنا
+<div
+  class="p-title"
+  id="pTitle">
+  عزنا بطبعنا
 </div>
 
-<div class="p-day" id="pDay">
-اليوم الوطني السعودي 96
+<div
+  class="p-day"
+  id="pDay">
+  اليوم الوطني السعودي 96
 </div>
 
 </div>
+
 
 <div class="p-main">
 
-<div class="p-store" id="pStore">
-متجرنا
+<div
+  class="p-store"
+  id="pStore">
+  متجرنا
 </div>
 
-<div class="p-desc" id="pDesc">
-صمّم عروضك وشارك فرحتك
+<div
+  class="p-desc"
+  id="pDesc">
+  صمّم عروضك وشارك فرحتك
 </div>
 
-<div class="offer" id="pOffer">
-خصم 30%
+<div
+  class="offer"
+  id="pOffer">
+  خصم 30%
 </div>
 
-<!-- QR يبقى موجود هنا لكن في الجزء السفلي -->
-<div class="qrbox" id="qr"></div>
 
-<!-- كود الخصم أصبح تحت الـQR وقبل نهاية الإطار -->
-<div class="code" id="pCode">
-KARD96
+<!-- QR -->
+
+<div
+  class="qrbox"
+  id="qr">
 </div>
 
-<div class="p-bottom" id="pBottom">
-زورونا وشاركوا فرحتنا
+
+<!-- كود الخصم -->
+
+<div
+  class="code"
+  id="pCode">
+  KARD96
+</div>
+
+
+<div
+  class="p-bottom"
+  id="pBottom">
+  زورونا وشاركوا فرحتنا
 </div>
 
 </div>
@@ -1289,6 +2158,7 @@ KARD96
 </div>
 
 </section>
+
 
 <aside class="card side">
 
@@ -1329,18 +2199,45 @@ KARD96
 <div class="specs">
 
 <div class="spec">
-<span data-ar="المقاس" data-en="Size">المقاس</span>
-<b>1080 × 1920</b>
+
+<span
+  data-ar="المقاس"
+  data-en="Size">
+  المقاس
+</span>
+
+<b>
+  1080 × 1920
+</b>
+
 </div>
 
 <div class="spec">
-<span data-ar="الجودة" data-en="Quality">الجودة</span>
-<b>HD</b>
+
+<span
+  data-ar="الجودة"
+  data-en="Quality">
+  الجودة
+</span>
+
+<b>
+  HD
+</b>
+
 </div>
 
 <div class="spec">
-<span data-ar="الصيغة" data-en="Format">الصيغة</span>
-<b>PNG</b>
+
+<span
+  data-ar="الصيغة"
+  data-en="Format">
+  الصيغة
+</span>
+
+<b>
+  PNG
+</b>
+
 </div>
 
 </div>
@@ -1366,9 +2263,11 @@ KARD96
 </aside>
 
 </div>
+
 </div>
 
 </main>
+
 
 <footer class="footer">
 
@@ -1383,11 +2282,16 @@ KARD96
   rel="noopener"
   aria-label="X">
 
-<svg viewBox="0 0 24 24" aria-hidden="true">
+<svg
+  viewBox="0 0 24 24"
+  aria-hidden="true">
+
 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.957 6.817H1.69l7.73-8.835L1.262 2.25H8.09l4.713 6.231 5.44-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/>
+
 </svg>
 
 </a>
+
 
 <a
   class="social-link"
@@ -1396,8 +2300,12 @@ KARD96
   rel="noopener"
   aria-label="WhatsApp">
 
-<svg viewBox="0 0 24 24" aria-hidden="true">
+<svg
+  viewBox="0 0 24 24"
+  aria-hidden="true">
+
 <path d="M20.52 3.48A11.84 11.84 0 0 0 12.09 0C5.55 0 .23 5.32.23 11.87c0 2.09.55 4.13 1.59 5.93L.13 24l6.34-1.66a11.85 11.85 0 0 0 5.62 1.43h.01c6.54 0 11.86-5.32 11.86-11.87 0-3.17-1.23-6.15-3.44-8.42Zm-8.43 18.3h-.01a9.9 9.9 0 0 1-5.05-1.39l-.36-.21-3.76.99 1-3.67-.23-.38a9.89 9.89 0 0 1-1.52-5.25C2.16 6.4 6.62 1.94 12.1 1.94c2.65 0 5.14 1.03 7.02 2.92a9.9 9.9 0 0 1 2.91 7.02c0 5.48-4.46 9.94-9.94 9.94Zm5.45-7.45c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.5s1.07 2.9 1.22 3.1c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+
 </svg>
 
 </a>
@@ -1405,13 +2313,21 @@ KARD96
 </div>
 
 <div class="footer-copy">
-<strong>كارد</strong>
-<span>© 2026 كارد — جميع الحقوق محفوظة</span>
+
+<strong>
+  كارد
+</strong>
+
+<span>
+  © 2026 كارد — جميع الحقوق محفوظة
+</span>
+
 </div>
 
 </div>
 
 </footer>
+
 
 <button
   class="fab up"
@@ -1428,19 +2344,35 @@ KARD96
   تحرير
 </button>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 
 <script>
 
 const $=id=>document.getElementById(id);
 
 let lang='ar';
+
 let type='national';
 
-const templates=document.querySelectorAll('.template');
+let backgroundTheme=
+  localStorage.getItem('kard-background')
+  ||'riyadh';
+
+
+const templates=
+  document.querySelectorAll('.template');
+
+
+const themeOptions=
+  document.querySelectorAll('.theme-option');
+
 
 const text={
+
   national:{
     ar:[
       'تخصيص بطاقة اليوم الوطني 96',
@@ -1473,12 +2405,23 @@ const text={
       'Enter your promotion details without a discount code.'
     ]
   }
+
 };
 
-function val(id,fallback=''){
+
+function val(
+  id,
+  fallback=''
+){
+
   const e=$(id);
-  return e ? e.value.trim() || fallback : fallback;
+
+  return e
+    ? e.value.trim() || fallback
+    : fallback;
+
 }
+
 
 function syncFields(){
 
@@ -1496,164 +2439,286 @@ function syncFields(){
     'hidden',
     type!=='offer'
   );
+
 }
 
-function applyLang(){
 
-  document.documentElement.lang=lang;
+function applyBackground(){
 
-  document.documentElement.dir=
-    lang==='ar'?'rtl':'ltr';
+  const poster=
+    $('poster');
 
-  document.querySelectorAll('[data-ar]').forEach(e=>{
+  poster.classList.remove(
+    'theme-riyadh-bg',
+    'theme-heritage-bg',
+    'theme-geometric-bg'
+  );
 
-    const v=e.getAttribute('data-'+lang);
+  if(backgroundTheme==='riyadh'){
 
-    if(e.tagName==='H1'){
-      e.innerHTML=v;
-    }else{
-      e.textContent=v;
-    }
-
-  });
-
-  $('lang').textContent=
-    lang==='ar'?'English':'العربية';
-
-  render();
-}
-
-function render(){
-
-  syncFields();
-
-  let s,u,offer,code='',bottom,day,desc,title;
-
-  if(type==='national'){
-
-    s=val('store','متجرنا');
-
-    u=val(
-      'url',
-      'https://example.com'
+    poster.classList.add(
+      'theme-riyadh-bg'
     );
-
-    offer=val(
-      'discount',
-      '30%'
-    );
-
-    code=val(
-      'code',
-      'KARD96'
-    );
-
-    title=
-      lang==='ar'
-      ?'عزنا بطبعنا'
-      :'Our pride, our character';
-
-    day=
-      lang==='ar'
-      ?'اليوم الوطني السعودي 96'
-      :'Saudi National Day 96';
-
-    desc=
-      lang==='ar'
-      ?'صمّم عروضك وشارك فرحتك'
-      :'Design your offers and share the celebration';
-
-    bottom=
-      lang==='ar'
-      ?'زورونا وشاركوا فرحتنا'
-      :'Visit us and share the celebration';
 
   }
 
-  else if(type==='gift'){
+  else if(backgroundTheme==='heritage'){
 
-    s=val(
-      'giftStore',
-      'متجرنا'
-    );
-
-    u=val(
-      'giftUrl',
-      'https://example.com'
-    );
-
-    offer=val(
-      'giftMessage',
-      'هدية من القلب'
-    );
-
-    title=
-      lang==='ar'
-      ?'بطاقة إهداء'
-      :'Gift Card';
-
-    day=
-      lang==='ar'
-      ?'هدية من القلب'
-      :'A gift from the heart';
-
-    desc=val(
-      'giftTo',
-      lang==='ar'
-      ?'لعملائنا الأعزاء'
-      :'For our dear customers'
-    );
-
-    bottom=val(
-      'giftFrom',
-      lang==='ar'
-      ?'مع خالص المحبة'
-      :'With appreciation'
+    poster.classList.add(
+      'theme-heritage-bg'
     );
 
   }
 
   else{
 
-    s=val(
-      'offerStore',
-      'متجرنا'
+    poster.classList.add(
+      'theme-geometric-bg'
     );
 
-    u=val(
-      'offerUrl',
-      'https://example.com'
-    );
+  }
 
-    offer=val(
-      'offerValue',
-      '30%'
-    );
 
-    title=val(
-      'offerTitle',
+  themeOptions.forEach(
+    option=>{
+
+      option.classList.toggle(
+        'active',
+        option.dataset.bg===backgroundTheme
+      );
+
+    }
+  );
+
+
+  localStorage.setItem(
+    'kard-background',
+    backgroundTheme
+  );
+
+}
+
+
+function applyLang(){
+
+  document.documentElement.lang=
+    lang;
+
+  document.documentElement.dir=
+    lang==='ar'
+      ?'rtl'
+      :'ltr';
+
+
+  document
+    .querySelectorAll('[data-ar]')
+    .forEach(e=>{
+
+      const v=
+        e.getAttribute(
+          'data-'+lang
+        );
+
+      if(e.tagName==='H1'){
+
+        e.innerHTML=v;
+
+      }else{
+
+        e.textContent=v;
+
+      }
+
+    });
+
+
+  $('lang').textContent=
+    lang==='ar'
+      ?'English'
+      :'العربية';
+
+
+  render();
+
+}
+
+
+function render(){
+
+  syncFields();
+
+  applyBackground();
+
+
+  let
+    s,
+    u,
+    offer,
+    code='',
+    bottom,
+    day,
+    desc,
+    title;
+
+
+  if(type==='national'){
+
+    s=
+      val(
+        'store',
+        'متجرنا'
+      );
+
+    u=
+      val(
+        'url',
+        'https://example.com'
+      );
+
+    offer=
+      val(
+        'discount',
+        '30%'
+      );
+
+    code=
+      val(
+        'code',
+        'KARD96'
+      );
+
+
+    title=
       lang==='ar'
-      ?'عرض خاص'
-      :'Special Offer'
-    );
+        ?'عزنا بطبعنا'
+        :'Our pride, our character';
 
-    day=val(
-      'offerDetails',
+
+    day=
       lang==='ar'
-      ?'خصم لفترة محدودة'
-      :'Limited-time discount'
-    );
+        ?'اليوم الوطني السعودي 96'
+        :'Saudi National Day 96';
+
 
     desc=
       lang==='ar'
-      ?'لا تفوّت العرض'
-      :'Do not miss the offer';
+        ?'صمّم عروضك وشارك فرحتك'
+        :'Design your offers and share the celebration';
+
 
     bottom=
       lang==='ar'
-      ?'تسوّق الآن'
-      :'Shop now';
+        ?'زورونا وشاركوا فرحتنا'
+        :'Visit us and share the celebration';
+
   }
+
+
+  else if(type==='gift'){
+
+    s=
+      val(
+        'giftStore',
+        'متجرنا'
+      );
+
+    u=
+      val(
+        'giftUrl',
+        'https://example.com'
+      );
+
+    offer=
+      val(
+        'giftMessage',
+        'هدية من القلب'
+      );
+
+
+    title=
+      lang==='ar'
+        ?'بطاقة إهداء'
+        :'Gift Card';
+
+
+    day=
+      lang==='ar'
+        ?'هدية من القلب'
+        :'A gift from the heart';
+
+
+    desc=
+      val(
+        'giftTo',
+        lang==='ar'
+          ?'لعملائنا الأعزاء'
+          :'For our dear customers'
+      );
+
+
+    bottom=
+      val(
+        'giftFrom',
+        lang==='ar'
+          ?'مع خالص المحبة'
+          :'With appreciation'
+      );
+
+  }
+
+
+  else{
+
+    s=
+      val(
+        'offerStore',
+        'متجرنا'
+      );
+
+    u=
+      val(
+        'offerUrl',
+        'https://example.com'
+      );
+
+    offer=
+      val(
+        'offerValue',
+        '30%'
+      );
+
+
+    title=
+      val(
+        'offerTitle',
+        lang==='ar'
+          ?'عرض خاص'
+          :'Special Offer'
+      );
+
+
+    day=
+      val(
+        'offerDetails',
+        lang==='ar'
+          ?'خصم لفترة محدودة'
+          :'Limited-time discount'
+      );
+
+
+    desc=
+      lang==='ar'
+        ?'لا تفوّت العرض'
+        :'Do not miss the offer';
+
+
+    bottom=
+      lang==='ar'
+        ?'تسوّق الآن'
+        :'Shop now';
+
+  }
+
 
   $('pStore').textContent=s;
 
@@ -1663,20 +2728,17 @@ function render(){
 
   $('pDesc').textContent=desc;
 
+
   $('pOffer').textContent=
     type==='gift'
-    ?offer
-    :
-    (
-      lang==='ar'
-      ?'خصم '
-      :'Discount '
-    )+offer;
+      ?offer
+      :
+      (
+        lang==='ar'
+          ?'خصم '
+          :'Discount '
+      )+offer;
 
-  /*
-    كود الخصم يظهر فقط في بطاقة اليوم الوطني.
-    في بوستر العروض لا يوجد كود خصم.
-  */
 
   $('pCode').classList.toggle(
     'hidden',
@@ -1687,61 +2749,83 @@ function render(){
 
   $('pBottom').textContent=bottom;
 
+
   $('formTitle').textContent=
     type==='national'
-    ?
+      ?
       (
         lang==='ar'
-        ?'تخصيص بطاقة اليوم الوطني 96'
-        :'Customize National Day 96 card'
+          ?'تخصيص بطاقة اليوم الوطني 96'
+          :'Customize National Day 96 card'
       )
-    :
-    type==='gift'
-    ?
-      (
-        lang==='ar'
-        ?'تخصيص بطاقة الهدايا'
-        :'Customize gift card'
-      )
-    :
-      (
-        lang==='ar'
-        ?'تخصيص بوسترات العروض'
-        :'Customize offer posters'
-      );
+      :
+      type==='gift'
+        ?
+        (
+          lang==='ar'
+            ?'تخصيص بطاقة الهدايا'
+            :'Customize gift card'
+        )
+        :
+        (
+          lang==='ar'
+            ?'تخصيص بوسترات العروض'
+            :'Customize offer posters'
+        );
 
-  /*
-    إعادة إنشاء QR بشكل صحيح في كل تحديث.
-    الرابط المستخدم هو رابط المتجر.
-  */
+
+  /* =====================================
+     QR
+  ===================================== */
 
   $('qr').innerHTML='';
+
 
   const drawQR=()=>{
 
     try{
 
       if(!window.QRious){
+
         return false;
+
       }
 
-      const canvas=document.createElement('canvas');
+
+      const canvas=
+        document.createElement(
+          'canvas'
+        );
+
 
       new QRious({
+
         element:canvas,
+
         value:u,
+
         size:82,
+
         level:'H'
+
       });
 
+
       canvas.style.width='82px';
+
       canvas.style.height='82px';
 
-      $('qr').appendChild(canvas);
+
+      $('qr').appendChild(
+        canvas
+      );
+
 
       return true;
 
-    }catch(e){
+    }
+
+    catch(e){
 
       console.error(
         'QR generation error:',
@@ -1749,17 +2833,30 @@ function render(){
       );
 
       return false;
+
     }
+
   };
 
-  if(!drawQR() && !window._qriousLoading){
+
+  if(
+    !drawQR()
+    &&
+    !window._qriousLoading
+  ){
 
     window._qriousLoading=true;
 
-    const q=document.createElement('script');
+
+    const q=
+      document.createElement(
+        'script'
+      );
+
 
     q.src=
       'https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js';
+
 
     q.onload=()=>{
 
@@ -1769,39 +2866,85 @@ function render(){
 
     };
 
+
     q.onerror=()=>{
 
       window._qriousLoading=false;
 
     };
 
+
     document.head.appendChild(q);
+
   }
+
 }
 
 
-/* اختيار القوالب */
+/* =====================================
+   اختيار القوالب
+===================================== */
 
-templates.forEach(b=>{
+templates.forEach(
+  b=>{
 
-  b.addEventListener('click',()=>{
+    b.addEventListener(
+      'click',
+      ()=>{
 
-    templates.forEach(x=>
-      x.classList.remove('active')
+        templates.forEach(
+          x=>
+            x.classList.remove(
+              'active'
+            )
+        );
+
+
+        b.classList.add(
+          'active'
+        );
+
+
+        type=
+          b.dataset.type;
+
+
+        render();
+
+      }
     );
 
-    b.classList.add('active');
-
-    type=b.dataset.type;
-
-    render();
-
-  });
-
-});
+  }
+);
 
 
-/* تحديث مباشر للحقول */
+/* =====================================
+   اختيار الخلفية
+===================================== */
+
+themeOptions.forEach(
+  option=>{
+
+    option.addEventListener(
+      'click',
+      ()=>{
+
+        backgroundTheme=
+          option.dataset.bg;
+
+
+        applyBackground();
+
+      }
+    );
+
+  }
+);
+
+
+/* =====================================
+   تحديث مباشر للحقول
+===================================== */
 
 [
   'store',
@@ -1818,18 +2961,22 @@ templates.forEach(b=>{
   'offerDetails',
   'offerValue',
   'offerUrl'
-].forEach(id=>{
+].forEach(
+  id=>{
 
-  const e=$(id);
+    const e=$(id);
 
-  if(e){
-    e.addEventListener(
-      'input',
-      render
-    );
+    if(e){
+
+      e.addEventListener(
+        'input',
+        render
+      );
+
+    }
+
   }
-
-});
+);
 
 
 /* تحديث التصميم */
@@ -1844,16 +2991,19 @@ $('update').addEventListener(
 
 $('heroStart').addEventListener(
   'click',
-  ()=>$('templates').scrollIntoView({
-    behavior:'smooth'
-  })
+  ()=>
+    $('templates').scrollIntoView({
+      behavior:'smooth'
+    })
 );
+
 
 $('start').addEventListener(
   'click',
-  ()=>$('templates').scrollIntoView({
-    behavior:'smooth'
-  })
+  ()=>
+    $('templates').scrollIntoView({
+      behavior:'smooth'
+    })
 );
 
 
@@ -1862,17 +3012,21 @@ $('start').addEventListener(
 $('lang').addEventListener(
   'click',
   ()=>{
+
     lang=
       lang==='ar'
-      ?'en'
-      :'ar';
+        ?'en'
+        :'ar';
 
     applyLang();
+
   }
 );
 
 
-/* الوضع الليلي */
+/* =====================================
+   الوضع الليلي
+===================================== */
 
 $('theme').addEventListener(
   'click',
@@ -1883,31 +3037,46 @@ $('theme').addEventListener(
         'data-theme'
       )==='dark';
 
+
     document.documentElement.setAttribute(
       'data-theme',
-      dark?'light':'dark'
+      dark
+        ?'light'
+        :'dark'
     );
 
+
     $('theme').textContent=
-      dark?'☾':'☀';
+      dark
+        ?'☾'
+        :'☀';
+
 
     localStorage.setItem(
       'kard-theme',
-      dark?'light':'dark'
+      dark
+        ?'light'
+        :'dark'
     );
 
   }
 );
 
+
 if(
-  localStorage.getItem('kard-theme')
-  ==='dark'
+  localStorage.getItem(
+    'kard-theme'
+  )==='dark'
 ){
+
   $('theme').click();
+
 }
 
 
-/* مشاركة */
+/* =====================================
+   مشاركة
+===================================== */
 
 $('share').addEventListener(
   'click',
@@ -1919,13 +3088,18 @@ $('share').addEventListener(
       url:location.href
     };
 
+
     try{
 
       if(navigator.share){
 
-        await navigator.share(data);
+        await navigator.share(
+          data
+        );
 
-      }else{
+      }
+
+      else{
 
         await navigator.clipboard.writeText(
           location.href
@@ -1933,23 +3107,32 @@ $('share').addEventListener(
 
       }
 
-    }catch(e){}
+    }
+
+    catch(e){}
 
   }
 );
 
 
-/* رفع الشعار */
+/* =====================================
+   رفع الشعار
+===================================== */
 
 $('upload').addEventListener(
   'click',
   ()=>{
 
     const i=
-      document.createElement('input');
+      document.createElement(
+        'input'
+      );
+
 
     i.type='file';
+
     i.accept='image/*';
+
 
     i.onchange=()=>{
 
@@ -1958,6 +3141,7 @@ $('upload').addEventListener(
         const r=
           new FileReader();
 
+
         r.onload=e=>{
 
           const oldLogo=
@@ -1965,16 +3149,27 @@ $('upload').addEventListener(
               '.uploaded-logo'
             );
 
+
           if(oldLogo){
+
             oldLogo.remove();
+
           }
 
+
           const im=
-            document.createElement('img');
+            document.createElement(
+              'img'
+            );
 
-          im.src=e.target.result;
 
-          im.className='uploaded-logo';
+          im.src=
+            e.target.result;
+
+
+          im.className=
+            'uploaded-logo';
+
 
           im.style.cssText=
             'position:absolute;' +
@@ -1986,16 +3181,22 @@ $('upload').addEventListener(
             'height:55px;' +
             'object-fit:contain;';
 
-          $('poster').appendChild(im);
+
+          $('poster').appendChild(
+            im
+          );
 
         };
+
 
         r.readAsDataURL(
           i.files[0]
         );
+
       }
 
     };
+
 
     i.click();
 
@@ -2003,7 +3204,9 @@ $('upload').addEventListener(
 );
 
 
-/* تحميل PNG */
+/* =====================================
+   تحميل PNG
+===================================== */
 
 $('download').addEventListener(
   'click',
@@ -2021,20 +3224,28 @@ $('download').addEventListener(
           }
         );
 
+
       const a=
-        document.createElement('a');
+        document.createElement(
+          'a'
+        );
+
 
       a.download=
         'kard-design.png';
+
 
       a.href=
         canvas.toDataURL(
           'image/png'
         );
 
+
       a.click();
 
-    }catch(e){
+    }
+
+    catch(e){
 
       console.error(e);
 
@@ -2066,15 +3277,22 @@ $('edit').addEventListener(
         '.form-fields:not(.hidden) input'
       );
 
+
     if(f){
+
       f.focus();
+
     }
 
   }
 );
 
 
-/* تشغيل أولي */
+/* =====================================
+   تشغيل أولي
+===================================== */
+
+applyBackground();
 
 render();
 
