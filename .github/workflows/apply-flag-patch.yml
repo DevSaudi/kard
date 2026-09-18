@@ -3,9 +3,12 @@ name: Apply Kard template text patch
 on:
   push:
     branches: [main]
+  issues:
+    types: [opened]
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   patch:
@@ -18,7 +21,6 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-
           replacements = [
               ('عزنا <span>بكرمنا</span>', 'عزنا <span>بطبعنا</span>'),
               ('<div class="hero-slogan">عزنا<br>بكرمنا</div>', '<div class="hero-slogan">عزنا<br>بطبعنا</div>'),
@@ -28,7 +30,6 @@ jobs:
           ]
           for old, new in replacements:
               s = s.replace(old, new)
-
           marker = 'render();\n</script></body></html>'
           addition = '''render();
 +(function(){
@@ -52,6 +53,7 @@ jobs:
 +          s = s.replace(marker, addition, 1)
 +          p.write_text(s, encoding='utf-8')
 +          PY
+          if [ -n "${ISSUE_NUMBER:-}" ]; then gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" || true; fi
           rm -f .github/workflows/fix-flag.yml .github/workflows/apply-flag-patch.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
