@@ -1,4 +1,4 @@
-name: Apply flag patch
+name: Apply Kard template text patch
 
 on:
   push:
@@ -12,21 +12,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Patch flag styling
+      - name: Update template labels and hero slogan
         run: |
           python - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          old = '.saudi-flag{width:31px;height:21px;background:#006c35;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.18);overflow:hidden}.saudi-flag:before{content:"لا إله إلا الله";color:#fff;font-size:5px;font-weight:700;white-space:nowrap;transform:scaleX(.9)}.saudi-flag:after{content:"";position:absolute;left:7px;right:7px;bottom:4px;height:1.5px;background:#fff;border-radius:2px}'
-          new = '.saudi-flag{width:auto;height:auto;background:none;border-radius:0;display:inline-flex;align-items:center;justify-content:center;position:relative;box-shadow:none;overflow:visible;font-size:18px;line-height:1}.saudi-flag:before{content:"🇸🇦";color:inherit;font-size:inherit;font-weight:400;white-space:nowrap;transform:none}.saudi-flag:after{content:none}'
-          if old not in s:
-              raise SystemExit('target CSS not found')
-          p.write_text(s.replace(old, new), encoding='utf-8')
-          PY
+
+          replacements = [
+              ('عزنا <span>بكرمنا</span>', 'عزنا <span>بطبعنا</span>'),
+              ('<div class="hero-slogan">عزنا<br>بكرمنا</div>', '<div class="hero-slogan">عزنا<br>بطبعنا</div>'),
+              ('.template .icon{font-size:27px;display:block;margin:4px}', '.template .icon{font-size:27px;display:block;margin:4px}.template[data-type="gift"] .icon,.template[data-type="offer"] .icon{display:none}'),
+              ('<span class="icon">🎁</span>', '<span class="icon"></span>'),
+              ('<span class="icon">🏷️</span>', '<span class="icon"></span>'),
+          ]
+          for old, new in replacements:
+              s = s.replace(old, new)
+
+          marker = 'render();\n</script></body></html>'
+          addition = '''render();
++(function(){
++  function syncFormTitle(){
++    const active=document.querySelector('.template.active');
++    const title=document.getElementById('formTitle');
++    if(!active||!title)return;
++    const t=active.dataset.type;
++    const en=document.documentElement.lang==='en';
++    if(t==='gift') title.textContent=en?'Customize gift card':'تخصيص بطاقة الهدايا';
++    else if(t==='offer') title.textContent=en?'Customize offer posters':'تخصيص بوسترات العروض';
++    else title.textContent=en?'Customize National Day 96 card':'تخصيص بطاقة اليوم الوطني 96';
++  }
++  document.querySelectorAll('.template').forEach(b=>b.addEventListener('click',()=>setTimeout(syncFormTitle,0)));
++  document.getElementById('lang').addEventListener('click',()=>setTimeout(syncFormTitle,0));
++  syncFormTitle();
++})();
++</script></body></html>'''.replace('\n+','\n')
++          if marker not in s:
++              raise SystemExit('script marker not found')
++          s = s.replace(marker, addition, 1)
++          p.write_text(s, encoding='utf-8')
++          PY
           rm -f .github/workflows/fix-flag.yml .github/workflows/apply-flag-patch.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html .github/workflows/fix-flag.yml .github/workflows/apply-flag-patch.yml
-          git commit -m 'fix: restore simple Saudi flag' || exit 0
+          git commit -m 'fix: update template titles and hero slogan' || exit 0
           git push
