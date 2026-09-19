@@ -447,7 +447,21 @@ header#siteHeader .nav::after{
 @media(max-width:1050px){header#siteHeader .nav::after{display:none}}
 </style>
 
-</head>
+
+<style id="kard-full-i18n-theme-fix">
+html[data-theme="dark"] body{background:#071f1d!important;color:#e8f4f1!important}
+html[data-theme="dark"] .card,html[data-theme="dark"] .template,html[data-theme="dark"] .bg-choice,html[data-theme="dark"] .share,html[data-theme="dark"] .field input,html[data-theme="dark"] .footer{background:#0d2a27!important;color:#e8f4f1!important}
+html[data-theme="dark"] .card{border-color:#24433f!important}
+html[data-theme="dark"] .field input{border-color:#31514c!important;color:#e8f4f1!important}
+html[data-theme="dark"] .bg-choice span,html[data-theme="dark"] .bg-choice small,html[data-theme="dark"] .note,html[data-theme="dark"] .head p,html[data-theme="dark"] .spec span,html[data-theme="dark"] .why p,html[data-theme="dark"] .footer-copy span{color:#9bb5b0!important}
+html[data-theme="dark"] .why{background:#0b312b!important;border-color:#28554d!important}
+html[data-theme="dark"] .social-link{border-color:#31514c!important;color:#b0c7c2!important}
+html[data-theme="dark"] .social-link.whatsapp{color:#22b77f!important}
+header#siteHeader{position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important}
+header#siteHeader .theme-toggle svg{width:16px!important;height:16px!important;display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+header#siteHeader .actions{direction:ltr!important}
+@media(max-width:760px){header#siteHeader .actions{direction:ltr!important}}
+</style>\n</head>
 <body>
 <header id="siteHeader">
   <div class="brand"><div class="brand-mark">ك</div><div>كارد<small>KARD</small></div></div>
@@ -455,8 +469,7 @@ header#siteHeader .nav::after{
   <div class="actions">
     <button class="ui icon-btn lang-btn" id="lang" aria-label="تبديل اللغة" title="تبديل اللغة"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.2 2.4 3.4 5.4 3.4 9s-1.2 6.6-3.4 9c-2.2-2.4-3.4-6.6-3.4-9S9.8 5.4 12 3Z"></path></svg></button>
     <button class="ui icon-btn theme-toggle" id="theme" aria-label="تفعيل الوضع الداكن" title="تفعيل الوضع الداكن" type="button">
-      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.7A8.8 8.8 0 0 1 9.3 3.5 8.9 8.9 0 1 0 20.5 14.7Z"></path></svg>
-      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 14.9A8.7 8.7 0 0 1 9.1 3.4 8.8 8.8 0 1 0 20.6 14.9Z"></path></svg>
     </button>
     <button class="start" id="start" data-i18n="start">ابدأ الآن →</button>
   </div>
@@ -598,4 +611,178 @@ $('download').addEventListener('click',async()=>{
   }
 });
 $('up').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));$('edit').addEventListener('click',()=>document.querySelector('.form-fields:not(.hidden) input')?.focus());render();applyThemeImages();applyLanguage();
-</script></body></html>
+</script>
+<script id="kard-full-i18n-script">
+(function(){
+  const T={
+    ar:{
+      navHome:'الرئيسية',navTemplates:'القوالب',navAbout:'عن كارد',start:'ابدأ الآن →',
+      heroEy:'صمّمها بطابعك السعودي',heroA:'صمّمها',heroB:'بطابعك السعودي',
+      heroSub:'حوّل عروضك ومناسباتك إلى تصاميم أنيقة تليق بهويتك',
+      heroDesc:'اختر القالب والثيم، أضف بياناتك، واصنع بطاقة جاهزة للمشاركة خلال دقائق.',
+      heroBtn:'ابدأ تصميمك الآن ←',
+      choose:'اختر القالب',chooseSub:'اختر المناسبة وسيظهر لك النموذج المناسب',
+      national:'اليوم الوطني 96',nationalSmall:'قالب رسمي',gift:'بطاقة إهداء',giftSmall:'إهداء أنيق',offer:'بوستر عروض',offerSmall:'خصومات المتجر',
+      formTitle:{national:'تخصيص بطاقة اليوم الوطني 96',gift:'تخصيص بطاقة الهدايا',offer:'تخصيص بوسترات العروض'},
+      formNote:{national:'أدخل بيانات متجرك، وستظهر مباشرة في المعاينة.',gift:'أدخل بيانات الإهداء لتظهر في بطاقة الهدايا.',offer:'أدخل بيانات الإعلان أو العرض بدون كود خصم.'},
+      labels:{national:['اسم المتجر','نسبة الخصم','كود الخصم','رابط المتجر'],gift:['اسم المتجر','المرسل','المستلم','رسالة الإهداء','رابط المتجر'],offer:['اسم المتجر','عنوان العرض','تفاصيل العرض','قيمة العرض','رابط المتجر']},
+      bgTitle:'اختر خلفية البطاقة',
+      bgs:{riyadh:['ثيم الرياض','أبراج الرياض وأجواء المدينة'],diriyah:['ثيم الدرعية','الدرعية والتراث السعودي'],green:['الثيم الأخضر السعودي','النخلة والسيفان وأجواء وطنية']},
+      update:'تحديث التصميم',download:'تحميل PNG HD',preview:'المعاينة',
+      quick:'أدوات سريعة',quickSub:'كل ما تحتاجه للمشاركة',share:'مشاركة الرابط',upload:'رفع الشعار',
+      size:'المقاس',quality:'الجودة',format:'الصيغة',
+      footer:'© 2026 كارد — جميع الحقوق محفوظة',
+      poster:{
+        national:{title:'عزنا بطبعنا',day:'اليوم الوطني السعودي 96',desc:'صمّم عروضك وشارك فرحتك',bottom:'زورونا وشاركوا فرحتنا'},
+        gift:{title:'بطاقة إهداء',day:'هدية من القلب',desc:'لعملائنا الأعزاء',bottom:'مع خالص المحبة'},
+        offer:{title:'عرض خاص',day:'خصم لفترة محدودة',desc:'لا تفوّت العرض',bottom:'تسوّق الآن'}
+      },
+      discountPrefix:'خصم ',themeDark:'تفعيل الوضع الداكن',themeLight:'تفعيل الوضع الفاتح',langTitle:'تغيير اللغة'
+    },
+    en:{
+      navHome:'Home',navTemplates:'Templates',navAbout:'About Kard',start:'Start now →',
+      heroEy:'Design it in your Saudi style',heroA:'Design it',heroB:'in your Saudi style',
+      heroSub:'Turn your offers and occasions into elegant designs that fit your brand',
+      heroDesc:'Choose a template and theme, add your details, and create a share-ready card in minutes.',
+      heroBtn:'Start designing ←',
+      choose:'Choose a template',chooseSub:'Choose an occasion and the matching design will appear',
+      national:'National Day 96',nationalSmall:'Official template',gift:'Gift Card',giftSmall:'Elegant gift',offer:'Offer Poster',offerSmall:'Store discounts',
+      formTitle:{national:'Customize National Day 96 card',gift:'Customize gift card',offer:'Customize offer posters'},
+      formNote:{national:'Enter your store details and they will appear instantly in the preview.',gift:'Enter the gift details for the gift card.',offer:'Enter your promotion details without a discount code.'},
+      labels:{national:['Store name','Discount','Discount code','Store URL'],gift:['Store name','From','To','Gift message','Store URL'],offer:['Store name','Offer title','Offer details','Offer value','Store URL']},
+      bgTitle:'Choose card background',
+      bgs:{riyadh:['Riyadh theme','Riyadh skyline and city mood'],diriyah:['Diriyah theme','Diriyah and Saudi heritage'],green:['Saudi green theme','Palm, swords and national mood']},
+      update:'Update design',download:'Download PNG HD',preview:'Preview',
+      quick:'Quick tools',quickSub:'Everything you need to share',share:'Share link',upload:'Upload logo',
+      size:'Size',quality:'Quality',format:'Format',
+      footer:'© 2026 Kard — All rights reserved',
+      poster:{
+        national:{title:'Our pride, our character',day:'Saudi National Day 96',desc:'Design your offer and share the celebration',bottom:'Visit us and share the celebration'},
+        gift:{title:'Gift Card',day:'A gift from the heart',desc:'For our dear customers',bottom:'With appreciation'},
+        offer:{title:'Special Offer',day:'Limited-time discount',desc:'Do not miss the offer',bottom:'Shop now'}
+      },
+      discountPrefix:'Discount ',themeDark:'Switch to dark mode',themeLight:'Switch to light mode',langTitle:'Change language'
+    }
+  };
+  const el=id=>document.getElementById(id);
+  const txt=(node,v)=>{if(node)node.textContent=v};
+
+  // Remove prior handlers from language and theme controls, then install one reliable handler each.
+  const oldLang=el('lang'), oldTheme=el('theme');
+  let langBtn=null, themeBtn=null;
+  if(oldLang){langBtn=oldLang.cloneNode(true);oldLang.replaceWith(langBtn)}
+  if(oldTheme){themeBtn=oldTheme.cloneNode(true);oldTheme.replaceWith(themeBtn)}
+  if(themeBtn){
+    themeBtn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 14.9A8.7 8.7 0 0 1 9.1 3.4 8.8 8.8 0 1 0 20.6 14.9Z"></path></svg>';
+    themeBtn.type='button';
+  }
+
+  function currentType(){return typeof type!=='undefined'?type:'national'}
+  function value(id,f=''){const e=el(id);return e?e.value.trim()||f:f}
+
+  function translateStatic(){
+    const t=T[lang];
+
+    const nav=document.querySelectorAll('#siteHeader .nav a');
+    if(nav[0])txt(nav[0],t.navHome);
+    if(nav[1])txt(nav[1],t.navTemplates);
+    if(nav[2])txt(nav[2],t.navAbout);
+
+    txt(el('start'),t.start);
+    txt(document.querySelector('.hero-copy .eyebrow'),t.heroEy);
+    const h1=document.querySelector('.hero-copy h1');
+    if(h1)h1.innerHTML=t.heroA+' <span>'+t.heroB+'</span>';
+    txt(document.querySelector('.hero-copy .sub'),t.heroSub);
+    txt(document.querySelector('.hero-copy .hero-description'),t.heroDesc);
+    txt(el('heroStart'),t.heroBtn);
+
+    const chooser=document.querySelector('.main-grid>section.card');
+    if(chooser){
+      txt(chooser.querySelector('.head h2'),t.choose);
+      txt(chooser.querySelector('.head p'),t.chooseSub);
+    }
+
+    const maps={national:[t.national,t.nationalSmall],gift:[t.gift,t.giftSmall],offer:[t.offer,t.offerSmall]};
+    document.querySelectorAll('.templates .template').forEach(b=>{
+      const m=maps[b.dataset.type];if(!m)return;
+      const ss=b.querySelectorAll('span'), sm=b.querySelector('small');
+      if(b.dataset.type==='national'&&ss[1])txt(ss[1],m[0]);
+      else if(ss[0])txt(ss[0],m[0]);
+      if(sm)txt(sm,m[1]);
+    });
+
+    txt(el('formTitle'),t.formTitle[currentType()]);
+    txt(el('formNote'),t.formNote[currentType()]);
+    const labels=[...document.querySelectorAll('#'+currentType()+'Fields .field label')];
+    (t.labels[currentType()]||[]).forEach((v,i)=>txt(labels[i],v));
+
+    txt(document.querySelector('.bg-title'),t.bgTitle);
+    const bgMap=t.bgs;
+    document.querySelectorAll('.bg-choice').forEach(b=>{
+      const m=bgMap[b.dataset.bg];if(!m)return;
+      txt(b.querySelector('span'),m[0]);txt(b.querySelector('small'),m[1]);
+    });
+
+    txt(el('update'),t.update);
+    txt(el('download'),t.download);
+    txt(document.querySelector('.preview-title'),t.preview);
+    const side=document.querySelector('.side');
+    if(side){
+      txt(side.querySelector('.head h2'),t.quick);
+      txt(side.querySelector('.head p'),t.quickSub);
+      txt(el('share'),t.share);txt(el('upload'),t.upload);
+      const specs=side.querySelectorAll('.spec');
+      if(specs[0]){txt(specs[0].children[0],t.size);txt(specs[0].children[1],'1080 × 1920')}
+      if(specs[1]){txt(specs[1].children[0],t.quality);txt(specs[1].children[1],'HD')}
+      if(specs[2]){txt(specs[2].children[0],t.format);txt(specs[2].children[1],'PNG')}
+      side.querySelector('.why')?.remove();
+    }
+    const footer=document.querySelector('.footer-copy span');if(footer)txt(footer,t.footer);
+
+    // Keep existing values, but translate the labels/content around them.
+    updatePoster(t);
+    if(langBtn){langBtn.title=t.langTitle;langBtn.setAttribute('aria-label',t.langTitle)}
+    updateThemeControl(t);
+  }
+
+  function updatePoster(t){
+    const typ=currentType(), p=t.poster[typ];
+    if(!p)return;
+    txt(el('pTitle'),p.title);
+    txt(el('pDay'),p.day);
+    if(typ==='gift')txt(el('pDesc'),value('giftTo',p.desc));else txt(el('pDesc'),p.desc);
+    if(typ==='gift')txt(el('pOffer'),value('giftMessage',''));
+    else txt(el('pOffer'),t.discountPrefix+value(typ==='national'?'discount':'offerValue','30%'));
+    const code=el('pCode');
+    if(code){code.classList.toggle('hidden',typ!=='national');code.textContent=value('code','KARD96')}
+    txt(el('pStore'),typ==='national'?value('store','متجرنا'):typ==='gift'?value('giftStore','متجرنا'):value('offerStore','متجرنا'));
+    txt(el('pBottom'),typ==='gift'?value('giftFrom',p.bottom):p.bottom);
+  }
+
+  function updateThemeControl(t){
+    if(!themeBtn)return;
+    const dark=document.documentElement.getAttribute('data-theme')==='dark';
+    themeBtn.title=dark?t.themeLight:t.themeDark;
+    themeBtn.setAttribute('aria-label',themeBtn.title);
+    themeBtn.setAttribute('aria-pressed',dark?'true':'false');
+  }
+
+  if(langBtn)langBtn.addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';translateStatic()});
+  if(themeBtn)themeBtn.addEventListener('click',()=>{
+    const dark=document.documentElement.getAttribute('data-theme')==='dark';
+    document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+    try{localStorage.setItem('kard-theme',dark?'light':'dark')}catch(e){}
+    updateThemeControl(T[lang]);
+  });
+
+  document.querySelectorAll('.template').forEach(b=>b.addEventListener('click',()=>setTimeout(translateStatic,0)));
+  document.querySelectorAll('.bg-choice').forEach(b=>b.addEventListener('click',()=>setTimeout(translateStatic,0)));
+  document.querySelectorAll('input').forEach(i=>i.addEventListener('input',()=>setTimeout(translateStatic,0)));
+  el('update')?.addEventListener('click',()=>setTimeout(translateStatic,0));
+
+  try{if(localStorage.getItem('kard-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}
+  updateThemeControl(T[lang]);
+  translateStatic();
+})();
+</script>
+</body></html>
