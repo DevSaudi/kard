@@ -324,8 +324,8 @@ header#siteHeader .brand-mark{
 </style>
 
 
-<style id="kard-final-fix">
-/* Header: normal page flow, controls on the opposite side of the brand */
+<style id="kard-final-refinement">
+/* Header: natural flow, opposite-side controls, never sticky/fixed */
 header#siteHeader{
   position:relative!important;
   top:auto!important; right:auto!important; left:auto!important; bottom:auto!important;
@@ -349,87 +349,69 @@ header#siteHeader{
 header#siteHeader .brand{grid-area:brand!important;justify-self:end!important;direction:rtl!important;color:#fff!important}
 header#siteHeader .nav{grid-area:nav!important;justify-self:center!important;direction:rtl!important}
 header#siteHeader .actions{grid-area:actions!important;justify-self:start!important;display:flex!important;align-items:center!important;gap:7px!important;direction:ltr!important}
-header#siteHeader .icon-btn{
-  width:34px!important;min-width:34px!important;height:34px!important;padding:0!important;
-  display:grid!important;place-items:center!important;border-radius:10px!important;
-  background:rgba(0,40,33,.20)!important;border:1px solid rgba(255,255,255,.28)!important;color:#fff!important;
-}
-header#siteHeader .icon-btn svg{
-  width:16px!important;height:16px!important;display:block!important;
-  fill:none!important;stroke:#fff!important;stroke-width:1.8!important;
-  stroke-linecap:round!important;stroke-linejoin:round!important;
-}
+header#siteHeader .icon-btn{width:34px!important;min-width:34px!important;height:34px!important;padding:0!important;display:grid!important;place-items:center!important;border-radius:10px!important}
+header#siteHeader .icon-btn svg{width:16px!important;height:16px!important;display:block!important;fill:none!important;stroke:#fff!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important}
 header#siteHeader .theme-moon{display:block!important}
 header#siteHeader .theme-sun{display:none!important}
 html[data-theme="dark"] header#siteHeader .theme-moon{display:none!important}
 html[data-theme="dark"] header#siteHeader .theme-sun{display:block!important}
 header#siteHeader .lang-btn{font-size:0!important}
+header#siteHeader .ui{background:rgba(0,40,33,.20)!important;color:#fff!important;border-color:rgba(255,255,255,.28)!important}
+header#siteHeader .start{background:rgba(0,111,85,.86)!important}
 
-/* Strong centered hero, without changing page section widths */
-.hero-copy{
-  width:min(100%,820px)!important;
-  margin:0 auto!important;
-  text-align:center!important;
-  align-items:center!important;
+/* Poster: integrated content plaque rather than a heavy glass panel */
+.poster{
+  border-radius:6px!important;
+  box-shadow:0 24px 52px rgba(0,35,30,.28)!important;
 }
-.hero-copy h1{
-  margin:10px 0 12px!important;
-  font-size:clamp(48px,7vw,82px)!important;
-  line-height:1.05!important;
-  text-align:center!important;
-}
-.hero-copy .sub,.hero-copy .hero-description{
-  margin-left:auto!important;margin-right:auto!important;text-align:center!important;
-}
-.hero-copy .hero-description{max-width:650px!important}
-
-/* Replace oversized glass card with a restrained editorial plaque */
 .poster-ad-card{
   width:min(78%,240px)!important;
   padding:18px 15px 14px!important;
   border:1px solid rgba(255,255,255,.18)!important;
   border-radius:20px!important;
   background:linear-gradient(180deg,rgba(0,45,37,.28),rgba(0,35,29,.58))!important;
-  box-shadow:0 16px 34px rgba(0,25,20,.20),inset 0 1px 0 rgba(255,255,255,.10)!important;
+  box-shadow:0 16px 34px rgba(0,25,20,.20), inset 0 1px 0 rgba(255,255,255,.10)!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
+  overflow:hidden!important;
 }
-.poster-ad-card .p-store{
-  font-size:23px!important;line-height:1.3!important;margin-bottom:6px!important;
-  color:#fff!important;text-shadow:0 3px 8px rgba(0,0,0,.42)!important;
-}
-.poster-ad-card .p-desc{
-  font-size:9px!important;line-height:1.85!important;color:rgba(255,255,255,.92)!important;
-}
+.poster-ad-card .p-store{font-size:23px!important;line-height:1.3!important;margin-bottom:6px!important;color:#fff!important;text-shadow:0 3px 8px rgba(0,0,0,.42)!important}
+.poster-ad-card .p-desc{font-size:9px!important;line-height:1.85!important;color:rgba(255,255,255,.92)!important}
 .poster-ad-card .offer{
-  margin:15px auto 8px!important;padding:5px 16px!important;
-  border:1.5px solid #fff!important;border-radius:999px!important;
-  background:transparent!important;color:#fff!important;font-size:21px!important;
-  line-height:1.15!important;min-width:0!important;box-shadow:none!important;
+  margin:15px auto 8px!important;
+  padding:5px 16px!important;
+  border:1.5px solid #fff!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  color:#fff!important;
+  font-size:21px!important;
+  line-height:1.15!important;
+  min-width:0!important;
+  box-shadow:none!important;
 }
 .poster-ad-card .qrbox{min-height:68px!important;margin:4px 0 3px!important}
 .poster-ad-card .qrbox canvas{width:58px!important;height:58px!important;padding:4px!important;border-radius:6px!important}
-.poster-ad-card .code{
-  width:72%!important;margin:0 auto 5px!important;padding:5px 9px!important;
-  border-radius:999px!important;border:1px solid rgba(255,255,255,.30)!important;
-  background:rgba(0,45,36,.48)!important;font-size:9px!important;
-}
+.poster-ad-card .code{width:72%!important;margin:0 auto 5px!important;padding:5px 9px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.30)!important;background:rgba(0,45,36,.48)!important;font-size:9px!important}
 .poster-ad-card .p-bottom{font-size:8px!important;line-height:1.6!important;color:rgba(255,255,255,.90)!important;margin:2px 0 0!important}
 
-/* Keep main cards wide and centered; center content only */
+/* Make hero content breathe and keep the page sections wide */
+.hero-copy{width:min(100%,820px)!important;margin:0 auto!important;text-align:center!important;align-items:center!important}
+.hero-copy h1{margin:10px 0 12px!important;font-size:clamp(48px,7vw,82px)!important;line-height:1.05!important;text-align:center!important}
+.hero-copy .sub,.hero-copy .hero-description{margin-left:auto!important;margin-right:auto!important;text-align:center!important}
+.hero-copy .hero-description{max-width:650px!important}
 .wrap{width:100%!important;max-width:1440px!important;margin-left:auto!important;margin-right:auto!important;padding-left:22px!important;padding-right:22px!important}
-.main-grid{width:100%!important;max-width:none!important}
-.card{border-radius:16px!important;overflow:hidden!important}
-.card .head,.form,.field,.bg-title,.bg-choice,.preview-title,.side .head,.side .body{text-align:center!important}
-.field input{text-align:center!important}
-.update,.download,.share{margin-left:auto!important;margin-right:auto!important;display:block!important}
+.main-grid{width:100%!important}
 
-/* Mobile: brand stays right, controls stay left */
+/* Mobile: brand right, controls left, still in normal flow */
 @media(max-width:760px){
   header#siteHeader{
-    width:calc(100% - 16px)!important;height:58px!important;margin:8px auto -66px!important;
-    padding:0 9px!important;grid-template-columns:auto 1fr auto!important;
+    width:calc(100% - 16px)!important;
+    height:58px!important;
+    margin:8px auto -66px!important;
+    padding:0 9px!important;
+    grid-template-columns:auto 1fr auto!important;
     grid-template-areas:"actions nav brand"!important;
+    direction:ltr!important;
   }
   header#siteHeader .nav{display:none!important}
   header#siteHeader .brand{justify-self:end!important}
@@ -445,14 +427,22 @@ header#siteHeader .lang-btn{font-size:0!important}
   header#siteHeader .icon-btn svg{width:14px!important;height:14px!important}
   .poster-ad-card{width:min(86%,242px)!important}
 }
+</style>
 
-/* Subtle header marketing line */
+
+<style id="kard-header-tagline">
 header#siteHeader .nav{position:relative}
 header#siteHeader .nav::after{
   content:'تصميم سعودي سريع • مناسب للمتاجر • جاهز للمشاركة';
-  position:absolute;top:31px;left:50%;transform:translateX(-50%);
-  font-size:7px;font-weight:700;color:rgba(255,255,255,.78);
-  white-space:nowrap;pointer-events:none;
+  position:absolute;
+  top:32px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:7px;
+  font-weight:700;
+  color:rgba(255,255,255,.78);
+  white-space:nowrap;
+  pointer-events:none;
 }
 @media(max-width:1050px){header#siteHeader .nav::after{display:none}}
 </style>
@@ -529,7 +519,13 @@ templates.forEach(b=>b.addEventListener('click',()=>{templates.forEach(x=>x.clas
 ['store','code','discount','url','giftStore','giftFrom','giftTo','giftMessage','giftUrl','offerStore','offerTitle','offerDetails','offerValue','offerUrl'].forEach(id=>$(id)?.addEventListener('input',render));$('update').addEventListener('click',render);$('heroStart').addEventListener('click',()=>$('templates').scrollIntoView({behavior:'smooth'}));$('start').addEventListener('click',()=>$('templates').scrollIntoView({behavior:'smooth'}));
 const I18N={ar:{home:'الرئيسية',templates:'القوالب',about:'عن كارد',start:'ابدأ الآن →'},en:{home:'Home',templates:'Templates',about:'About Kard',start:'Start now →'}};
 function applyLanguage(){const t=I18N[lang];document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=t[e.dataset.i18n]||e.textContent);document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$('lang').title=lang==='ar'?'Switch language':'تبديل اللغة';$('lang').setAttribute('aria-label',$('lang').title)}
-$('lang').addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';applyLanguage();document.documentElement.dataset.lang=lang;render()});
+$('lang').addEventListener('click',()=>{
+  lang=lang==='ar'?'en':'ar';
+  applyLanguage();
+  document.documentElement.dataset.lang=lang;
+  document.querySelectorAll('[data-lang-label]').forEach(el=>el.textContent=el.getAttribute('data-'+lang)||el.textContent);
+  render();
+});
 function setThemeIcon(){
   const dark=document.documentElement.getAttribute('data-theme')==='dark';
   $('theme').setAttribute('aria-pressed',dark?'true':'false');
@@ -544,9 +540,6 @@ $('theme').addEventListener('click',()=>{
 });
 try{if(localStorage.getItem('kard-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}
 setThemeIcon();
-});
-if(localStorage.getItem('kard-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');
-setThemeIcon();
 $('share').addEventListener('click',async()=>{try{if(navigator.share)await navigator.share({title:'Kard',text:'Kard — Saudi digital cards',url:location.href});else await navigator.clipboard.writeText(location.href)}catch(e){}});
 $('upload').addEventListener('click',()=>{const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=()=>{if(i.files[0]){const r=new FileReader();r.onload=e=>{document.querySelector('.uploaded-logo')?.remove();const im=document.createElement('img');im.src=e.target.result;im.className='uploaded-logo';im.style.cssText='position:absolute;z-index:5;top:55px;left:50%;transform:translateX(-50%);width:55px;height:55px;object-fit:contain;';$('poster').appendChild(im)};r.readAsDataURL(i.files[0])}};i.click()});
 $('download').addEventListener('click',async()=>{
@@ -557,20 +550,17 @@ $('download').addEventListener('click',async()=>{
   button.textContent='جاري تجهيز PNG…';
   try{
     if(document.fonts?.ready) await document.fonts.ready;
-
     const bg=poster.querySelector('.poster-bg');
     if(bg){
-      const m=bg.style.backgroundImage.match(/^url\\(["']?(.*?)["']?\\)$/);
-      if(m?.[1]){
+      const image=bg.style.backgroundImage.match(/^url\(["']?(.*?)["']?\)$/);
+      if(image?.[1]){
         const probe=new Image();
-        probe.src=m[1];
+        probe.src=image[1];
         if(probe.decode) await probe.decode().catch(()=>{});
         else await new Promise(resolve=>{probe.onload=probe.onerror=resolve});
       }
     }
-
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-
     const canvas=await html2canvas(poster,{
       scale:3,
       width:360,
@@ -586,32 +576,13 @@ $('download').addEventListener('click',async()=>{
       onclone:(doc)=>{
         const p=doc.getElementById('poster');
         if(!p)return;
-        Object.assign(p.style,{
-          width:'360px',
-          height:'640px',
-          minWidth:'360px',
-          maxWidth:'360px',
-          minHeight:'640px',
-          maxHeight:'640px',
-          aspectRatio:'auto',
-          transform:'none',
-          margin:'0',
-          boxShadow:'none',
-          borderRadius:'0'
-        });
-        const b=doc.getElementById('posterBg');
-        if(b){
-          b.style.backgroundSize='cover';
-          b.style.backgroundPosition='center center';
-        }
-        const q=doc.querySelector('#qr canvas');
-        if(q){
-          q.style.width='58px';
-          q.style.height='58px';
-        }
+        Object.assign(p.style,{width:'360px',height:'640px',minWidth:'360px',maxWidth:'360px',minHeight:'640px',maxHeight:'640px',aspectRatio:'auto',transform:'none',margin:'0',boxShadow:'none',borderRadius:'0'});
+        const bg2=doc.getElementById('posterBg');
+        if(bg2){bg2.style.backgroundSize='cover';bg2.style.backgroundPosition='center center';}
+        const qr=doc.querySelector('#qr canvas');
+        if(qr){qr.style.width='58px';qr.style.height='58px';}
       }
     });
-
     const a=document.createElement('a');
     a.download='kard-design-1080x1920.png';
     a.href=canvas.toDataURL('image/png');
